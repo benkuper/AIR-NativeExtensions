@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<extension xmlns="http://ns.adobe.com/air/extension/4.0">  
+    <id>benkuper.nativeExtensions.BaseExtension</id>  
+    <versionNumber>1</versionNumber>  
+    <platforms>  
+        <platform name="Windows-x86">  
+            <applicationDeployment>  
+                <nativeLibrary>BaseExtension.dll</nativeLibrary>  
+                <initializer>BaseExtInitializer</initializer>  
+                <finalizer>BaseExtFinalizer</finalizer>  
+            </applicationDeployment>  
+        </platform>  
+    </platforms>  
+</extension>  

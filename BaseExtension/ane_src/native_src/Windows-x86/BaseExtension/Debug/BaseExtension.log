@@ -1,0 +1,17 @@
+﻿Build started 30/04/2014 22:39:39.
+     1>Project "D:\Documents\Perso\Projects\AIR\NativeExtensions\BaseExtension\ane_src\native_src\Windows-x86\BaseExtension\BaseExtension.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /I"C:\Users\Ben Kuper\AppData\Local\FlashDevelop\Apps\flexairsdk\4.6.0+4.0.0\include" /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _USRDLL /D BASEEXTENSION_EXPORTS /D _WINDLL /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt BaseExtension.cpp
+         BaseExtension.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /I"C:\Users\Ben Kuper\AppData\Local\FlashDevelop\Apps\flexairsdk\4.6.0+4.0.0\include" /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _USRDLL /D BASEEXTENSION_EXPORTS /D _WINDLL /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt dllmain.cpp
+         dllmain.cpp
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\Documents\Perso\Projects\AIR\NativeExtensions\BaseExtension\ane_src\native_src\Windows-x86\BaseExtension\Debug\BaseExtension.dll" /INCREMENTAL /NOLOGO "C:\Users\Ben Kuper\AppData\Local\FlashDevelop\Apps\flexairsdk\4.6.0+4.0.0\lib\win\FlashRuntimeExtensions.lib" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:\Documents\Perso\Projects\AIR\NativeExtensions\BaseExtension\ane_src\native_src\Windows-x86\BaseExtension\Debug\BaseExtension.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\Documents\Perso\Projects\AIR\NativeExtensions\BaseExtension\ane_src\native_src\Windows-x86\BaseExtension\Debug\BaseExtension.lib" /MACHINE:X86 /DLL Debug\BaseExtension.obj
+         Debug\dllmain.obj
+            Creating library D:\Documents\Perso\Projects\AIR\NativeExtensions\BaseExtension\ane_src\native_src\Windows-x86\BaseExtension\Debug\BaseExtension.lib and object D:\Documents\Perso\Projects\AIR\NativeExtensions\BaseExtension\ane_src\native_src\Windows-x86\BaseExtension\Debug\BaseExtension.exp
+         BaseExtension.vcxproj -> D:\Documents\Perso\Projects\AIR\NativeExtensions\BaseExtension\ane_src\native_src\Windows-x86\BaseExtension\Debug\BaseExtension.dll
+     1>Done Building Project "D:\Documents\Perso\Projects\AIR\NativeExtensions\BaseExtension\ane_src\native_src\Windows-x86\BaseExtension\BaseExtension.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:01.41

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?> 
+<application xmlns="http://ns.adobe.com/air/application/4.0">
+	
+	<id>BaseExtensionDemo</id> 
+	<versionNumber>1.0</versionNumber> 
+	<filename>BaseExtensionDemo</filename> 
+	
+	<name>BaseExtensionDemo</name> 
+	<description></description> 
+	<copyright></copyright> 
+	
+	<initialWindow> 
+		<title>BaseExtensionDemo</title> 
+		<content>BaseExtensionDemo.swf</content> 
+		<systemChrome>standard</systemChrome> 
+		<transparent>false</transparent> 
+		<visible>true</visible> 
+		<minimizable>true</minimizable> 
+		<maximizable>true</maximizable> 
+		<resizable>true</resizable> 
+	</initialWindow> 
+	
+	<supportedProfiles>extendedDesktop</supportedProfiles>
+	
+	<extensions>
+		<extensionID>benkuper.nativeExtensions.BaseExtension</extensionID>
+	</extensions>
+	<!-- 
+	More options:
+	http://livedocs.adobe.com/flex/3/html/File_formats_1.html#1043413
+	-->
+</application>
