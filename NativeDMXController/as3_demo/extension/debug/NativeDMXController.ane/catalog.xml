@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding ="utf-8"?>
+<swc xmlns="http://www.adobe.com/flash/swccatalog/9">
+  <versions>
+    <swc version="1.2" />
+    <flex version="4.6.0" build="23201" minimumSupportedVersion="3.0.0" />
+  </versions>
+  <features>
+    <feature-script-deps />
+    <feature-files />
+  </features>
+  <libraries>
+    <library path="library.swf">
+      <script name="benkuper/nativeExtensions/NativeDMXController" mod="1400493866409" signatureChecksum="2538509214" >
+        <def id="benkuper.nativeExtensions:NativeDMXController" /> 
+        <dep id="benkuper.nativeExtensions:DMXDevice" type="e" /> 
+        <dep id="benkuper.nativeExtensions:DMXEvent" type="e" /> 
+        <dep id="trace" type="e" /> 
+        <dep id="__AS3__.vec:Vector" type="e" /> 
+        <dep id="flash.utils:Timer" type="e" /> 
+        <dep id="flash.events:TimerEvent" type="e" /> 
+        <dep id="flash.external:ExtensionContext" type="e" /> 
+        <dep id="benkuper.nativeExtensions:DMXDevice" type="s" /> 
+        <dep id="__AS3__.vec:Vector" type="s" /> 
+        <dep id="flash.utils:Timer" type="s" /> 
+        <dep id="flash.events:TimerEvent" type="s" /> 
+        <dep id="flash.external:ExtensionContext" type="s" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="flash.events:EventDispatcher" type="i" /> 
+      </script>
+      <script name="benkuper/nativeExtensions/DMXDevice" mod="1400493815161" signatureChecksum="1601554129" >
+        <def id="benkuper.nativeExtensions:DMXDevice" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="flash.events:EventDispatcher" type="i" /> 
+      </script>
+      <script name="_e543727c3c620bdbe33ce0d861cc398215c8db0d195617310da6c436b89e10f2_flash_display_Sprite" mod="1400493897648" signatureChecksum="4265048499" >
+        <def id="_e543727c3c620bdbe33ce0d861cc398215c8db0d195617310da6c436b89e10f2_flash_display_Sprite" /> 
+        <dep id="flash.system:Security" type="e" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="flash.display:Sprite" type="i" /> 
+      </script>
+      <script name="benkuper/nativeExtensions/DMXEvent" mod="1400493434435" signatureChecksum="2077716606" >
+        <def id="benkuper.nativeExtensions:DMXEvent" /> 
+        <dep id="benkuper.nativeExtensions:DMXDevice" type="s" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="flash.events:Event" type="i" /> 
+      </script>
+      <digests>
+        <digest type="SHA-256" signed="false" value="431bffb6be36721ff115aafa7a36a13202183ec5e5106ff523123fb424842e71"   />
+      </digests>
+    </library>
+  </libraries>
+  <files>
+  </files>
+</swc>
