@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <extension xmlns="http://ns.adobe.com/air/extension/4.0">  
-    <id>benkuper.nativeExtensions.MyoController</id>  
+    <id>benkuper.nativeExtensions.NativeSerial</id>  
     <versionNumber>1</versionNumber>  
     <platforms>  
         <platform name="Windows-x86">  
             <applicationDeployment>  
-                <nativeLibrary>MyoController.dll</nativeLibrary>  
-                <initializer>MyoExtInitializer</initializer>  
-                <finalizer>MyoExtFinalizer</finalizer>  
+                <nativeLibrary>NativeSerialExtension.dll</nativeLibrary>  
+                <initializer>NativeSerialExtInitializer</initializer>  
+                <finalizer>NativeSerialExtFinalizer</finalizer>  
             </applicationDeployment>  
         </platform>  
     </platforms>  

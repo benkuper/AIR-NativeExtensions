@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding ="utf-8"?>
+<swc xmlns="http://www.adobe.com/flash/swccatalog/9">
+  <versions>
+    <swc version="1.2" />
+    <flex version="4.6.0" build="23201" minimumSupportedVersion="3.0.0" />
+  </versions>
+  <features>
+    <feature-script-deps />
+    <feature-files />
+  </features>
+  <libraries>
+    <library path="library.swf">
+      <script name="benkuper/nativeExtensions/SerialPort" mod="1401377507585" signatureChecksum="936004739" >
+        <def id="benkuper.nativeExtensions:SerialPort" /> 
+        <dep id="trace" type="e" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="Object" type="i" /> 
+      </script>
+      <script name="_4a4d5f3bf2ec49f9e5c4769f4d14a873acb43237201523c6d532b7f4b84be343_flash_display_Sprite" mod="1401377512386" signatureChecksum="1865447989" >
+        <def id="_4a4d5f3bf2ec49f9e5c4769f4d14a873acb43237201523c6d532b7f4b84be343_flash_display_Sprite" /> 
+        <dep id="flash.system:Security" type="e" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="flash.display:Sprite" type="i" /> 
+      </script>
+      <script name="benkuper/nativeExtensions/NativeSerial" mod="1401375870742" signatureChecksum="2611825844" >
+        <def id="benkuper.nativeExtensions:NativeSerial" /> 
+        <dep id="benkuper.nativeExtensions:SerialPort" type="e" /> 
+        <dep id="trace" type="e" /> 
+        <dep id="__AS3__.vec:Vector" type="e" /> 
+        <dep id="flash.external:ExtensionContext" type="e" /> 
+        <dep id="benkuper.nativeExtensions:SerialPort" type="s" /> 
+        <dep id="__AS3__.vec:Vector" type="s" /> 
+        <dep id="flash.external:ExtensionContext" type="s" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="Object" type="i" /> 
+      </script>
+      <digests>
+        <digest type="SHA-256" signed="false" value="dd2069f4427b6c061f2fc57761f5d56915f3553cdcede666ec1cf64644d8f7e5"   />
+      </digests>
+    </library>
+  </libraries>
+  <files>
+  </files>
+</swc>
