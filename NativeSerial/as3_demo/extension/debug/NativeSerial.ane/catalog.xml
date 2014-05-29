@@ -16,26 +16,41 @@
         <dep id="AS3" type="n" /> 
         <dep id="Object" type="i" /> 
       </script>
-      <script name="_4a4d5f3bf2ec49f9e5c4769f4d14a873acb43237201523c6d532b7f4b84be343_flash_display_Sprite" mod="1401377512386" signatureChecksum="1865447989" >
-        <def id="_4a4d5f3bf2ec49f9e5c4769f4d14a873acb43237201523c6d532b7f4b84be343_flash_display_Sprite" /> 
+      <script name="_15cc396c95bc92f9dcfc078e0815d0e28cf0fc822a745372d5777214216cb3b3_flash_display_Sprite" mod="1401386281024" signatureChecksum="865630685" >
+        <def id="_15cc396c95bc92f9dcfc078e0815d0e28cf0fc822a745372d5777214216cb3b3_flash_display_Sprite" /> 
         <dep id="flash.system:Security" type="e" /> 
         <dep id="AS3" type="n" /> 
         <dep id="flash.display:Sprite" type="i" /> 
       </script>
-      <script name="benkuper/nativeExtensions/NativeSerial" mod="1401375870742" signatureChecksum="2611825844" >
+      <script name="benkuper/nativeExtensions/SerialEvent" mod="1401385620263" signatureChecksum="2939639024" >
+        <def id="benkuper.nativeExtensions:SerialEvent" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="flash.events:Event" type="i" /> 
+      </script>
+      <script name="benkuper/nativeExtensions/NativeSerial" mod="1401386212365" signatureChecksum="2089141260" >
         <def id="benkuper.nativeExtensions:NativeSerial" /> 
         <dep id="benkuper.nativeExtensions:SerialPort" type="e" /> 
+        <dep id="benkuper.nativeExtensions:SerialEvent" type="e" /> 
+        <dep id="flash.events:Event" type="e" /> 
+        <dep id="flash.utils:ByteArray" type="e" /> 
         <dep id="trace" type="e" /> 
         <dep id="__AS3__.vec:Vector" type="e" /> 
+        <dep id="flash.utils:Timer" type="e" /> 
+        <dep id="flash.events:TimerEvent" type="e" /> 
         <dep id="flash.external:ExtensionContext" type="e" /> 
+        <dep id="flash.desktop:NativeApplication" type="e" /> 
         <dep id="benkuper.nativeExtensions:SerialPort" type="s" /> 
+        <dep id="flash.events:Event" type="s" /> 
+        <dep id="flash.utils:ByteArray" type="s" /> 
         <dep id="__AS3__.vec:Vector" type="s" /> 
+        <dep id="flash.utils:Timer" type="s" /> 
+        <dep id="flash.events:TimerEvent" type="s" /> 
         <dep id="flash.external:ExtensionContext" type="s" /> 
         <dep id="AS3" type="n" /> 
-        <dep id="Object" type="i" /> 
+        <dep id="flash.events:EventDispatcher" type="i" /> 
       </script>
       <digests>
-        <digest type="SHA-256" signed="false" value="dd2069f4427b6c061f2fc57761f5d56915f3553cdcede666ec1cf64644d8f7e5"   />
+        <digest type="SHA-256" signed="false" value="3cdead6f147d08cecc272a9d2f7dcb725176901efae7338640d1650d93731d38"   />
       </digests>
     </library>
   </libraries>

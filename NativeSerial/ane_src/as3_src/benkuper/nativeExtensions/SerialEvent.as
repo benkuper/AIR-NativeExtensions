@@ -8,6 +8,7 @@ package  benkuper.nativeExtensions
 	 */
 	public class SerialEvent extends Event 
 	{
+		static public const DATA:String = "data";
 		
 		public function SerialEvent(type:String, bubbles:Boolean=false, cancelable:Boolean=false) 
 		{ 

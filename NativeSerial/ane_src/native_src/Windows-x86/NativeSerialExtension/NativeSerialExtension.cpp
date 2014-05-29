@@ -9,16 +9,15 @@
 #include <stdlib.h>
 #include <msclr\marshal.h>
 
-
 using namespace std;
-
-
 
 using namespace System;
 using namespace System::Collections::Generic;
 using namespace System::Management;
-
 using namespace msclr::interop;
+
+using namespace System::IO::Ports;
+using namespace System::Threading;
 
 namespace NativeSerialExtension {
 
@@ -61,6 +60,83 @@ namespace NativeSerialExtension {
 				return ports;
 			}
 
+			static SerialPort^ _serialPort;
+			static Thread^ readThread;
+			static int bytesSinceLastRead;
+			static array<unsigned char>^ buffer;
+
+			static void openPort(String^ portName, int baudRate)
+			{
+				Console::WriteLine("NativeSerial :: openPort");
+
+				string name;
+				string message;
+
+				ThreadStart^ start = gcnew ThreadStart(Read);
+				if(readThread && readThread->IsAlive)
+				{
+					readThread->Abort();
+				}
+
+				readThread = gcnew Thread(start);
+
+				// Create a new SerialPort object with default settings.
+				_serialPort = gcnew SerialPort();
+
+				// Allow the user to set the appropriate properties.
+				_serialPort->PortName = portName;
+				_serialPort->BaudRate = baudRate;
+				
+				/*
+				_serialPort->Parity = SetPortParity(_serialPort.Parity);
+				_serialPort->DataBits = SetPortDataBits(_serialPort.DataBits);
+				_serialPort->StopBits = SetPortStopBits(_serialPort.StopBits);
+				_serialPort->Handshake = SetPortHandshake(_serialPort.Handshake);
+				*/
+
+				// Set the read/write timeouts
+				_serialPort->ReadTimeout = 500;
+				_serialPort->WriteTimeout = 500;
+
+				_serialPort->Open();
+				readThread->Start();
+
+				Console::WriteLine("Port is Open ? "+_serialPort->IsOpen);
+			}
+
+			static void closePort()
+			{
+				_serialPort->Close();
+			}
+
+			static void write(array<unsigned char>^ buffer)
+			{
+				//Console::WriteLine("Native Serial :: write");
+				_serialPort->Write(buffer,0,buffer->Length);
+			}
+
+			static void clearBuffer()
+			{
+				bytesSinceLastRead = 0;
+			}
+
+			static void Read()
+			{
+				bytesSinceLastRead = 0;
+				buffer = gcnew array<unsigned char>(4096); //buffer length, may need to be higher if more data are passed
+
+				while (true)
+				{
+					try
+					{
+						int readResult = _serialPort->Read(buffer,bytesSinceLastRead,_serialPort->BytesToRead);
+						bytesSinceLastRead += readResult;
+					}
+					catch (TimeoutException^) { }
+
+					Sleep(3); // avoid CPU explosion
+				}
+			}
 	};
 }
 
@@ -119,6 +195,17 @@ extern "C"
 	{
 		printf("NativeSerial Extension :: openPort\n");
 
+		const uint8_t * port;
+		uint32_t portLength = 0;
+		FREGetObjectAsUTF8(argv[0], &portLength,&port);
+
+		int baud = 0;
+		FREGetObjectAsInt32(argv[1],&baud);
+
+		String^ portName = gcnew String((const char *)port);
+
+		NativeSerial::openPort(portName,baud);
+
 		FREObject result;
 		FRENewObjectFromBool(true,&result);
 		return result;
@@ -137,22 +224,63 @@ extern "C"
 
 	FREObject update(FREContext ctx, void* funcData, uint32_t argc, FREObject argv[])
 	{
-		printf("NativeSerial Extension :: update\n");
+		//printf("NativeSerial Extension :: update\n");
+
+		int numBytes = 0;
+		try
+		{
+			FREByteArray bytes;
+			FREAcquireByteArray(argv[0],&bytes);
+		
+			numBytes = NativeSerial::bytesSinceLastRead;
+			for(int i=0;i<numBytes;i++) bytes.bytes[i] = NativeSerial::buffer[i];
+
+			NativeSerial::clearBuffer();
+
+			FREReleaseByteArray(argv[0]);
+
+			
+
+		}catch(exception e)
+		{
+			printf("Error reading : %s\n");
+		}
 
 		FREObject result;
-		FRENewObjectFromBool(true,&result);
+		FRENewObjectFromInt32(numBytes,&result);
 		return result;
 
 	}
 
 	FREObject write(FREContext ctx, void* funcData, uint32_t argc, FREObject argv[])
 	{
-		printf("NativeSerial Extension :: write\n");
+		//printf("NativeSerial Extension :: write\n");
+
+		
+		try
+		{
+			FREByteArray bytes;
+			FREAcquireByteArray(argv[0],&bytes);
+		
+
+			int numBytes = bytes.length;
+			array<unsigned char>^ bytesToWrite = gcnew array<unsigned char>(numBytes);
+			for(int i=0;i<numBytes;i++) bytesToWrite[i] = bytes.bytes[i];
+
+			FREReleaseByteArray(argv[0]);
+
+			NativeSerial::write(bytesToWrite);
+
+		}catch(exception e)
+		{
+			printf("Error writing\n");
+		}
+
+		
 
 		FREObject result;
 		FRENewObjectFromBool(true,&result);
 		return result;
-
 	}
 
 	// Flash Native Extensions stuff
