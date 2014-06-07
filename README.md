@@ -20,3 +20,5 @@ This extension allows you to control the Enttec DMX Pro device and communicate i
 ### SpoutAIR
 
 This extension lets you share a BitmapData with Spout ( see http://spout.zeal.co ) so you can use it in Processing, Resolume, Unity, etc.
+
+See : https://www.youtube.com/watch?v=Q1IaP9nCLaY
