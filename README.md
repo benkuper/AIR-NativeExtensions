@@ -8,14 +8,22 @@ Collections of Native Extensions for Adobe AIR
 
 This is a minimal setup with all files needed to start a new NativeExtension. It contains some scripts i've made to ease the compile and testing of ANE files.
 
+
 ### NativeSerial
 
 This is a C++/C# extension that let users communicate with Serial COM Ports, like Arduino.
 The lib also features COM port listing and automatic COM connection / disconnection detection.
 
+
 ### NativeDMXController
 
 This extension allows you to control the Enttec DMX Pro device and communicate in both ways with DMX hardware.
+
+
+### NativeMIDI
+
+This extension uses the c++ rtmidi library to access Windows MIDI API (and CoreMIDI/JACK on Mac on support for OSX is released) and enables receiving and sending MIDI data from real devices or virtual midi looper such as loopMIDI or loopBe1.
+
 
 ### SpoutAIR
 
