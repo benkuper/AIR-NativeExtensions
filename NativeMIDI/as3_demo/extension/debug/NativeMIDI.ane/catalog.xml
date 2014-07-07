@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding ="utf-8"?>
+<swc xmlns="http://www.adobe.com/flash/swccatalog/9">
+  <versions>
+    <swc version="1.2" />
+    <flex version="4.6.0" build="23201" minimumSupportedVersion="3.0.0" />
+  </versions>
+  <features>
+    <feature-script-deps />
+    <feature-files />
+  </features>
+  <libraries>
+    <library path="library.swf">
+      <script name="com/greensock/core/Animation" mod="1395413184000" signatureChecksum="3654196994" >
+        <def id="com.greensock.core:Animation" /> 
+        <dep id="flash.events:Event" type="e" /> 
+        <dep id="com.greensock.core:SimpleTimeline" type="e" /> 
+        <dep id="flash.utils:getTimer" type="e" /> 
+        <dep id="flash.display:Shape" type="e" /> 
+        <dep id="flash.events:Event" type="s" /> 
+        <dep id="com.greensock.core:SimpleTimeline" type="s" /> 
+        <dep id="flash.display:Shape" type="s" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="Object" type="i" /> 
+      </script>
+      <script name="com/greensock/TweenLite" mod="1395422064000" signatureChecksum="3681658248" >
+        <def id="com.greensock:TweenLite" /> 
+        <dep id="com.greensock.easing:Ease" type="e" /> 
+        <dep id="com.greensock.core:PropTween" type="e" /> 
+        <dep id="flash.utils:Dictionary" type="e" /> 
+        <dep id="Error" type="e" /> 
+        <dep id="flash.events:Event" type="s" /> 
+        <dep id="com.greensock.easing:Ease" type="s" /> 
+        <dep id="com.greensock.core:PropTween" type="s" /> 
+        <dep id="com.greensock.core:SimpleTimeline" type="s" /> 
+        <dep id="flash.utils:Dictionary" type="s" /> 
+        <dep id="flash.display:Shape" type="s" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="com.greensock.core:Animation" type="i" /> 
+      </script>
+      <script name="benkuper/nativeExtensions/MIDIDeviceIn" mod="1404734856495" signatureChecksum="1382824617" >
+        <def id="benkuper.nativeExtensions:MIDIDeviceIn" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="Object" type="i" /> 
+      </script>
+      <script name="benkuper/nativeExtensions/MIDIMessage" mod="1404759495184" signatureChecksum="4176888074" >
+        <def id="benkuper.nativeExtensions:MIDIMessage" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="Object" type="i" /> 
+      </script>
+      <script name="benkuper/nativeExtensions/MIDIDeviceOut" mod="1404734860006" signatureChecksum="3571727275" >
+        <def id="benkuper.nativeExtensions:MIDIDeviceOut" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="Object" type="i" /> 
+      </script>
+      <script name="com/greensock/easing/Ease" mod="1392853706000" signatureChecksum="441089553" >
+        <def id="com.greensock.easing:Ease" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="Object" type="i" /> 
+      </script>
+      <script name="benkuper/nativeExtensions/NativeMIDI" mod="1404769826671" signatureChecksum="3961414984" >
+        <def id="benkuper.nativeExtensions:NativeMIDI" /> 
+        <dep id="flash.events:Event" type="e" /> 
+        <dep id="benkuper.nativeExtensions:MIDIMessage" type="e" /> 
+        <dep id="trace" type="e" /> 
+        <dep id="benkuper.nativeExtensions:MIDIEvent" type="e" /> 
+        <dep id="__AS3__.vec:Vector" type="e" /> 
+        <dep id="benkuper.nativeExtensions:MIDIDeviceOut" type="e" /> 
+        <dep id="benkuper.nativeExtensions:MIDIDeviceIn" type="e" /> 
+        <dep id="flash.events:StatusEvent" type="e" /> 
+        <dep id="flash.external:ExtensionContext" type="e" /> 
+        <dep id="flash.desktop:NativeApplication" type="e" /> 
+        <dep id="com.greensock:TweenLite" type="e" /> 
+        <dep id="flash.events:Event" type="s" /> 
+        <dep id="benkuper.nativeExtensions:MIDIMessage" type="s" /> 
+        <dep id="__AS3__.vec:Vector" type="s" /> 
+        <dep id="benkuper.nativeExtensions:MIDIDeviceOut" type="s" /> 
+        <dep id="benkuper.nativeExtensions:MIDIDeviceIn" type="s" /> 
+        <dep id="flash.events:StatusEvent" type="s" /> 
+        <dep id="flash.external:ExtensionContext" type="s" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="flash.events:EventDispatcher" type="i" /> 
+      </script>
+      <script name="com/greensock/core/PropTween" mod="1391789152000" signatureChecksum="15497904" >
+        <def id="com.greensock.core:PropTween" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="Object" type="i" /> 
+      </script>
+      <script name="_7ffd1290136e81809b599c02a3f8cb0b36ce39c9a0a9db7b4eab0f81e9ad40be_flash_display_Sprite" mod="1404770028933" signatureChecksum="1703640073" >
+        <def id="_7ffd1290136e81809b599c02a3f8cb0b36ce39c9a0a9db7b4eab0f81e9ad40be_flash_display_Sprite" /> 
+        <dep id="flash.system:Security" type="e" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="flash.display:Sprite" type="i" /> 
+      </script>
+      <script name="com/greensock/core/SimpleTimeline" mod="1391789152000" signatureChecksum="3108149836" >
+        <def id="com.greensock.core:SimpleTimeline" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="com.greensock.core:Animation" type="i" /> 
+      </script>
+      <script name="benkuper/nativeExtensions/MIDIEvent" mod="1404766446837" signatureChecksum="2196091805" >
+        <def id="benkuper.nativeExtensions:MIDIEvent" /> 
+        <dep id="benkuper.nativeExtensions:MIDIMessage" type="s" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="flash.events:Event" type="i" /> 
+      </script>
+      <digests>
+        <digest type="SHA-256" signed="false" value="f3b911be2da251aa7f9c8173721c48a61bcf196dab3c4dbc2e2f83a7039a5f67"   />
+      </digests>
+    </library>
+  </libraries>
+  <files>
+  </files>
+</swc>
