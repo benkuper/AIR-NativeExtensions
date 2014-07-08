@@ -5,6 +5,7 @@
 #include <string>
 
 #include "SpoutHelpers.h"
+#include <pthread.h>
 
 using namespace std;
 
@@ -15,6 +16,106 @@ using namespace std;
 //ID3D11DeviceContext * context;
 
 HWND hWnd;
+
+
+pthread_t receiveThread;
+bool doReceive;
+int lastSendersCount = 0;
+
+void * receiveThreadLoop(FREContext context)
+{
+	spoutInterop interop;
+
+	printf("Unity Thread loop start !\n");
+
+	char senderNames[32][256];
+
+	while(doReceive)
+	{
+		int numSenders = getNumSenders();
+
+		if(numSenders != lastSendersCount)
+		{
+			printf("Num Senders changed : %i\n",numSenders);
+
+			char newNames[32][256];
+			int i,j;
+			bool found;
+			
+			printf("\n\n################ SENDER UPDATE ###############\n\n");
+			printf("> Old senders : ");
+
+			for(i=0;i<lastSendersCount;i++)
+			{
+				printf("%s | ",senderNames[i]);
+			}
+
+			printf("\n");
+			printf("> New senders : ");
+			for(i=0;i<numSenders;i++)
+			{
+				interop.getSenderNameForIndex(i,newNames[i]);
+
+				printf("%s | ",newNames[i]);
+			}
+
+			printf("\n");
+
+			//NEW SENDERS DETECTION
+			printf("\n** Detecting new senders **\n");
+			for(i=0;i<numSenders;i++)
+			{
+				//printf("Check for : %s  >>> ",newNames[i]);
+				found = false;
+				for(j = 0;j<lastSendersCount;j++)
+				{
+					printf(" | %s ",senderNames[j]);
+					if(!found && strcmp(newNames[i],senderNames[j]) == 0) 
+					{
+							found = true;
+							printf("(found !) ");
+					}
+				}
+
+				//printf("\nFound ? %d\n");
+				if(!found) FREDispatchStatusEventAsync(context,(const uint8_t *)"sharingStarted",(const uint8_t *)newNames[i]);
+			}
+			
+			//SENDER STOP DETECTION
+			printf("\n** Detecting leaving senders **\n");
+			for(int i=0;i<lastSendersCount;i++)
+			{
+				found = false;
+				printf("Check for : %s  >>> ",senderNames[i]);
+				for(j = 0;j<numSenders;j++)
+				{
+					printf(" | %s  ",newNames[j]);
+					if(!found && strcmp(senderNames[i],newNames[j]) == 0) 
+					{
+							found = true;
+							printf("(found !) ");
+					}
+				}
+
+				//printf("\nFound ? %d\n",found);
+				if(!found) FREDispatchStatusEventAsync(context,(const uint8_t *)"sharingStopped",(const uint8_t *)senderNames[i]);
+			}
+			
+
+			memcpy(senderNames,newNames,sizeof(newNames));
+		}
+
+		
+
+		lastSendersCount = numSenders;
+		
+		Sleep(50);
+	}
+
+	printf("Receive Thread Loop Exit\n");
+	return 0;
+}
+
 
 extern "C"
 {
@@ -136,6 +237,105 @@ extern "C"
 
 	}
 
+	//Receiving
+
+	FREObject startReceiving(FREContext ctx, void* funcData, uint32_t argc, FREObject argv[])
+	{
+		if(doReceive)
+		{
+			pthread_join(receiveThread, NULL);
+			doReceive = false;
+		}
+
+		doReceive = true;
+		int ret = pthread_create(&receiveThread,NULL, receiveThreadLoop,ctx);
+
+		lastSendersCount = 0;
+
+		FREObject result;
+		FRENewObjectFromBool(ret == 0,&result);
+		return result;
+	}
+
+	FREObject stopReceiving(FREContext ctx, void* funcData, uint32_t argc, FREObject argv[])
+	{
+		doReceive = false;
+
+		FREObject result;
+		FRENewObjectFromBool(true,&result);
+		return result;
+	}
+
+
+	FREObject receiveTexture(FREContext ctx, void* funcData, uint32_t argc, FREObject argv[])
+	{
+		const uint8_t * sharingName;
+		uint32_t sharingNameLength;
+		FREGetObjectAsUTF8(argv[0],&sharingNameLength,&sharingName);
+
+		bool shareResult = false;
+
+		FREBitmapData bd;
+		try
+		{
+			FREAcquireBitmapData(argv[1],&bd);
+			FREReleaseBitmapData(argv[1]);
+
+			InitReceiveTexture(bd.width,bd.height);
+
+			bool bTextureShare = false; //see WinSpoutSDK.cpp
+
+			shareResult = spout.InitReceiver((char *)sharingName, bd.width,bd.height, bTextureShare, false);
+
+			printf("Receive result : %s\n",shareResult?"OK":"Error");
+
+			if(shareResult)
+			{
+				shareResult = getTextureBytes((char *)sharingName, bd.bits32);
+				printf("Get Texture Bytes : %s\n",shareResult?"OK":"Error");
+			}
+
+		}catch(exception e)
+		{
+			printf("Exception ! %s\n",e.what());
+		}
+		
+		
+		FREObject result;
+		FRENewObjectFromBool(shareResult,&result);
+		return result;
+	}
+
+
+	FREObject updateReceiveTexture(FREContext ctx, void* funcData, uint32_t argc, FREObject argv[])
+	{
+		const uint8_t * sharingName;
+		uint32_t sharingNameLength;
+		FREGetObjectAsUTF8(argv[0],&sharingNameLength,&sharingName);
+
+		bool shareResult = false;
+
+		FREBitmapData bd;
+		try
+		{
+			FREAcquireBitmapData(argv[1],&bd);
+			FREReleaseBitmapData(argv[1]);
+
+			shareResult = getTextureBytes((char *)sharingName, bd.bits32);
+
+			//printf("Get Texture Bytes : %s\n",shareResult?"OK":"Error");
+
+		}catch(exception e)
+		{
+			printf("Exception ! %s\n",e.what());
+		}
+		
+		
+		FREObject result;
+		FRENewObjectFromBool(shareResult,&result);
+		return result;
+	}
+
 	// Flash Native Extensions stuff
 	void SpoutContextInitializer(void* extData, const uint8_t* ctxType, FREContext ctx, uint32_t* numFunctionsToSet,  const FRENamedFunction** functionsToSet) { 
 
@@ -145,7 +345,11 @@ extern "C"
 		{
 			{ (const uint8_t*) "init",     NULL, &init },
 			{ (const uint8_t*) "shareTexture",    NULL, &shareTexture },
-			{ (const uint8_t*) "updateTexture",    NULL, &updateTexture }
+			{ (const uint8_t*) "updateTexture",    NULL, &updateTexture },
+			{ (const uint8_t*) "startReceiving",    NULL, &startReceiving },
+			{ (const uint8_t*) "stopReceiving",    NULL, &stopReceiving },
+			{ (const uint8_t*) "receiveTexture",    NULL, &receiveTexture },
+			{ (const uint8_t*) "updateReceiveTexture",    NULL, &updateReceiveTexture }
 		};
     
 		*numFunctionsToSet = sizeof( extensionFunctions ) / sizeof( FRENamedFunction );

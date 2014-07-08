@@ -9,3 +9,5 @@ del Spout.swc
 
 echo "ok"
 pause
+cd ..\as3_demo
+call copyANE.bat

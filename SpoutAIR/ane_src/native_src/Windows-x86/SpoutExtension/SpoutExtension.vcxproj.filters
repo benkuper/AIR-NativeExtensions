@@ -38,25 +38,25 @@
     <ClCompile Include="dllmain.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\..\Ressources\SDKs\SpoutSDK\spoutSenders.cpp">
+    <ClCompile Include="..\..\..\..\..\..\..\..\..\Ressources\SDKs\SpoutSDK\spoutSenders.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\..\Ressources\SDKs\SpoutSDK\spoutDirectX.cpp">
+    <ClCompile Include="..\..\..\..\..\..\..\..\..\Ressources\SDKs\SpoutSDK\spoutDirectX.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\..\Ressources\SDKs\SpoutSDK\spoutGLext.cpp">
+    <ClCompile Include="..\..\..\..\..\..\..\..\..\Ressources\SDKs\SpoutSDK\spoutGLext.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\..\Ressources\SDKs\SpoutSDK\spoutInterop.cpp">
+    <ClCompile Include="..\..\..\..\..\..\..\..\..\Ressources\SDKs\SpoutSDK\spoutInterop.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\..\Ressources\SDKs\SpoutSDK\spoutMap.cpp">
+    <ClCompile Include="..\..\..\..\..\..\..\..\..\Ressources\SDKs\SpoutSDK\spoutMap.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\..\Ressources\SDKs\SpoutSDK\spoutMemoryShare.cpp">
+    <ClCompile Include="..\..\..\..\..\..\..\..\..\Ressources\SDKs\SpoutSDK\spoutMemoryShare.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\..\Ressources\SDKs\SpoutSDK\SpoutSDK.cpp">
+    <ClCompile Include="..\..\..\..\..\..\..\..\..\Ressources\SDKs\SpoutSDK\SpoutSDK.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

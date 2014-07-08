@@ -6,6 +6,11 @@ GLuint myTexture;
 int texWidth;
 int texHeight;
 
+GLuint receiveTexID;
+GLuint offscreen_framebuffer;
+unsigned int rTexWidth;
+unsigned int rTexHeight;
+
 bool InitGL(HWND hWnd);
 
 bool initSpout(HWND hWnd)
@@ -67,8 +72,6 @@ void DisableOpenGL(HWND hWnd, HDC hDC, HGLRC hRC)
     ReleaseDC( hWnd, hDC );
 }
 
-
-
 void InitTexture(int width, int height)					// Initialize local texture for sharing
 {
 
@@ -89,7 +92,6 @@ void InitTexture(int width, int height)					// Initialize local texture for shar
 
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST); //  GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST); //  GL_LINEAR);
-
 }
 
 
@@ -183,8 +185,6 @@ bool InitGL(HWND hWnd)						// All Setup For OpenGL Goes Here
 
 
 	printf("And we are there !\n");
-
-	
 
 	//BuildFont();										// Build The Font
 
@@ -326,5 +326,71 @@ bool InitGL(HWND hWnd)						// All Setup For OpenGL Goes Here
 
 
 	return true;										// Initialization Went OK
+
+}
+
+
+//RECEIVING
+
+void InitReceiveTexture(int width, int height)					// Initialize local texture for sharing
+{
+
+	rTexWidth = width;
+	rTexHeight = height;
+	// printf("WinSpoutSDK : InitTexture : bMemoryMode = %d\n", bMemoryMode);
+
+	if(myTexture != NULL) {
+		glDeleteTextures(1, &receiveTexID);
+		receiveTexID = NULL;
+	}
+
+	//Generate a new FBO. It will contain your texture.
+	glGenFramebuffersEXT(1, &offscreen_framebuffer);
+	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, offscreen_framebuffer);
+
+	//Create the texture 
+	glGenTextures(1, &receiveTexID);
+	glBindTexture(GL_TEXTURE_2D, receiveTexID);
+
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA,  width, height, 0, GL_BGRA_EXT, GL_UNSIGNED_BYTE, NULL);
+
+	glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
+
+	//Bind the texture to your FBO
+	glFramebufferTexture2DEXT(GL_FRAMEBUFFER_EXT, GL_COLOR_ATTACHMENT0_EXT, GL_TEXTURE_2D, receiveTexID, 0);
+
+	//Test if everything failed    
+	GLenum status = glCheckFramebufferStatusEXT(GL_FRAMEBUFFER_EXT);
+	if(status != GL_FRAMEBUFFER_COMPLETE_EXT) {
+		printf("failed to make complete framebuffer object %x\n", status);
+	}
+
+}
+
+int getNumSenders()
+{
+	spoutSenders senders;
+	return senders.GetSenderCount();
+}
+
+
+bool  getTextureBytes(char * sharingName,uint32_t * pixels)
+{
+	bool receiveResult = spout.ReceiveTexture(sharingName,receiveTexID, GL_TEXTURE_2D,rTexWidth,rTexHeight);
+	if(!receiveResult) 
+	{
+		printf("spout.ReceiveTexture failed.\n");
+		return false;
+	}
+	//Bind the FBO
+	glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, offscreen_framebuffer);
+	// set the viewport as the FBO won't be the same dimension as the screen
+	glViewport(0, 0, rTexWidth, rTexHeight);
+
+	//GLubyte* pixels = (GLubyte*) malloc(rTexWidth * rTexHeight * sizeof(GLubyte) * 4);
+	glReadPixels(0, 0, rTexWidth, rTexHeight,GL_BGRA_EXT, GL_UNSIGNED_BYTE, pixels);
+
+	return true;
 
 }
