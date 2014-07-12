@@ -51,7 +51,7 @@ package
 		{
 			switch(e.keyCode)
 			{
-				case Keyboard.SPACE:
+				case Keyboard.SPACE: 
 					spout.extContext.call("showPanel");
 					break;
 			}

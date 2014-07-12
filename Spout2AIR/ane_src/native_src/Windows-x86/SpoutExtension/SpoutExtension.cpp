@@ -120,7 +120,7 @@ extern "C"
 
 	FREObject createReceiver(FREContext ctx, void* funcData, uint32_t argc, FREObject argv[])
 	{
-		printf("Spout Extension :: createReceiver\n");
+		//printf("Spout Extension :: createReceiver\n");
 
 		if(spoutReceiver == NULL)
 		{
@@ -151,8 +151,8 @@ extern "C"
 		{
 			printf("SpoutExtension2 :: found receiver : %s :: %i*%i\n",senderName,rW,rH);
 			 
-			currentTexID = 0;									// Initially there is no local OpenGL texture ID
-			InitGLtexture(currentTexID,rW,rH);	// Create an OpenGL texture for data transfers
+			//currentTexID = 0;									// Initially there is no local OpenGL texture ID
+			//InitGLtexture(currentTexID,rW,rH);	// Create an OpenGL texture for data transfers
 
 
 			FREObject args[3];
@@ -186,34 +186,69 @@ extern "C"
 			FREAcquireBitmapData(argv[1],&bd);
 			
 
-			unsigned int w;
-			unsigned int h;
+			FREObject methodResult = NULL;
 
-			//printf("Receive image 2 ?");
-			res = spoutReceiver->ReceiveImage((char *)sharingName, w, h,(unsigned char *)bd.bits32,GL_BGRA_EXT);
-			//printf(" >> %i\n",res);
-			
-			//res = spoutReceiver->ReceiveTexture((char *)sharingName, w, h,currentTexID, GL_TEXTURE_2D);
-			//printf("Receive Texture result : %i\n",res);
+			unsigned int w = bd.width;
+			unsigned int h = bd.height;
 
-			if(w == bd.width && h == bd.height)
+			bool memoryMode = false;//unused
+			char safeName[256];
+			strcpy_s(safeName,256,(char *)sharingName);
+
+			if(spoutReceiver->GetImageSize(safeName, w, h,memoryMode));
+
+			//printf("Extension GetImageSize check %i / %i\n",w,h);
+
+			if(w != bd.width || h != bd.height)
 			{
-				//printf("Resolution match 2 ! update bitmapData\n");
-				//GLToBitmapData(currentTexID,w,h,(GLvoid *)bd.bits32);
+
+				FREObject args[2];
+				FRENewObjectFromInt32(w,&args[0]);
+				FRENewObjectFromInt32(h,&args[1]);
+
+				FREReleaseBitmapData(argv[1]);
+
+				FREResult f = FRECallObjectMethod(argv[2],(const uint8_t *)"setSize",2,args,&methodResult,NULL);
+				//printf("Set size result : %i, will skip receiveImage this time\n",f);
+
+			}else
+			{
+				res = spoutReceiver->ReceiveImage(safeName, w, h,(unsigned char *)bd.bits32,GL_BGRA_EXT);
+				//printf("SpoutExtension ReceiveImage Result : %i (%i %i)\n",res,w,h);
+				FREReleaseBitmapData(argv[1]);
 			}
 
-			FREReleaseBitmapData(argv[1]);
-
-			FREObject methodResult = NULL;
 			
-			FREResult f = FRECallObjectMethod(argv[2],(const uint8_t *)"update",0,NULL,&methodResult,NULL);
+			
+
+			if(res)
+			{				
+				if(w != bd.width || h != bd.height)
+				{
+					printf("BitmapData & Receive Texture different size !!\n");
+				}else
+				{
+					
+					FREResult f = FRECallObjectMethod(argv[2],(const uint8_t *)"update",0,NULL,&methodResult,NULL);
+				}
+			}else
+			{
+				printf("SpoutExtension :: ReceiveImage failed. \n");
+				/*
+				spoutReceiver->ReleaseReceiver();
+				spoutReceiver->CreateReceiver((char *)sharingName, w, h);
+				*/
+			}
+			
+			FREReleaseBitmapData(argv[1]);
+		
+
 			//printf("Call method result : %i\n",f);
 		}catch(exception e)
 		{
 			printf("Exception ! %s\n",e.what());
 		}
-		
-		
+
 		FREObject result;
 		FRENewObjectFromBool(res,&result);
 		return result;

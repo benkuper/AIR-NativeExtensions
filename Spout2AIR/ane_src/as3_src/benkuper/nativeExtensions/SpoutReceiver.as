@@ -29,20 +29,28 @@ package benkuper.nativeExtensions
 			trace("New SpoutReceiver !", textureName, textureWidth, textureHeight);
 			
 			bitmap = new Bitmap();
-			bitmapData = new BitmapData(textureWidth, textureHeight, true, 0xffff00ff);
 			addChild(bitmap);
 		}
 		
 		public function setInfos(textureName:String, w:int, h:int):void
 		{
 			this.textureName = textureName;
-			this.textureWidth = w;
-			this.textureHeight = h;
+			setSize(w, h);
 		}
+		
+		
 		
 		public function update():void
 		{
 			bitmap.bitmapData = bitmapData;
+		}
+		
+		public function setSize(w:int, h:int):void
+		{
+			textureWidth = w;
+			textureHeight = h;
+			bitmapData = new BitmapData(textureWidth, textureHeight, true, 0xffff00ff);
+			trace("SpoutReceiver set Size :", textureWidth, textureHeight);
 		}
 		
 		override public function toString():String
