@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding ="utf-8"?>
+<swc xmlns="http://www.adobe.com/flash/swccatalog/9">
+  <versions>
+    <swc version="1.2" />
+    <flex version="4.6.0" build="23201" minimumSupportedVersion="3.0.0" />
+  </versions>
+  <features>
+    <feature-script-deps />
+    <feature-files />
+  </features>
+  <libraries>
+    <library path="library.swf">
+      <script name="_c77d419f1021f44a20dbb8d98309c9b7d259c0901571157c1a22d04534666b93_flash_display_Sprite" mod="1405152446872" signatureChecksum="3438442467" >
+        <def id="_c77d419f1021f44a20dbb8d98309c9b7d259c0901571157c1a22d04534666b93_flash_display_Sprite" /> 
+        <dep id="flash.system:Security" type="e" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="flash.display:Sprite" type="i" /> 
+      </script>
+      <script name="benkuper/nativeExtensions/SpoutReceiver" mod="1405127707966" signatureChecksum="1781047038" >
+        <def id="benkuper.nativeExtensions:SpoutReceiver" /> 
+        <dep id="flash.display:BitmapData" type="e" /> 
+        <dep id="trace" type="e" /> 
+        <dep id="flash.display:Bitmap" type="e" /> 
+        <dep id="flash.display:BitmapData" type="s" /> 
+        <dep id="flash.display:Bitmap" type="s" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="flash.display:Sprite" type="i" /> 
+      </script>
+      <script name="benkuper/nativeExtensions/SpoutEvent" mod="1402226620217" signatureChecksum="3853152835" >
+        <def id="benkuper.nativeExtensions:SpoutEvent" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="flash.events:Event" type="i" /> 
+      </script>
+      <script name="benkuper/nativeExtensions/Spout" mod="1405126674726" signatureChecksum="282112535" >
+        <def id="benkuper.nativeExtensions:Spout" /> 
+        <dep id="flash.events:Event" type="e" /> 
+        <dep id="benkuper.nativeExtensions:SpoutEvent" type="e" /> 
+        <dep id="flash.display:BitmapData" type="e" /> 
+        <dep id="trace" type="e" /> 
+        <dep id="flash.events:StatusEvent" type="e" /> 
+        <dep id="flash.external:ExtensionContext" type="e" /> 
+        <dep id="benkuper.nativeExtensions:SpoutReceiver" type="e" /> 
+        <dep id="flash.desktop:NativeApplication" type="e" /> 
+        <dep id="flash.events:Event" type="s" /> 
+        <dep id="flash.events:StatusEvent" type="s" /> 
+        <dep id="flash.external:ExtensionContext" type="s" /> 
+        <dep id="benkuper.nativeExtensions:SpoutReceiver" type="s" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="flash.events:EventDispatcher" type="i" /> 
+      </script>
+      <digests>
+        <digest type="SHA-256" signed="false" value="f1d4592df5c27207f650d94c5cb9dd5ea78a6af1f6ca6a8ca112f0ccd11c7910"   />
+      </digests>
+    </library>
+  </libraries>
+  <files>
+  </files>
+</swc>
