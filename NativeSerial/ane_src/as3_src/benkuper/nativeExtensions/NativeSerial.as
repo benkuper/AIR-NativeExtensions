@@ -54,9 +54,6 @@ package benkuper.nativeExtensions
 			readTimer.start();
 		}
 		
-		
-		
-		
 		public function listPorts():Vector.<SerialPort>
 		{
 			trace("[NativeSerial :: listPorts]");
