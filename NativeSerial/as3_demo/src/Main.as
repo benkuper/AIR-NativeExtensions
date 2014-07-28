@@ -15,15 +15,17 @@ package
 	public class Main extends Sprite 
 	{
 		private var serial:NativeSerial;
+		private var port:SerialPort;
 		
 		public function Main():void 
 		{
-			serial = new NativeSerial();
+			NativeSerial.init();
 			
 			if (NativeSerial.ports.length > 0)
 			{
-				serial.openPort(NativeSerial.ports[0].COMID, 9600);
-				serial.addEventListener(SerialEvent.DATA, serialData);
+				port = NativeSerial.ports[0];
+				port.open();
+				port.addEventListener(SerialEvent.DATA, serialData);
 			}
 			
 			
@@ -32,9 +34,15 @@ package
 		
 		private function serialData(e:SerialEvent):void 
 		{
+			
+			//trace("Received :", port.buffer.readUTFBytes(port.buffer.bytesAvailable));
+			
+			port.buffer.position = 0;
 			graphics.clear();
 			graphics.beginFill(0);
-			graphics.drawRect(10, 10, serial.buffer[0] * 3, 20);
+			graphics.drawRect(10, 10, port.buffer[0] * 3, 20);
+			//graphics.drawRect(10, 40, port.buffer[1] * 3, 20);
+			//graphics.drawRect(10, 70, port.buffer[2] * 3, 20);
 			graphics.endFill();
 		}
 		
@@ -43,7 +51,7 @@ package
 			switch(e.keyCode)
 			{
 				case Keyboard.ENTER:
-					serial.write(255);
+					port.write(255);
 					break;
 					
 				case Keyboard.SPACE:
@@ -53,11 +61,11 @@ package
 						ba.writeByte(0);
 					}
 					ba.writeByte(255);
-					serial.writeBytes(ba);
+					port.writeBytes(ba);
 					break;
 					
 				default:
-					serial.write(e.keyCode);
+					port.write(e.keyCode);
 					break; 
 			}
 		}

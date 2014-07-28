@@ -21,10 +21,194 @@ using namespace System::Threading;
 
 namespace NativeSerialExtension {
 
+	public ref class Port
+	{
+		public :
+			String ^portName;
+
+			SerialPort^ _serialPort;
+			
+			int bytesSinceLastRead;
+			array<unsigned char>^ buffer;
+
+			bool isInit;
+
+			void openPort(String^ portName, int baudRate)
+			{
+				Console::WriteLine("NativeSerial :: Port :: openPort");
+
+				this->portName = portName;
+
+				Console::WriteLine("PortName = "+this->portName);
+
+				string name;
+				string message;
+
+				// Create a new SerialPort object with default settings.
+				_serialPort = gcnew SerialPort();
+
+				// Allow the user to set the appropriate properties.
+				_serialPort->PortName = portName;
+				_serialPort->BaudRate = baudRate;
+				
+
+				/*
+				_serialPort->Parity = SetPortParity(_serialPort.Parity);
+				_serialPort->DataBits = SetPortDataBits(_serialPort.DataBits);
+				_serialPort->StopBits = SetPortStopBits(_serialPort.StopBits);
+				_serialPort->Handshake = SetPortHandshake(_serialPort.Handshake);
+				*/
+
+				// Set the read/write timeouts
+				_serialPort->ReadTimeout = 500;
+				_serialPort->WriteTimeout = 500;
+
+				
+				try
+				{
+					_serialPort->Open();
+				}catch(Exception^ e)
+				{
+					Console::WriteLine("Error Opening Port :"+e->Message);
+				}
+
+				//Read buffer init
+				bytesSinceLastRead = 0;
+				buffer = gcnew array<unsigned char>(4096); //buffer length, may need to be higher if more data are passed
+
+				Console::WriteLine("Port is Open ? "+_serialPort->IsOpen);
+
+				isInit = true;
+			}
+
+			void closePort()
+			{
+				_serialPort->Close();
+				
+			}
+
+			void write(array<unsigned char>^ buffer)
+			{
+				//Console::WriteLine("Native Serial :: write");
+				if(!_serialPort->IsOpen)
+				{
+					Console::WriteLine("Port write ("+portName+") :: port is not open !");
+					return;
+				}
+
+				_serialPort->Write(buffer,0,buffer->Length);
+			}
+
+			void read()
+			{
+				if(!isInit) return;
+				//Console::WriteLine("Read on Port "+portName);
+
+				try
+				{
+					int readResult = _serialPort->Read(buffer,bytesSinceLastRead,_serialPort->BytesToRead);
+					bytesSinceLastRead += readResult;
+					//Console::WriteLine(" -> "+bytesSinceLastRead+" read");
+				}
+				catch (TimeoutException^) { }			
+			}
+
+			void clearBuffer()
+			{
+				bytesSinceLastRead = 0;
+			}
+			
+	};
+
 	public ref class NativeSerial
 	{
 		
 		public:
+
+
+			static List<Port ^>^ sPorts;
+			static bool isInit;
+
+			static Thread^ readThread;
+			static bool doRead;
+
+			static void init()
+			{
+				if(isInit) return;
+				sPorts = gcnew List<Port ^>();
+
+
+				ThreadStart^ start = gcnew ThreadStart(Read);
+
+				if(readThread && readThread->IsAlive)
+				{
+					readThread->Abort();
+				}
+
+				readThread = gcnew Thread(start);
+
+				doRead = true;
+				readThread->Start();
+
+
+			}
+
+			static void openPort(String^ portName, int baudRate)
+			{
+				if(getPort(portName) == nullptr)
+				{
+					Port ^p = gcnew Port();
+					sPorts->Add(p);
+					p->openPort(portName,baudRate);
+				}else
+				{
+					Console::WriteLine("openPort :: port already exists");
+				}
+			}
+
+			static void closePort(String^ portName)
+			{
+				Port^ p = getPort(portName);
+				if(p != nullptr)
+				{
+					sPorts->Remove(p);
+					p->closePort();
+				}else
+				{
+					Console::WriteLine("closePort :: port was not opened");
+				}
+			}
+
+			static void write(String^ portName, array<unsigned char>^ buffer)
+			{
+				Port ^p = getPort(portName);
+				if(p != nullptr)
+				{
+					p->write(buffer);
+				}else
+				{
+					Console::WriteLine("NativeSerial :: write to "+portName+" : port not in list");
+				}
+			}
+
+			static Port^ getPort(String^ portName)
+			{
+				//Console::WriteLine("Searching port "+portName+" in "+sPorts->Count+" opened ports");
+
+				for each(Port^ p in sPorts)
+				{
+					//Console::WriteLine(portName+"< >"+p->portName);
+					if(p->portName == portName)
+					{
+						//Console::WriteLine("Port found !");
+						return p;
+					}
+				}
+
+				Console::WriteLine("Port not found");
+				return nullptr;
+			}
+
 			static array<String ^>^ getCOMPorts()
 			{
 				array<String ^>^ ports;
@@ -39,14 +223,14 @@ namespace NativeSerialExtension {
 					
 					ports = gcnew array<String^>(results->Count);
 
-					Console::WriteLine("List Port using WMI");
+					Console::WriteLine("List Port using WMI :");
 					int i=0;
 					for each(ManagementObject^ queryObj in results)
 					{
 						//Console::WriteLine("-----------------------------------");
 						//Console::WriteLine("Win32_PnPEntity instance");
 						//Console::WriteLine("-----------------------------------");
-						Console::WriteLine("Name: {0}", queryObj["Name"]);
+						Console::WriteLine("> Name: {0}", queryObj["Name"]);
 						ports[i] = queryObj["Name"]->ToString();
 						i++;
 					}
@@ -60,95 +244,46 @@ namespace NativeSerialExtension {
 				return ports;
 			}
 
-			static SerialPort^ _serialPort;
-			static Thread^ readThread;
-			static int bytesSinceLastRead;
-			static array<unsigned char>^ buffer;
 
-			static void openPort(String^ portName, int baudRate)
+			static void clean()
 			{
-				Console::WriteLine("NativeSerial :: openPort");
-
-				string name;
-				string message;
-
-				ThreadStart^ start = gcnew ThreadStart(Read);
-				if(readThread && readThread->IsAlive)
+				for each(Port^ p in sPorts)
 				{
-					readThread->Abort();
+					p->closePort();
 				}
-
-				readThread = gcnew Thread(start);
-
-				// Create a new SerialPort object with default settings.
-				_serialPort = gcnew SerialPort();
-
-				// Allow the user to set the appropriate properties.
-				_serialPort->PortName = portName;
-				_serialPort->BaudRate = baudRate;
 				
-				/*
-				_serialPort->Parity = SetPortParity(_serialPort.Parity);
-				_serialPort->DataBits = SetPortDataBits(_serialPort.DataBits);
-				_serialPort->StopBits = SetPortStopBits(_serialPort.StopBits);
-				_serialPort->Handshake = SetPortHandshake(_serialPort.Handshake);
-				*/
+				sPorts->Clear();
 
-				// Set the read/write timeouts
-				_serialPort->ReadTimeout = 500;
-				_serialPort->WriteTimeout = 500;
-
-				_serialPort->Open();
-				readThread->Start();
-
-				Console::WriteLine("Port is Open ? "+_serialPort->IsOpen);
-			}
-
-			static void closePort()
-			{
-				_serialPort->Close();
-			}
-
-			static void write(array<unsigned char>^ buffer)
-			{
-				//Console::WriteLine("Native Serial :: write");
-				_serialPort->Write(buffer,0,buffer->Length);
-			}
-
-			static void clearBuffer()
-			{
-				bytesSinceLastRead = 0;
+				doRead = false;
+				readThread->Abort();
 			}
 
 			static void Read()
 			{
-				bytesSinceLastRead = 0;
-				buffer = gcnew array<unsigned char>(4096); //buffer length, may need to be higher if more data are passed
-
-				while (true)
+				while (doRead)
 				{
-					try
+					for each(Port^ p in sPorts)
 					{
-						int readResult = _serialPort->Read(buffer,bytesSinceLastRead,_serialPort->BytesToRead);
-						bytesSinceLastRead += readResult;
+						
+						p->read();
 					}
-					catch (TimeoutException^) { }
-
 					Sleep(3); // avoid CPU explosion
 				}
 			}
+			
 	};
 }
 
 using namespace NativeSerialExtension;
-
 
 extern "C"
 {
 
 	FREObject init(FREContext ctx, void* funcData, uint32_t argc, FREObject argv[])
 	{
-		printf("NativeSerial Extension :: init\n");
+		printf("NativeSerial :: init\n");
+
+		NativeSerial::init();
 
 		FREObject result;
 		FRENewObjectFromBool(true,&result);
@@ -158,7 +293,8 @@ extern "C"
 
 	FREObject listPorts(FREContext ctx, void* funcData, uint32_t argc, FREObject argv[])
 	{
-		printf("NativeSerial Extension :: listPorts\n");
+		printf("NativeSerial :: listPorts\n");
+
 
 		array<String^>^ comPortsArray = NativeSerial::getCOMPorts();
 		int numPorts = comPortsArray->Length;
@@ -168,7 +304,7 @@ extern "C"
 		FRENewObject((const uint8_t *)"Vector.<String>",0,NULL,&result,NULL);
 		FRESetArrayLength(result,numPorts);
 
-		printf("COM Ports found : %i",numPorts);
+		printf("COM Ports found : %i\n",numPorts);
 
 		marshal_context ^ context = gcnew marshal_context();
 
@@ -194,6 +330,7 @@ extern "C"
 	FREObject openPort(FREContext ctx, void* funcData, uint32_t argc, FREObject argv[])
 	{
 		printf("NativeSerial Extension :: openPort\n");
+		
 
 		const uint8_t * port;
 		uint32_t portLength = 0;
@@ -216,6 +353,13 @@ extern "C"
 	{
 		printf("NativeSerial Extension :: closePort\n");
 
+		const uint8_t * port;
+		uint32_t portLength = 0;
+		FREGetObjectAsUTF8(argv[0], &portLength,&port);
+		String^ portName = gcnew String((const char *)port);
+
+		NativeSerial::closePort(portName);
+
 		FREObject result;
 		FRENewObjectFromBool(true,&result);
 		return result;
@@ -227,23 +371,37 @@ extern "C"
 		//printf("NativeSerial Extension :: update\n");
 
 		int numBytes = 0;
-		try
+
+		const uint8_t * port;
+		uint32_t portLength = 0;
+		FREGetObjectAsUTF8(argv[0], &portLength,&port);
+		String^ portName = gcnew String((const char *)port);
+		Port^ p = NativeSerial::getPort(portName);
+
+		if(p != nullptr) 
 		{
-			FREByteArray bytes;
-			FREAcquireByteArray(argv[0],&bytes);
+			
+			try
+			{
+				FREByteArray bytes;
+				FREAcquireByteArray(argv[1],&bytes);
 		
-			numBytes = NativeSerial::bytesSinceLastRead;
-			for(int i=0;i<numBytes;i++) bytes.bytes[i] = NativeSerial::buffer[i];
+				numBytes = p->bytesSinceLastRead;
+				for(int i=0;i<numBytes;i++) bytes.bytes[i] = p->buffer[i];
 
-			NativeSerial::clearBuffer();
+				p->clearBuffer();
 
-			FREReleaseByteArray(argv[0]);
+				FREReleaseByteArray(argv[1]);
 
 			
 
-		}catch(exception e)
+			}catch(exception e)
+			{
+				printf("Error reading : %s\n");
+			}
+		}else
 		{
-			printf("Error reading : %s\n");
+			printf("COM Port \"%s\" not found !\n",port);
 		}
 
 		FREObject result;
@@ -254,22 +412,29 @@ extern "C"
 
 	FREObject write(FREContext ctx, void* funcData, uint32_t argc, FREObject argv[])
 	{
-		//printf("NativeSerial Extension :: write\n");
-
 		
+		const uint8_t * port;
+		uint32_t portLength = 0;
+		FREGetObjectAsUTF8(argv[0], &portLength,&port);
+		String^ portName = gcnew String((const char *)port);
+
+		//printf("NativeSerial Extension :: write to Port : %s\n",port);
+
 		try
 		{
 			FREByteArray bytes;
-			FREAcquireByteArray(argv[0],&bytes);
+			FREAcquireByteArray(argv[1],&bytes);
 		
 
 			int numBytes = bytes.length;
 			array<unsigned char>^ bytesToWrite = gcnew array<unsigned char>(numBytes);
 			for(int i=0;i<numBytes;i++) bytesToWrite[i] = bytes.bytes[i];
 
-			FREReleaseByteArray(argv[0]);
+			FREReleaseByteArray(argv[1]);
 
-			NativeSerial::write(bytesToWrite);
+			
+
+			NativeSerial::write(portName,bytesToWrite);
 
 		}catch(exception e)
 		{
@@ -287,6 +452,8 @@ extern "C"
 	void NativeSerialContextInitializer(void* extData, const uint8_t* ctxType, FREContext ctx, uint32_t* numFunctionsToSet,  const FRENamedFunction** functionsToSet) { 
 
 		printf("** Native Serial Extension v0.1 by Ben Kuper **\n");
+
+
 
 		static FRENamedFunction extensionFunctions[] =
 		{
@@ -306,6 +473,7 @@ extern "C"
 
 	void NativeSerialContextFinalizer(FREContext ctx) 
 	{
+		NativeSerial::clean();
 		return;
 	}
 

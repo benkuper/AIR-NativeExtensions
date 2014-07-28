@@ -49,7 +49,7 @@ package benkuper.nativeExtensions
 		{
 			textureWidth = w;
 			textureHeight = h;
-			bitmapData = new BitmapData(textureWidth, textureHeight, true, 0xffff00ff);
+			bitmapData = new BitmapData(textureWidth, textureHeight, true, 0);
 			trace("SpoutReceiver set Size :", textureWidth, textureHeight);
 		}
 		

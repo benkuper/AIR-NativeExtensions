@@ -10,27 +10,30 @@
   </features>
   <libraries>
     <library path="library.swf">
-      <script name="benkuper/nativeExtensions/SerialPort" mod="1401377507585" signatureChecksum="936004739" >
+      <script name="benkuper/nativeExtensions/SerialPort" mod="1406545365126" signatureChecksum="349817399" >
         <def id="benkuper.nativeExtensions:SerialPort" /> 
+        <dep id="benkuper.nativeExtensions:SerialEvent" type="e" /> 
+        <dep id="flash.utils:ByteArray" type="e" /> 
         <dep id="trace" type="e" /> 
+        <dep id="benkuper.nativeExtensions:NativeSerial" type="e" /> 
+        <dep id="flash.utils:ByteArray" type="s" /> 
         <dep id="AS3" type="n" /> 
-        <dep id="Object" type="i" /> 
+        <dep id="flash.events:EventDispatcher" type="i" /> 
       </script>
-      <script name="_15cc396c95bc92f9dcfc078e0815d0e28cf0fc822a745372d5777214216cb3b3_flash_display_Sprite" mod="1401386281024" signatureChecksum="865630685" >
-        <def id="_15cc396c95bc92f9dcfc078e0815d0e28cf0fc822a745372d5777214216cb3b3_flash_display_Sprite" /> 
-        <dep id="flash.system:Security" type="e" /> 
-        <dep id="AS3" type="n" /> 
-        <dep id="flash.display:Sprite" type="i" /> 
-      </script>
-      <script name="benkuper/nativeExtensions/SerialEvent" mod="1401385620263" signatureChecksum="2939639024" >
+      <script name="benkuper/nativeExtensions/SerialEvent" mod="1405154167744" signatureChecksum="2939639024" >
         <def id="benkuper.nativeExtensions:SerialEvent" /> 
         <dep id="AS3" type="n" /> 
         <dep id="flash.events:Event" type="i" /> 
       </script>
-      <script name="benkuper/nativeExtensions/NativeSerial" mod="1401386212365" signatureChecksum="2089141260" >
+      <script name="_e0c55311453969e8fe223ff4dbd5c4abe36fbf4cdf6388efff9d4c0406fc3c57_flash_display_Sprite" mod="1406545951862" signatureChecksum="3763436701" >
+        <def id="_e0c55311453969e8fe223ff4dbd5c4abe36fbf4cdf6388efff9d4c0406fc3c57_flash_display_Sprite" /> 
+        <dep id="flash.system:Security" type="e" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="flash.display:Sprite" type="i" /> 
+      </script>
+      <script name="benkuper/nativeExtensions/NativeSerial" mod="1406545869095" signatureChecksum="1663234479" >
         <def id="benkuper.nativeExtensions:NativeSerial" /> 
         <dep id="benkuper.nativeExtensions:SerialPort" type="e" /> 
-        <dep id="benkuper.nativeExtensions:SerialEvent" type="e" /> 
         <dep id="flash.events:Event" type="e" /> 
         <dep id="flash.utils:ByteArray" type="e" /> 
         <dep id="trace" type="e" /> 
@@ -50,7 +53,7 @@
         <dep id="flash.events:EventDispatcher" type="i" /> 
       </script>
       <digests>
-        <digest type="SHA-256" signed="false" value="3cdead6f147d08cecc272a9d2f7dcb725176901efae7338640d1650d93731d38"   />
+        <digest type="SHA-256" signed="false" value="134a2da20070e0ffb8abe61920c2d0a9ae1d5837d73be6575e337ee013d02ab0"   />
       </digests>
     </library>
   </libraries>

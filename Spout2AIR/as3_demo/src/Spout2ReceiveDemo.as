@@ -54,6 +54,12 @@ package
 				case Keyboard.SPACE: 
 					spout.extContext.call("showPanel");
 					break;
+					
+				case Keyboard.R:
+					if(receiver != null) removeChild(receiver);
+					receiver = spout.createReceiver("UniSpout2");
+					if(receiver != null) addChild(receiver);
+					break;
 			}
 		}
 		
@@ -61,7 +67,7 @@ package
 		{
 			if (receiver == null)
 			{
-				receiver = spout.createReceiver("test");
+				receiver = spout.createReceiver("UniSpout2");
 				trace("receiver Found ? ", receiver);
 				if(receiver != null) addChild(receiver);
 			}else

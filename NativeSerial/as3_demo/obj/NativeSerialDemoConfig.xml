@@ -16,7 +16,7 @@
     </define>
     <define append="true">
       <name>CONFIG::timeStamp</name>
-      <value>'29/05/2014'</value>
+      <value>'28/07/2014'</value>
     </define>
     <define append="true">
       <name>CONFIG::air</name>
@@ -35,6 +35,8 @@
       <path-element>D:\Documents\Perso\Projects\AIR\NativeExtensions\NativeSerial\as3_demo\src</path-element>
       <path-element>D:\Documents\Ressources\AS3\tuio-as3</path-element>
       <path-element>D:\Documents\Ressources\AS3\greensock-v12-as3</path-element>
+      <path-element>D:\Documents\Ressources\AS3\BenKuper</path-element>
+      <path-element>D:\Documents\Ressources\AS3\as3-utils\src</path-element>
       <path-element>C:\Program Files (x86)\FlashDevelop\Library\AS3\classes</path-element>
     </source-path>
     <library-path append="true">
