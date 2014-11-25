@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding ="utf-8"?>
+<swc xmlns="http://www.adobe.com/flash/swccatalog/9">
+  <versions>
+    <swc version="1.2" />
+    <flex version="4.6.0" build="23201" minimumSupportedVersion="3.0.0" />
+  </versions>
+  <features>
+    <feature-script-deps />
+    <feature-files />
+  </features>
+  <libraries>
+    <library path="library.swf">
+      <script name="_24a4cbd8711e5050b71c66ce1c6ce1edc9c9bae87c42273dc43ed3ed45d20421_flash_display_Sprite" mod="1414072841857" signatureChecksum="1102019463" >
+        <def id="_24a4cbd8711e5050b71c66ce1c6ce1edc9c9bae87c42273dc43ed3ed45d20421_flash_display_Sprite" /> 
+        <dep id="flash.system:Security" type="e" /> 
+        <dep id="flash.display:Sprite" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="benkuper/nativeExtensions/ExtendedMouse" mod="1413450821361" signatureChecksum="256678418" >
+        <def id="benkuper.nativeExtensions:ExtendedMouse" /> 
+        <dep id="flash.display:DisplayObject" type="s" /> 
+        <dep id="flash.geom:Point" type="s" /> 
+        <dep id="flash.external:ExtensionContext" type="s" /> 
+        <dep id="flash.geom:Rectangle" type="s" /> 
+        <dep id="flash.geom:Point" type="e" /> 
+        <dep id="trace" type="e" /> 
+        <dep id="flash.desktop:NativeApplication" type="e" /> 
+        <dep id="flash.external:ExtensionContext" type="e" /> 
+        <dep id="Object" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <digests>
+        <digest type="SHA-256" signed="false" value="9041ab4b41831b0a5f0023b107bb538ffae9e0377b6e071fa05a94050eab38d4"   />
+      </digests>
+    </library>
+  </libraries>
+  <files>
+  </files>
+</swc>
