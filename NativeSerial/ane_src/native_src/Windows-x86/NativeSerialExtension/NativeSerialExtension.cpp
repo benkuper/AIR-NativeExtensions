@@ -16,9 +16,10 @@ using namespace System::Collections::Generic;
 using namespace System::Management;
 using namespace msclr::interop;
 
+/*
 using namespace InTheHand::Net::Sockets;
 using namespace InTheHand::Net::Bluetooth;
-
+*/
 
 using namespace System::IO::Ports;
 using namespace System::Threading;
