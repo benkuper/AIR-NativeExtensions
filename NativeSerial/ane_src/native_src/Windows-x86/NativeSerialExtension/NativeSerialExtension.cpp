@@ -16,8 +16,14 @@ using namespace System::Collections::Generic;
 using namespace System::Management;
 using namespace msclr::interop;
 
+using namespace InTheHand::Net::Sockets;
+using namespace InTheHand::Net::Bluetooth;
+
+
 using namespace System::IO::Ports;
 using namespace System::Threading;
+
+
 
 namespace NativeSerialExtension {
 
@@ -32,14 +38,14 @@ namespace NativeSerialExtension {
 			array<unsigned char>^ buffer;
 
 			bool isInit;
+			bool isOpened;
 
-			void openPort(String^ portName, int baudRate)
+			bool openPort(String^ portName, int baudRate)
 			{
-				Console::WriteLine("NativeSerial :: Port :: openPort");
-
+				
 				this->portName = portName;
 
-				Console::WriteLine("PortName = "+this->portName);
+				Console::WriteLine("SerialPort :: openPort "+this->portName);
 
 				string name;
 				string message;
@@ -51,7 +57,7 @@ namespace NativeSerialExtension {
 				_serialPort->PortName = portName;
 				_serialPort->BaudRate = baudRate;
 				
-
+				
 				/*
 				_serialPort->Parity = SetPortParity(_serialPort.Parity);
 				_serialPort->DataBits = SetPortDataBits(_serialPort.DataBits);
@@ -70,20 +76,31 @@ namespace NativeSerialExtension {
 				}catch(Exception^ e)
 				{
 					Console::WriteLine("Error Opening Port :"+e->Message);
+					return false;
 				}
 
 				//Read buffer init
 				bytesSinceLastRead = 0;
 				buffer = gcnew array<unsigned char>(4096); //buffer length, may need to be higher if more data are passed
 
-				Console::WriteLine("Port is Open ? "+_serialPort->IsOpen);
+				//Console::WriteLine("Port is Open ? "+_serialPort->IsOpen);
 
 				isInit = true;
+				
+				return true;
 			}
+
+
 
 			void closePort()
 			{
-				_serialPort->Close();
+				try
+				{
+					_serialPort->Close();
+				}catch(Exception^ e)
+				{
+					Console::WriteLine("Error closing the port ("+portName+"), maybe device is already disconnected ?");
+				}
 				
 			}
 
@@ -132,52 +149,76 @@ namespace NativeSerialExtension {
 			static Thread^ readThread;
 			static bool doRead;
 
-			static void init()
+			static Thread^ listThread;
+			static bool doList;
+
+			static FREContext freContext;
+
+			static bool btLibLoaded;
+
+			static void init(FREContext ctx)
 			{
 				if(isInit) return;
+
+				freContext = ctx;
 				sPorts = gcnew List<Port ^>();
 
 
-				ThreadStart^ start = gcnew ThreadStart(Read);
-
-				if(readThread && readThread->IsAlive)
-				{
-					readThread->Abort();
-				}
-
-				readThread = gcnew Thread(start);
-
+				ThreadStart^ readStart = gcnew ThreadStart(Read);
+				if(readThread && readThread->IsAlive) readThread->Abort();
+				readThread = gcnew Thread(readStart);
 				doRead = true;
 				readThread->Start();
 
-
+				ThreadStart^ listStart = gcnew ThreadStart(ListPorts);
+				if(listThread && listThread->IsAlive) listThread->Abort();
+				listThread = gcnew Thread(listStart);
+				doList = true;
+				listThread->Start();
 			}
 
-			static void openPort(String^ portName, int baudRate)
+			static bool openPort(String^ portName, int baudRate)
 			{
+				
 				if(getPort(portName) == nullptr)
 				{
 					Port ^p = gcnew Port();
-					sPorts->Add(p);
-					p->openPort(portName,baudRate);
+					
+					bool openResult = p->openPort(portName,baudRate);
+					if(openResult)
+					{
+						sPorts->Add(p);
+					}
+
+					return openResult;
 				}else
 				{
-					Console::WriteLine("openPort :: port already exists");
+					Console::WriteLine("openPort :: port already opened");
+					return false;
 				}
 			}
 
 			static void closePort(String^ portName)
 			{
+				Console::WriteLine("Close port :"+portName);
 				Port^ p = getPort(portName);
 				if(p != nullptr)
 				{
+					//Console::WriteLine("Remove port from list "+portName);
 					sPorts->Remove(p);
 					p->closePort();
 				}else
 				{
-					Console::WriteLine("closePort :: port was not opened");
+					//Console::WriteLine("closePort :: port was not opened");
 				}
 			}
+
+			static bool isOpened(String^ portName)
+			{
+				Port^ p = getPort(portName);
+				return (p != nullptr);
+			}
+
 
 			static void write(String^ portName, array<unsigned char>^ buffer)
 			{
@@ -187,7 +228,7 @@ namespace NativeSerialExtension {
 					p->write(buffer);
 				}else
 				{
-					Console::WriteLine("NativeSerial :: write to "+portName+" : port not in list");
+					Console::WriteLine("NativeSerial :: write to "+portName+" : port not opened");
 				}
 			}
 
@@ -209,8 +250,31 @@ namespace NativeSerialExtension {
 				return nullptr;
 			}
 
+			static int getNumCOMPorts()
+			{
+				 try
+				{
+					ManagementObjectSearcher^ searcher = 
+						gcnew ManagementObjectSearcher("root\\CIMV2", 
+						"SELECT * FROM Win32_PnPEntity WHERE Name LIKE '%(COM[0-9]%)%'"); 
+
+					ManagementObjectCollection^ results = searcher->Get();
+					return results->Count;
+
+				 }catch (ManagementException^ e)
+				{
+					Console::WriteLine("An error occurred while querying for WMI data : " + e->Message);
+					//return gcnew array<String ^>(0);
+				}
+
+				 return 0;
+			}
+
 			static array<String ^>^ getCOMPorts()
 			{
+
+				
+
 				array<String ^>^ ports;
 
 				 try
@@ -223,19 +287,18 @@ namespace NativeSerialExtension {
 					
 					ports = gcnew array<String^>(results->Count);
 
-					Console::WriteLine("List Port using WMI :");
+					//Console::WriteLine("List Port using WMI :");
 					int i=0;
 					for each(ManagementObject^ queryObj in results)
 					{
 						//Console::WriteLine("-----------------------------------");
 						//Console::WriteLine("Win32_PnPEntity instance");
 						//Console::WriteLine("-----------------------------------");
-						Console::WriteLine("> Name: {0}", queryObj["Name"]);
+						//Console::WriteLine("> Name: {0}", queryObj["Name"]);
 						ports[i] = queryObj["Name"]->ToString();
 						i++;
 					}
-				}
-				catch (ManagementException^ e)
+				}catch (ManagementException^ e)
 				{
 					Console::WriteLine("An error occurred while querying for WMI data: " + e->Message);
 					//return gcnew array<String ^>(0);
@@ -256,18 +319,52 @@ namespace NativeSerialExtension {
 
 				doRead = false;
 				readThread->Abort();
+
+				doList = false;
+				listThread->Abort();
 			}
 
 			static void Read()
 			{
 				while (doRead)
 				{
+
 					for each(Port^ p in sPorts)
 					{
-						
+						//Console::WriteLine(p->portName+" is opened ?"+p->_serialPort->IsOpen);
 						p->read();
 					}
 					Sleep(3); // avoid CPU explosion
+				}
+			}
+
+			static void ListPorts()
+			{
+
+				Console::WriteLine("Bluetooth handling");
+				/*
+				BluetoothClient^ client = gcnew BluetoothClient();
+				array<BluetoothDeviceInfo^>^ devices = client->DiscoverDevices();
+				
+
+				for each(BluetoothDeviceInfo^ di in devices)
+				{ 
+					Console::WriteLine(di->DeviceName+" // "+di->DeviceAddress+" // "+di->Connected);
+				}
+				*/
+
+				int prevNumCOMPorts = 0;
+
+				while(doList)
+				{
+					int numCOMPorts = getNumCOMPorts();
+					if(numCOMPorts != prevNumCOMPorts) 
+					{	
+						Console::WriteLine("[NativeSerial::ListPort Thread] Ports changed !");
+						FREDispatchStatusEventAsync(freContext,(const uint8_t*)"updatePorts",(const uint8_t*)"changed");
+						prevNumCOMPorts = numCOMPorts;
+					}
+					Sleep(500); //list only 2 times / seconds
 				}
 			}
 			
@@ -276,6 +373,7 @@ namespace NativeSerialExtension {
 
 using namespace NativeSerialExtension;
 
+
 extern "C"
 {
 
@@ -283,7 +381,8 @@ extern "C"
 	{
 		printf("NativeSerial :: init\n");
 
-		NativeSerial::init();
+		NativeSerial::init(ctx);
+
 
 		FREObject result;
 		FRENewObjectFromBool(true,&result);
@@ -293,7 +392,7 @@ extern "C"
 
 	FREObject listPorts(FREContext ctx, void* funcData, uint32_t argc, FREObject argv[])
 	{
-		printf("NativeSerial :: listPorts\n");
+		//printf("NativeSerial :: listPorts\n");
 
 
 		array<String^>^ comPortsArray = NativeSerial::getCOMPorts();
@@ -304,7 +403,7 @@ extern "C"
 		FRENewObject((const uint8_t *)"Vector.<String>",0,NULL,&result,NULL);
 		FRESetArrayLength(result,numPorts);
 
-		printf("COM Ports found : %i\n",numPorts);
+		//printf("COM Ports found : %i\n",numPorts);
 
 		marshal_context ^ context = gcnew marshal_context();
 
@@ -321,7 +420,6 @@ extern "C"
 		}
 
 		delete context;
-		
 
 		return result;
 
@@ -329,7 +427,7 @@ extern "C"
 
 	FREObject openPort(FREContext ctx, void* funcData, uint32_t argc, FREObject argv[])
 	{
-		printf("NativeSerial Extension :: openPort\n");
+		//printf("NativeSerial Extension :: openPort\n");
 		
 
 		const uint8_t * port;
@@ -341,24 +439,46 @@ extern "C"
 
 		String^ portName = gcnew String((const char *)port);
 
-		NativeSerial::openPort(portName,baud);
+		bool openResult = NativeSerial::openPort(portName,baud);
 
 		FREObject result;
-		FRENewObjectFromBool(true,&result);
+		FRENewObjectFromBool(openResult,&result);
+		return result;
+
+	}
+
+
+	FREObject isPortOpened(FREContext ctx, void* funcData, uint32_t argc, FREObject argv[])
+	{
+		//printf("NativeSerial Extension :: is Port open ?\n");
+		
+		const uint8_t * port;
+		uint32_t portLength = 0;
+		FREGetObjectAsUTF8(argv[0], &portLength,&port);
+
+		String^ portName = gcnew String((const char *)port);
+
+		bool openResult = NativeSerial::isOpened(portName);
+
+		FREObject result;
+		FRENewObjectFromBool(openResult,&result);
 		return result;
 
 	}
 
 	FREObject closePort(FREContext ctx, void* funcData, uint32_t argc, FREObject argv[])
 	{
-		printf("NativeSerial Extension :: closePort\n");
+		//printf("NativeSerial Extension :: closePort \n");
 
 		const uint8_t * port;
 		uint32_t portLength = 0;
 		FREGetObjectAsUTF8(argv[0], &portLength,&port);
+
+
 		String^ portName = gcnew String((const char *)port);
 
 		NativeSerial::closePort(portName);
+
 
 		FREObject result;
 		FRENewObjectFromBool(true,&result);
@@ -368,13 +488,15 @@ extern "C"
 
 	FREObject update(FREContext ctx, void* funcData, uint32_t argc, FREObject argv[])
 	{
-		//printf("NativeSerial Extension :: update\n");
-
+		
 		int numBytes = 0;
 
 		const uint8_t * port;
 		uint32_t portLength = 0;
 		FREGetObjectAsUTF8(argv[0], &portLength,&port);
+
+		
+
 		String^ portName = gcnew String((const char *)port);
 		Port^ p = NativeSerial::getPort(portName);
 
@@ -460,6 +582,7 @@ extern "C"
 			{ (const uint8_t*) "init",     NULL, &init },
 			{ (const uint8_t*) "listPorts",    NULL, &listPorts },
 			{ (const uint8_t*) "openPort",        NULL, &openPort },
+			{ (const uint8_t*) "isPortOpened",        NULL, &isPortOpened },
 			{ (const uint8_t*) "closePort", NULL, &closePort },
 			{ (const uint8_t*) "update", NULL, &update },
 			{ (const uint8_t*) "write", NULL, &write }

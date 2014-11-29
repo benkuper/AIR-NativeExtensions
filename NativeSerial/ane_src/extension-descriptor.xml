@@ -9,6 +9,14 @@
                 <initializer>NativeSerialExtInitializer</initializer>  
                 <finalizer>NativeSerialExtFinalizer</finalizer>  
             </applicationDeployment>  
-        </platform>  
+        </platform> 
+		
+		<platform name="MacOS-x86">  
+            <applicationDeployment>  
+                <nativeLibrary>NativeSerial.framework</nativeLibrary>  
+                <initializer>NativeSerialExtInitializer</initializer>  
+                <finalizer>NativeSerialExtFinalizer</finalizer>  
+            </applicationDeployment>  
+        </platform>
     </platforms>  
 </extension>  

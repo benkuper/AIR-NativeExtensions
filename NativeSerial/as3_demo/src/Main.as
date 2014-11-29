@@ -3,6 +3,7 @@ package
 	import benkuper.nativeExtensions.NativeSerial;
 	import benkuper.nativeExtensions.SerialEvent;
 	import benkuper.nativeExtensions.SerialPort;
+	import benkuper.util.Shortcutter;
 	import flash.display.Sprite;
 	import flash.events.KeyboardEvent;
 	import flash.ui.Keyboard;
@@ -17,28 +18,65 @@ package
 		private var serial:NativeSerial;
 		private var port:SerialPort;
 		
-		public function Main():void 
+		public function Main():void
 		{
 			NativeSerial.init();
+			NativeSerial.instance.addEventListener(SerialEvent.PORT_ADDED, portAdded);
+			NativeSerial.instance.addEventListener(SerialEvent.PORT_REMOVED, portRemoved);
 			
-			if (NativeSerial.ports.length > 0)
-			{
-				port = NativeSerial.ports[0];
-				port.open();
-				port.addEventListener(SerialEvent.DATA, serialData);
-			}
-			
+			Shortcutter.init(stage);
+			Shortcutter.add(this);
 			
 			stage.addEventListener(KeyboardEvent.KEY_DOWN, keyDown);
 		}
 		
+		
+		private function portAdded(e:SerialEvent):void 
+		{
+			trace("Main :: port added :" + e.port.fullName);
+			port = NativeSerial.getPort("COM4");
+			
+			if (port != null) 
+			{
+				port.open();
+				port.addEventListener(SerialEvent.DATA, serialData);
+			}
+		}
+		
+		private function portRemoved(e:SerialEvent):void 
+		{
+			trace("Main :: port removed");
+			if (e.port == port)
+			{
+				port.removeEventListener(SerialEvent.DATA, serialData);
+				port = null;
+				graphics.clear();
+				graphics.beginFill(0xff00ff);
+				graphics.drawCircle(100, 100, 10);
+				graphics.endFill();
+			}
+		}
+		
+		
+		
+		[Shortcut(key="o")]
+		public function openPort():void
+		{
+			
+			
+		}
+		
 		private function serialData(e:SerialEvent):void 
 		{
+			graphics.clear();
+			
+			trace("Serial data");
+			if (port == null) return;
 			
 			//trace("Received :", port.buffer.readUTFBytes(port.buffer.bytesAvailable));
 			
 			port.buffer.position = 0;
-			graphics.clear();
+			
 			graphics.beginFill(0);
 			graphics.drawRect(10, 10, port.buffer[0] * 3, 20);
 			//graphics.drawRect(10, 40, port.buffer[1] * 3, 20);
@@ -48,6 +86,8 @@ package
 		
 		private function keyDown(e:KeyboardEvent):void 
 		{
+			if (port == null) return;
+			
 			switch(e.keyCode)
 			{
 				case Keyboard.ENTER:

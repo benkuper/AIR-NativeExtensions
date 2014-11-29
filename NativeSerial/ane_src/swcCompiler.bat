@@ -2,7 +2,7 @@ call acompc -source-path as3_src -include-classes benkuper.nativeExtensions.Nati
 
 unzip -o NativeSerial.swc -x catalog.xml
 
-call adt -package -target ane NativeSerial.ane extension-descriptor.xml -swc NativeSerial.swc -platform Windows-x86 -C native_src\Windows-x86\NativeSerialExtension\Debug NativeSerialExtension.dll -C ./ library.swf
+call adt -package -target ane NativeSerial.ane extension-descriptor.xml -swc NativeSerial.swc -platform Windows-x86 -C native_src\Windows-x86\NativeSerialExtension\Debug NativeSerialExtension.dll -C ./ library.swf -platform MacOS-x86 -C native_src\MacOS NativeSerial.framework -C ./ library.swf
 
 del library.swf
 del NativeSerial.swc
