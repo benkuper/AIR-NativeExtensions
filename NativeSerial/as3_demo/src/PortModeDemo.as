@@ -27,7 +27,7 @@ package
 		
 		private function serialData255(e:SerialEvent):void 
 		{
-			trace("Data 255 !", port.buffer2.bytesAvailable);
+			trace("Data 255 !", e.data.bytesAvailable);
 		}
 		
 	}

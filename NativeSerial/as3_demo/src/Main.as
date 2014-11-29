@@ -3,7 +3,7 @@ package
 	import benkuper.nativeExtensions.NativeSerial;
 	import benkuper.nativeExtensions.SerialEvent;
 	import benkuper.nativeExtensions.SerialPort;
-	import benkuper.util.Shortcutter;
+	//import benkuper.util.Shortcutter;
 	import flash.display.Sprite;
 	import flash.events.KeyboardEvent;
 	import flash.ui.Keyboard;
@@ -24,8 +24,10 @@ package
 			NativeSerial.instance.addEventListener(SerialEvent.PORT_ADDED, portAdded);
 			NativeSerial.instance.addEventListener(SerialEvent.PORT_REMOVED, portRemoved);
 			
+			/*
 			Shortcutter.init(stage);
 			Shortcutter.add(this);
+			*/
 			
 			stage.addEventListener(KeyboardEvent.KEY_DOWN, keyDown);
 		}
@@ -59,7 +61,7 @@ package
 		
 		
 		
-		[Shortcut(key="o")]
+		//[Shortcut(key="o")]
 		public function openPort():void
 		{
 			
