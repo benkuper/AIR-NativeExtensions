@@ -10,55 +10,60 @@
   </features>
   <libraries>
     <library path="library.swf">
-      <script name="benkuper/nativeExtensions/SerialPort" mod="1413980055340" signatureChecksum="3215265549" >
+      <script name="benkuper/nativeExtensions/SerialPort" mod="1415664763000" signatureChecksum="3424721231" >
         <def id="benkuper.nativeExtensions:SerialPort" /> 
         <dep id="benkuper.nativeExtensions:SerialEvent" type="s" /> 
         <dep id="flash.utils:ByteArray" type="s" /> 
+        <dep id="flash.system:Capabilities" type="e" /> 
         <dep id="benkuper.nativeExtensions:NativeSerial" type="e" /> 
         <dep id="benkuper.nativeExtensions:SerialEvent" type="e" /> 
         <dep id="flash.utils:ByteArray" type="e" /> 
         <dep id="flash.events:EventDispatcher" type="i" /> 
         <dep id="AS3" type="n" /> 
       </script>
-      <script name="benkuper/nativeExtensions/SerialEvent" mod="1413976283890" signatureChecksum="3632183865" >
+      <script name="benkuper/nativeExtensions/SerialEvent" mod="1413976283000" signatureChecksum="3632183865" >
         <def id="benkuper.nativeExtensions:SerialEvent" /> 
         <dep id="benkuper.nativeExtensions:SerialPort" type="s" /> 
         <dep id="flash.utils:ByteArray" type="s" /> 
         <dep id="flash.events:Event" type="i" /> 
         <dep id="AS3" type="n" /> 
       </script>
-      <script name="_ab9487066e9a8c457a25c4eed67603325986a77431e6af4cae78c1ceb8b0537d_flash_display_Sprite" mod="1417263366198" signatureChecksum="1411807837" >
-        <def id="_ab9487066e9a8c457a25c4eed67603325986a77431e6af4cae78c1ceb8b0537d_flash_display_Sprite" /> 
-        <dep id="flash.system:Security" type="e" /> 
-        <dep id="flash.display:Sprite" type="i" /> 
-        <dep id="AS3" type="n" /> 
-      </script>
-      <script name="benkuper/nativeExtensions/NativeSerial" mod="1413979903093" signatureChecksum="1324161051" >
+      <script name="benkuper/nativeExtensions/NativeSerial" mod="1415664383000" signatureChecksum="2292603814" >
         <def id="benkuper.nativeExtensions:NativeSerial" /> 
         <dep id="flash.events:TimerEvent" type="s" /> 
         <dep id="__AS3__.vec:Vector" type="s" /> 
         <dep id="flash.events:StatusEvent" type="s" /> 
+        <dep id="RegExp" type="s" /> 
+        <dep id="flash.filesystem:File" type="s" /> 
         <dep id="benkuper.nativeExtensions:SerialPort" type="s" /> 
         <dep id="flash.utils:Timer" type="s" /> 
         <dep id="flash.utils:ByteArray" type="s" /> 
         <dep id="flash.external:ExtensionContext" type="s" /> 
         <dep id="flash.events:Event" type="s" /> 
+        <dep id="flash.filesystem:File" type="e" /> 
+        <dep id="benkuper.nativeExtensions:SerialPort" type="e" /> 
+        <dep id="flash.utils:Timer" type="e" /> 
+        <dep id="flash.utils:ByteArray" type="e" /> 
+        <dep id="flash.external:ExtensionContext" type="e" /> 
+        <dep id="flash.events:Event" type="e" /> 
+        <dep id="flash.system:Capabilities" type="e" /> 
         <dep id="trace" type="e" /> 
         <dep id="flash.desktop:NativeApplication" type="e" /> 
         <dep id="flash.events:TimerEvent" type="e" /> 
         <dep id="__AS3__.vec:Vector" type="e" /> 
         <dep id="flash.events:StatusEvent" type="e" /> 
         <dep id="benkuper.nativeExtensions:SerialEvent" type="e" /> 
-        <dep id="benkuper.nativeExtensions:SerialPort" type="e" /> 
-        <dep id="flash.utils:Timer" type="e" /> 
-        <dep id="flash.utils:ByteArray" type="e" /> 
-        <dep id="flash.external:ExtensionContext" type="e" /> 
-        <dep id="flash.events:Event" type="e" /> 
         <dep id="flash.events:EventDispatcher" type="i" /> 
         <dep id="AS3" type="n" /> 
       </script>
+      <script name="_0054994f5f84559e63e7df06d698ec5537e93bd19fe1f5669b2e8d7ce0ab151f_flash_display_Sprite" mod="1417264748050" signatureChecksum="1616018061" >
+        <def id="_0054994f5f84559e63e7df06d698ec5537e93bd19fe1f5669b2e8d7ce0ab151f_flash_display_Sprite" /> 
+        <dep id="flash.system:Security" type="e" /> 
+        <dep id="flash.display:Sprite" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
       <digests>
-        <digest type="SHA-256" signed="false" value="7f42995e7bc819ee168be3da993f27a0ab020bcc27d07161d0458353c0bf63d8"   />
+        <digest type="SHA-256" signed="false" value="d78ef6eee2ed8ac62bf455422f82df1b6f0a6fcca3bf0a48dd4b00f962c6d6b5"   />
       </digests>
     </library>
   </libraries>

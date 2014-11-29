@@ -6,7 +6,9 @@ package benkuper.nativeExtensions
 	import flash.events.StatusEvent;
 	import flash.events.TimerEvent;
 	import flash.external.ExtensionContext;
-	import flash.utils.ByteArray;
+import flash.filesystem.File;
+import flash.system.Capabilities;
+import flash.utils.ByteArray;
 	import flash.utils.Timer;
 	
 	/**
@@ -28,6 +30,10 @@ package benkuper.nativeExtensions
 		public var maxBuffer:int = 4096; //maxBuffer Length
 		
 		public static var instance:NativeSerial;
+
+        private var listPortsFunc:Function;
+        private var updatePortsLoopTimer:Timer; //timer for mac port listing loop
+
 		
 		public function NativeSerial():void
 		{
@@ -35,13 +41,15 @@ package benkuper.nativeExtensions
 			
 			extContext = ExtensionContext.createExtensionContext("benkuper.nativeExtensions.NativeSerial", "serial");
 			
-			var b:Boolean = extContext.call("init") as Boolean;
-			
-			trace("NativeSerial init, success ?", b);
-			
+
 			extContext.addEventListener(StatusEvent.STATUS, extensionStatusHandler);
-			
-			ports = new Vector.<SerialPort>();
+
+            var b:Boolean = extContext.call("init") as Boolean;
+
+            trace("NativeSerial init, success ?", b);
+
+
+            ports = new Vector.<SerialPort>();
 			openedPorts = new Vector.<SerialPort>();
 			
 			readBuffer = new ByteArray();
@@ -54,6 +62,18 @@ package benkuper.nativeExtensions
 			updateTimer = new Timer(1000 / updateFPS);
 			updateTimer.addEventListener(TimerEvent.TIMER, updateTimerTick);
 			updateTimer.start();
+
+            if(Capabilities.os.indexOf("Win") != -1)
+            {
+                listPortsFunc = listPortsWin;
+            }else
+            {
+                listPortsFunc = listPortsMac;
+
+                updatePortsLoopTimer = new Timer(1000);
+                updatePortsLoopTimer.addEventListener(TimerEvent.TIMER, updatePortsLoopTimerTick);
+                updatePortsLoopTimer.start();
+            }
 			
 			
 			NativeApplication.nativeApplication.addEventListener(Event.EXITING, appExiting);			
@@ -91,54 +111,107 @@ package benkuper.nativeExtensions
 			
 			return null;
 		}
-		
+
 		//extension calls
-		
-		protected function updatePortsList():void
-		{
-			var p:SerialPort;
-			var newPortNames:Vector.<String> = extContext.call("listPorts") as Vector.<String>;
-			
-			//removed ports detection
-			var portsToRemove:Vector.<SerialPort> = new Vector.<SerialPort>;
-			
-			
-			for each(p in ports)
-			{
-				if (newPortNames.indexOf(p.fullName) == -1) //port doesn't exist anymore
-				{
-					portsToRemove.push(p);
-				}
-			}
-			
-			for each(p in portsToRemove) removePort(p);
-			
-			
-			//added ports detection
-			//trace("New port detection :");
-			var portsToAdd:Vector.<String> = new Vector.<String>;
-			for each(var n:String in newPortNames)
-			{
-				
-				var nameIsFound:Boolean = false;
-				for each(p in ports)
-				{
-					if (p.fullName == n) 
-					{
-						nameIsFound = true;
-						break;
-					}
-				}
-				if (!nameIsFound) portsToAdd.push(n);
-				//trace("	> " + n + " is Found ? " + nameIsFound);
-			}
-			
-			for each(var pn:String in portsToAdd) addPort(pn);
+		protected function updatePortsLoopTimerTick(e:TimerEvent):void
+        {
+            updatePortsList();
+        }
+
+		protected function updatePortsList():void {
+            var p:SerialPort;
+
+            var newPortNames:Vector.<String> = listPortsFunc(); //redirect to mac or win func;
+
+
+            //removed ports detection
+            var portsToRemove:Vector.<SerialPort> = new Vector.<SerialPort>;
+
+
+            for each(p in ports)
+            {
+                if (newPortNames.indexOf(p.fullName) == -1) //port doesn't exist anymore
+                {
+                    portsToRemove.push(p);
+                }
+            }
+
+            for each(p in portsToRemove) removePort(p);
+
+
+            //added ports detection
+            //trace("New port detection :");
+            var portsToAdd:Vector.<String> = new Vector.<String>;
+            for each(var n:String in newPortNames)
+            {
+
+                var nameIsFound:Boolean = false;
+                for each(p in ports)
+                {
+                    if (p.fullName == n)
+                    {
+                        nameIsFound = true;
+                        break;
+                    }
+                }
+                if (!nameIsFound) portsToAdd.push(n);
+                //trace("	> " + n + " is Found ? " + nameIsFound);
+            }
+
+            for each(var pn:String in portsToAdd) addPort(pn);
+        }
+
+        protected function listPortsWin():Vector.<String>
+        {
+            return extContext.call("listPorts") as Vector.<String>;
+        }
+
+        protected function listPortsMac():Vector.<String>
+        {
+            var validComPorts:Vector.<String> = new Vector.<String>;
+
+
+            var allDevDevices:Array;
+            var devDirectory:File = new File("/dev/");
+            var searchRegex:RegExp;
+
+            searchRegex = /\/dev\/tty\./; //BEN :: simple list of all tty.* ports
+
+            /*
+            //if all serial ports allowed
+            if(includeAllSerial)
+            //get any ports that start with tty. or cu.
+                searchRegex = /\/dev\/(tty|cu)\./;
+            //otherwise we should just return the arduino ports or all ports
+            else
+            //so store the arduino port regex, which matches any port that starts with tty.usb
+                searchRegex = /\/dev\/tty\.usb/;
+             */
+
+
+            //get all the ports
+            allDevDevices = devDirectory.getDirectoryListing();
+
+            //loop through the ports
+            for each (var i:File in allDevDevices)
+            {
+                //if we should include all ports or if the native path has a match for our regex
+                if (i.nativePath.match(searchRegex))
+                {
+                    //save this port reference
+                    validComPorts.push(i.nativePath);
+                }
+            }
+
+            //return requested ports
+            return validComPorts;
+
 			
 		}
 		
 		public function openPort(portName:String = "COM1", baudRate:int = 9600):Boolean
 		{
+            trace("NativeSerial :: openPort :"+portName);
 			var result:Boolean = extContext.call("openPort", portName, baudRate);
 			if (result) 
 			{
@@ -187,19 +260,16 @@ package benkuper.nativeExtensions
 			var p:SerialPort = SerialPort.create(portFullName);
 			ports.push(p);
 			dispatchEvent(new SerialEvent(SerialEvent.PORT_ADDED, p));
-			trace("Port added !",p.fullName);
 		}
 		
 		private function removePort(p:SerialPort):void
 		{
-			trace("Remove port", p.COMID);
 			p.clean();
 			
 			ports.splice(ports.indexOf(p), 1);
 			openedPorts.splice(openedPorts.indexOf(p), 1);
 			
 			dispatchEvent(new SerialEvent(SerialEvent.PORT_REMOVED, p));
-			trace("Port removed ",p.fullName);
 		}
 		
 		//handlers
@@ -218,12 +288,16 @@ package benkuper.nativeExtensions
 		
 		private function extensionStatusHandler(e:StatusEvent):void 
 		{
-			trace("Extension Status received, code :", e.code, ", level :", e.level);
+			//trace("Extension Status received, code :", e.code, ", level :", e.level);
 			switch(e.code)
 			{
 				case "updatePorts":
 					updatePortsList();
 					break;
+
+                case "print":
+                    trace("[NativeSerial] > "+e.level);
+                    break;
 			}
 		}
 		
@@ -237,6 +311,14 @@ package benkuper.nativeExtensions
 			
 			updateTimer.stop();
 			updateTimer.removeEventListener(TimerEvent.TIMER, updateTimerTick);
+            updateTimer = null;
+
+            if(updatePortsLoopTimer != null)
+            {
+                updatePortsLoopTimer.stop();
+                updatePortsLoopTimer.removeEventListener(TimerEvent.TIMER,updatePortsLoopTimerTick);
+                updatePortsLoopTimer = null;
+            }
 		}
 		
 		
