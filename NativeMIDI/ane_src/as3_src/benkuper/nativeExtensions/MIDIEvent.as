@@ -13,6 +13,16 @@ package benkuper.nativeExtensions
 		static public const NOTE_OFF:String = "noteOff";
 		static public const CONTROLLER_CHANGE:String = "controllerChange";
 		
+		
+		static public const DEVICE_IN_ADDED:String = "deviceInAdded";
+		static public const DEVICE_IN_REMOVED:String = "deviceInRemoved";
+		
+		static public const DEVICE_OUT_ADDED:String = "deviceOutAdded";
+		static public const DEVICE_OUT_REMOVED:String = "deviceOutRemoved";
+		
+		//
+		public var device:MIDIDevice;
+		
 		//
 		public var channel:int;
 		
@@ -21,7 +31,7 @@ package benkuper.nativeExtensions
 		public var data2:int;
 
 		
-		public function MIDIEvent(type:String, channel:int, data1:int, data2:int, bubbles:Boolean=false, cancelable:Boolean=false) 
+		public function MIDIEvent(type:String, bubbles:Boolean=false, cancelable:Boolean=false) 
 		{ 
 			super(type, bubbles, cancelable);
 			this.channel = channel;
@@ -50,13 +60,21 @@ package benkuper.nativeExtensions
 				channel = m.status - 175;
 			}
 			
-			return new MIDIEvent(type,channel,m.data1,m.data2);
+			var evt:MIDIEvent = new MIDIEvent(type);
+			evt.channel = channel;
+			evt.data1 = m.data1;
+			evt.data2 = m.data2;
+			return evt;
 		}
 		
 		
 		public override function clone():Event 
 		{ 
-			return new MIDIEvent(type, channel, data1,data2, bubbles, cancelable);
+			var evt:MIDIEvent = new MIDIEvent(type, bubbles, cancelable);
+			evt.channel = channel;
+			evt.data1 = data1;
+			evt.data2 = data2;
+			return evt;
 		} 
 		
 		public override function toString():String 

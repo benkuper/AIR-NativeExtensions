@@ -38,7 +38,7 @@ mv library.swf $BUILDFOLDER
 	-C $BUILDFOLDER . \
     -platform Windows-x86 \
     -C $BUILDFOLDER library.swf \
-    -C native_src/Windows-x86/NativeMIDI/Debug NativeMIDI.dll \
+    -C native_src/Windows-x86 NativeMIDI.dll \
 #	library.swf libIOSMightyLib.a
 #	-platformoptions platformoptions.xml
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<extension xmlns="http://ns.adobe.com/air/extension/4.0">  
+<extension xmlns="http://ns.adobe.com/air/extension/3.8">  
     <id>benkuper.nativeExtensions.NativeMIDI</id>  
     <versionNumber>1</versionNumber>  
     <platforms>  

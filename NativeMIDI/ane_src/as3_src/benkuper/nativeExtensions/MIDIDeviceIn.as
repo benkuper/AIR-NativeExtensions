@@ -5,21 +5,42 @@ package benkuper.nativeExtensions
 	 * ...
 	 * @author Ben Kuper
 	 */
-	public class MIDIDeviceIn 
+	public class MIDIDeviceIn extends MIDIDevice
 	{
-		public var opened:int;
-		public var name:String;
-		
 		
 		public function MIDIDeviceIn(name:String):void
 		{
-			this.name = name;
-			
+			super(name);
+			var filterName:Array = name.split(" ");
+			if (filterName.length > 1) filterName.pop();
+			this.name = filterName.join(" "); //RTMidi adds index at the end of the name, remove it for real device name
 		}
 		
-		public function toString():String
+		override public function open():Boolean 
 		{
-			return "[MIDIDeviceIn name=" + name+"]";
+			super.open();
+			nativePointer = NativeMIDI.openInputDevice(this);
+			return nativePointer != -1;
+		}
+		
+		
+		
+		public function updateData(message:MIDIMessage):void
+		{
+			var evt:MIDIEvent = MIDIEvent.getEventForMessage(message);
+			evt.device = this;
+			dispatchEvent(evt);
+		}
+		
+		override public function close():void
+		{
+			super.close();
+			NativeMIDI.closeInputDevice(this);
+		}
+		
+		override public function toString():String
+		{
+			return "[MIDIDeviceIn name=\"" + name+"\"]";
 		}
 	}
 	
