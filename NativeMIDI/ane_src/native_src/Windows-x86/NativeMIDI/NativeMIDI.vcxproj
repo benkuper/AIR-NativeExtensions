@@ -59,6 +59,9 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>$(FLEX_SDK_PATH)\lib\win\FlashRuntimeExtensions.lib;D:\Documents\Ressources\Libraries\rtmidi-2.1.0\lib\rtmidid.lib;winmm.lib;D:\Documents\Ressources\Libraries\pthread\lib\x86\pthreadVC2.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>copy $(TargetPath) ..\$(TargetFileName)</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>

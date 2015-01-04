@@ -21,13 +21,52 @@ RtMidiOut *midiout = 0;
 
 std::vector<unsigned char> outMessage;
 
+
+std::vector<RtMidiIn *> openMidiIn;
+std::vector<RtMidiOut *> openMidiOut;
+
+/*
+RtMidiIn * getMidiIn(RtMidiIn* device)
+{
+	for (size_t i = 0; i < openMidiIn.size(); ++i) {
+        // If two Myo pointers compare equal, they refer to the same Myo device.
+		if (openMidiIn[i] == device) {
+            return openMidiIn[i];
+        }
+    }
+}
+*/
+
 struct midiMessage
 {
+	RtMidiIn* device;
 	byte status;
 	byte data1;
 	byte data2;
 	double stamp;
 };
+
+
+int getDeviceIndex(RtMidiIn *device)
+{
+	for (size_t i = 0; i < openMidiIn.size(); ++i) {
+        // If two Myo pointers compare equal, they refer to the same Myo device.
+		if (openMidiIn[i] == device) {
+            return i;
+        }
+    }
+
+	printf("MIDI device not found %i\n",device);
+	return -1;
+}
+
+
+void removeDeviceIn(RtMidiIn * device)
+{
+	printf("Remove device in %i\n",device);
+	int id = getDeviceIndex(device);
+	if(id != -1) openMidiIn.erase(openMidiIn.begin()+id);
+}
 
 FREObject messageToFre(midiMessage m)
 {
@@ -39,16 +78,18 @@ FREObject messageToFre(midiMessage m)
 	FRENewObjectFromInt32((int)m.data2,&fD2);
 	FREObject fStamp;
 	FRENewObjectFromDouble(m.stamp,&fStamp);
+	FREObject fDevice;
+	FRENewObjectFromInt32((int)m.device,&fDevice);
 
-	FREObject args[4];
+	FREObject args[5];
 	args[0] = fStatus;
 	args[1] = fD1;
 	args[2] = fD2;
 	args[3] = fStamp;
-
+	args[4] = fDevice;
 
 	FREObject fm = NULL;
-	FREResult fre = FRENewObject((const uint8_t *)"benkuper.nativeExtensions.MIDIMessage",4,args,&fm,NULL);
+	FREResult fre = FRENewObject((const uint8_t *)"benkuper.nativeExtensions.MIDIMessage",5,args,&fm,NULL);
 			
 	printf("Message to fre FREResult %i\n",fre);
 
@@ -65,34 +106,47 @@ void *MIDIReadThread(FREContext ctx)
 	int nBytes, i;
 	double stamp;
 
-
 	while(!exitRunThread)
 	{
-		stamp = midiin->getMessage( &message );
-		nBytes = message.size();
-
-		for ( i=0; i<nBytes; i++ )
-		{
-			printf("Byte %i = %i\n", i,(int)message[i]);
-		}
-
-		if ( nBytes > 0 )
-		{
-			printf(">>> stamp = %d\n",stamp);
-		}
-
-		if(nBytes == 3) //complete midi message
+		//printf("Check thread, %i devices\n",openMidiIn.size());
+		for(int di=0;di<openMidiIn.size();di++)
 		{
 			
-			midiMessage m;
-			m.stamp = stamp;
-			m.status = message[0];
-			m.data1 = message[1];
-			m.data2 = message[2];
+			RtMidiIn * in = openMidiIn[di];
+			stamp = in->getMessage(&message );
+			
+			nBytes = message.size();
 
-			messageQueue.push_back(m);
+			//printf("> check for %i, %i\n",di,in);
+		//	printf("Midi in %i get message %i\n",in,stamp);
 
-			FREDispatchStatusEventAsync(ctx,(const uint8_t *)"data",(const uint8_t *)"none");
+
+			for ( i=0; i<nBytes; i++ )
+			{
+				printf("Byte %i = %i\n", i,(byte)message[i]);
+			}
+
+			if ( nBytes > 0 )
+			{
+				printf(">>> stamp = %d\n",stamp);
+			}
+
+			if(nBytes == 3) //complete midi message
+			{
+			
+				midiMessage m;
+				m.device = in;
+				m.stamp = stamp;
+				m.status = message[0];
+				printf("Status %i from %i\n",m.status,in);
+				m.data1 = message[1];
+				m.data2 = message[2];
+
+				messageQueue.push_back(m);
+
+				FREDispatchStatusEventAsync(ctx,(const uint8_t *)"data",(const uint8_t *)"none");
+			}
+
 		}
 
 		// Sleep for 10 milliseconds ... platform-dependent.
@@ -162,7 +216,7 @@ extern "C"
 
 	    unsigned int nPorts = midiin->getPortCount();
 
-		printf("Native MIDI :: listInputDevices > %i devices detected :\n",nPorts);
+		//printf("Native MIDI :: listInputDevices > %i devices detected :\n",nPorts);
 
 		FRESetArrayLength(result,nPorts);
 		
@@ -179,7 +233,7 @@ extern "C"
 			}
 
 			//std::cout << "  Input Port #" << i+1 << ": " << portName << '\n';
-			printf("[%i] %s\n",i,portName.c_str());
+			//printf("[%i] %s\n",i,portName.c_str());
 
 			FREObject args[1];
 			FREObject portFRE = NULL;
@@ -205,7 +259,7 @@ extern "C"
 
 	    unsigned int nPorts = midiout->getPortCount();
 
-		printf("Native MIDI :: listOutputDevices > %i devices detected :\n",nPorts);
+		//printf("Native MIDI :: listOutputDevices > %i devices detected :\n",nPorts);
 
 		FRESetArrayLength(result,nPorts);
 		
@@ -221,7 +275,7 @@ extern "C"
 				// return NULL;
 			}
 			//std::cout << "  Input Port #" << i+1 << ": " << portName << '\n';
-			printf("[%i] %s\n",i,portName.c_str());
+			//printf("[%i] %s\n",i,portName.c_str());
 
 			FREObject args[1];
 			FREObject portFRE = NULL;
@@ -247,13 +301,25 @@ extern "C"
 		FREGetObjectAsInt32(argv[0],&index);
 
 		printf("Native MIDI :: open input device %i\n",index);
-		midiin->openPort(index);
 		
-		// Don't ignore sysex, timing, or active sensing messages.
-		midiin->ignoreTypes( false, false, false );
+		int pointer = -1;
+		try {
+			RtMidiIn* in = new RtMidiIn();
+			in->openPort(index);
+			openMidiIn.push_back(in);
 
+			pointer = (int)in;
+			printf("Open midi pointer : %i (%s), num open devices :  %i\n",pointer,in->getPortName(index).c_str(),openMidiIn.size());
+			// Don't ignore sysex, timing, or active sensing messages.
+			midiin->ignoreTypes( false, false, false );
+
+		}
+		catch ( RtMidiError &error ) {
+			error.printMessage();
+		}		
+		
 		FREObject result;
-		FRENewObjectFromBool(true,&result);
+		FRENewObjectFromInt32(pointer,&result);
 		return result;
 	}
 
@@ -263,15 +329,32 @@ extern "C"
 		FREGetObjectAsInt32(argv[0],&index);
 
 		printf("Native MIDI :: open output device %i\n",index);
-		midiout->openPort(index);
+
+		int pointer = -1;
+		
+		try {
+			RtMidiOut* out = new RtMidiOut();
+			out->openPort(index);
+			//openMidiOut.push_back(in);
+
+			pointer = (int)out;
+			printf("Open midi pointer : %i\n",pointer);
+			// Don't ignore sysex, timing, or active sensing messages.
+			midiin->ignoreTypes( false, false, false );
+
+		}
+		catch ( RtMidiError &error ) {
+			error.printMessage();
+		}	
 
 		FREObject result;
-		FRENewObjectFromBool(true,&result);
+		FRENewObjectFromInt32(pointer,&result);
 		return result;
 	}
 
 	FREObject updateData(FREContext ctx, void* funcData, uint32_t argc, FREObject argv[])
 	{
+
 		int numMessages = messageQueue.size();
 		
 		printf("Update data, num messages : %i",numMessages);
@@ -294,9 +377,15 @@ extern "C"
 
 	FREObject closeInputDevice(FREContext ctx, void* funcData, uint32_t argc, FREObject argv[])
 	{
+		int pointer = 0;
+		FREGetObjectAsInt32(argv[0],&pointer);
+		
 		try
 		{
-			if(midiin->isPortOpen()) midiin->closePort();
+			RtMidiIn *in = (RtMidiIn *)pointer;
+			if(in->isPortOpen()) in->closePort();
+			removeDeviceIn(in);
+			printf("Num open midi devices %i\n",openMidiIn.size());
 		}catch(exception e)
 		{
 			printf("Error closing input device.\n");
@@ -309,9 +398,13 @@ extern "C"
 
 	FREObject closeOutputDevice(FREContext ctx, void* funcData, uint32_t argc, FREObject argv[])
 	{
+		int pointer = 0;
+		FREGetObjectAsInt32(argv[0],&pointer);
+
 		try
 		{
-			if(midiout->isPortOpen()) midiout->closePort();
+			RtMidiOut *out = (RtMidiOut *)pointer;
+			if(out->isPortOpen()) out->closePort();
 		}catch(exception e)
 		{
 			printf("Error closing output device.\n");
@@ -350,6 +443,11 @@ extern "C"
 		if(midiin->isPortOpen()) midiin->closePort();
 		if(midiout->isPortOpen()) midiout->closePort();
 
+		for(int i=0;i<openMidiIn.size();i++)
+		{
+			openMidiIn[i]->closePort();
+		}
+
 		delete midiin;
 	    delete midiout;
 	}
@@ -359,27 +457,13 @@ extern "C"
 		exitRunThread = true;
 		try
 		{
-			pthread_cancel(readThread);
+			//pthread_cancel(readThread);
 		}catch(exception e)
 		{
 			printf("Thread already exited !");
 		}
 
 	}
-
-	FREObject clean(FREContext ctx, void* funcData, uint32_t argc, FREObject argv[])
-	{
-		cleanThread();
-		cleanMIDI();
-
-		FREObject result;
-		FRENewObjectFromBool(true,&result);
-		return result;
-
-	}
-
-	
-
 
 	// Flash Native Extensions stuff
 	void NativeMIDIContextInitializer(void* extData, const uint8_t* ctxType, FREContext ctx, uint32_t* numFunctionsToSet,  const FRENamedFunction** functionsToSet) { 
@@ -397,12 +481,10 @@ extern "C"
 			{ (const uint8_t*) "closeInputDevice",    NULL, &closeInputDevice },
 			{ (const uint8_t*) "closeOutputDevice",   NULL, &closeOutputDevice },
 			{ (const uint8_t*) "sendMessage",		  NULL, &sendMIDIMessage },
-			{ (const uint8_t*) "clean",        NULL, &clean }
 		};
     
 		*numFunctionsToSet = sizeof( extensionFunctions ) / sizeof( FRENamedFunction );
 		*functionsToSet = extensionFunctions;
-
 	}
 
 
