@@ -18,4 +18,4 @@ unzip -o extension\debug\%ANE_FILE%.zip -d extension\debug\%ANE_FILE%
 
 del extension\debug\%ANE_FILE%.zip
 
-pause
+#pause
