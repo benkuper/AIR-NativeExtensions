@@ -1,0 +1,33 @@
+Contents of /Users/benkuper/Documents/Dev/AIR-NativeExtensions/NativeMIDI/ane_src/native_src/MacOS/NativeMIDI/NativeMIDI/NativeMIDI-Prefix.pch
+-x
+objective-c
+-arch
+x86_64
+-fretain-comments-from-system-headers
+-std=gnu99
+-fobjc-arc
+-fmodules
+-fmodules-cache-path=/Users/benkuper/Documents/Dev/AIR-NativeExtensions/NativeMIDI/ane_src/native_src/MacOS/NativeMIDI/DerivedData/ModuleCache
+-fpascal-strings
+-O0
+-DDEBUG=1
+-DDEBUG=1
+-isysroot
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk
+-fasm-blocks
+-mmacosx-version-min=10.9
+-g
+-iquote
+-iquote
+-I/Users/benkuper/Documents/Dev/AIR-NativeExtensions/NativeMIDI/ane_src/native_src/MacOS/NativeMIDI/Build/Products/Debug/include
+-I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include
+-F/Users/benkuper/Documents/Dev/AIR-NativeExtensions/NativeMIDI/ane_src/native_src/MacOS/NativeMIDI/Build/Products/Debug
+-F/Applications/Xcode.app/Contents/Developer/Library/Frameworks
+-ferror-limit=10
+-working-directory=/Users/benkuper/Documents/Dev/AIR-NativeExtensions/NativeMIDI/ane_src/native_src/MacOS/NativeMIDI
+-Xclang
+-detailed-preprocessing-record
+x86_64-apple-darwin13.0.0
+"4.2.1 Compatible Apple LLVM 5.1 (clang-503.0.40)"
+SDK_PRODUCT_BUILD_VERSION=13C64
+13C64

@@ -22,13 +22,13 @@ package benkuper.nativeExtensions
 		{
 			
 			extContext = ExtensionContext.createExtensionContext("benkuper.nativeExtensions.NativeMIDI", "midi");
-			
-			var b:Boolean = extContext.call("init") as Boolean;
+            extContext.addEventListener(StatusEvent.STATUS, statusHandler);
+
+            var b:Boolean = extContext.call("init") as Boolean;
 			
 			updateDeviceList();
 			
-			extContext.addEventListener(StatusEvent.STATUS, statusHandler);
-			
+
 			NativeApplication.nativeApplication.addEventListener(Event.EXITING, appExiting);
 			
 		}
@@ -38,6 +38,10 @@ package benkuper.nativeExtensions
 			//trace("Status from Native Extension", e.code, e.level);
 			switch(e.code)
 			{
+                case "print":
+                    trace("[NativeMIDI Extension::print] "+e.level);
+                    break;
+
 				case "data":
 					updateData();
 					break;

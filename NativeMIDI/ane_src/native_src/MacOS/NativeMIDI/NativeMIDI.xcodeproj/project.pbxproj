@@ -1,0 +1,526 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		66C27DAE1A59E15E00DB9E2F /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66C27DAD1A59E15E00DB9E2F /* Cocoa.framework */; };
+		66C27DB81A59E15E00DB9E2F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 66C27DB61A59E15E00DB9E2F /* InfoPlist.strings */; };
+		66C27DC31A59E15E00DB9E2F /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66C27DC21A59E15E00DB9E2F /* XCTest.framework */; };
+		66C27DC41A59E15E00DB9E2F /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66C27DAD1A59E15E00DB9E2F /* Cocoa.framework */; };
+		66C27DC71A59E15E00DB9E2F /* NativeMIDI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66C27DAA1A59E15E00DB9E2F /* NativeMIDI.framework */; };
+		66C27DCD1A59E15E00DB9E2F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 66C27DCB1A59E15E00DB9E2F /* InfoPlist.strings */; };
+		66C27DCF1A59E15E00DB9E2F /* NativeMIDITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 66C27DCE1A59E15E00DB9E2F /* NativeMIDITests.m */; };
+		66C27DDB1A59E5FF00DB9E2F /* NativeMIDI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 66C27DDA1A59E5FF00DB9E2F /* NativeMIDI.cpp */; };
+		66C27DDD1A59E62900DB9E2F /* FlashRuntimeExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 66C27DDC1A59E62900DB9E2F /* FlashRuntimeExtensions.h */; };
+		66C27DF21A59E64800DB9E2F /* Adobe AIR.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66C27DF11A59E64800DB9E2F /* Adobe AIR.framework */; };
+		66C27DF51A59E65800DB9E2F /* RtMidi.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 66C27DF31A59E65800DB9E2F /* RtMidi.cpp */; };
+		66C27DF61A59E65800DB9E2F /* RtMidi.h in Headers */ = {isa = PBXBuildFile; fileRef = 66C27DF41A59E65800DB9E2F /* RtMidi.h */; };
+		66C27DF81A59F32400DB9E2F /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66C27DF71A59F32400DB9E2F /* CoreAudio.framework */; };
+		66C27DFA1A59F34500DB9E2F /* CoreMIDI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66C27DF91A59F34500DB9E2F /* CoreMIDI.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		66C27DC51A59E15E00DB9E2F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 66C27DA11A59E15D00DB9E2F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 66C27DA91A59E15D00DB9E2F;
+			remoteInfo = NativeMIDI;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		66C27DAA1A59E15E00DB9E2F /* NativeMIDI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = NativeMIDI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		66C27DAD1A59E15E00DB9E2F /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		66C27DB01A59E15E00DB9E2F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		66C27DB11A59E15E00DB9E2F /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		66C27DB21A59E15E00DB9E2F /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		66C27DB51A59E15E00DB9E2F /* NativeMIDI-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "NativeMIDI-Info.plist"; sourceTree = "<group>"; };
+		66C27DB71A59E15E00DB9E2F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		66C27DB91A59E15E00DB9E2F /* NativeMIDI-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NativeMIDI-Prefix.pch"; sourceTree = "<group>"; };
+		66C27DBA1A59E15E00DB9E2F /* NativeMIDI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NativeMIDI.h; sourceTree = "<group>"; };
+		66C27DC11A59E15E00DB9E2F /* NativeMIDITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NativeMIDITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		66C27DC21A59E15E00DB9E2F /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		66C27DCA1A59E15E00DB9E2F /* NativeMIDITests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "NativeMIDITests-Info.plist"; sourceTree = "<group>"; };
+		66C27DCC1A59E15E00DB9E2F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		66C27DCE1A59E15E00DB9E2F /* NativeMIDITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NativeMIDITests.m; sourceTree = "<group>"; };
+		66C27DD91A59E32900DB9E2F /* build.command */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; name = build.command; path = ../../../build.command; sourceTree = "<group>"; };
+		66C27DDA1A59E5FF00DB9E2F /* NativeMIDI.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NativeMIDI.cpp; sourceTree = "<group>"; };
+		66C27DDC1A59E62900DB9E2F /* FlashRuntimeExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FlashRuntimeExtensions.h; path = ../../../../../../SDKs/AIRSDK_Compiler/include/FlashRuntimeExtensions.h; sourceTree = "<group>"; };
+		66C27DF11A59E64800DB9E2F /* Adobe AIR.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "Adobe AIR.framework"; path = "../../../../../../SDKs/AIRSDK_Compiler/runtimes/air/mac/Adobe AIR.framework"; sourceTree = "<group>"; };
+		66C27DF31A59E65800DB9E2F /* RtMidi.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RtMidi.cpp; path = ../../../../../../../Lib/RTMidi/RtMidi.cpp; sourceTree = "<group>"; };
+		66C27DF41A59E65800DB9E2F /* RtMidi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RtMidi.h; path = ../../../../../../../Lib/RTMidi/RtMidi.h; sourceTree = "<group>"; };
+		66C27DF71A59F32400DB9E2F /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
+		66C27DF91A59F34500DB9E2F /* CoreMIDI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMIDI.framework; path = System/Library/Frameworks/CoreMIDI.framework; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		66C27DA61A59E15D00DB9E2F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				66C27DFA1A59F34500DB9E2F /* CoreMIDI.framework in Frameworks */,
+				66C27DF81A59F32400DB9E2F /* CoreAudio.framework in Frameworks */,
+				66C27DF21A59E64800DB9E2F /* Adobe AIR.framework in Frameworks */,
+				66C27DAE1A59E15E00DB9E2F /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		66C27DBE1A59E15E00DB9E2F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				66C27DC71A59E15E00DB9E2F /* NativeMIDI.framework in Frameworks */,
+				66C27DC41A59E15E00DB9E2F /* Cocoa.framework in Frameworks */,
+				66C27DC31A59E15E00DB9E2F /* XCTest.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		66C27DA01A59E15D00DB9E2F = {
+			isa = PBXGroup;
+			children = (
+				66C27DF11A59E64800DB9E2F /* Adobe AIR.framework */,
+				66C27DDC1A59E62900DB9E2F /* FlashRuntimeExtensions.h */,
+				66C27DB31A59E15E00DB9E2F /* NativeMIDI */,
+				66C27DC81A59E15E00DB9E2F /* NativeMIDITests */,
+				66C27DAC1A59E15E00DB9E2F /* Frameworks */,
+				66C27DAB1A59E15E00DB9E2F /* Products */,
+				66C27DD91A59E32900DB9E2F /* build.command */,
+			);
+			sourceTree = "<group>";
+		};
+		66C27DAB1A59E15E00DB9E2F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				66C27DAA1A59E15E00DB9E2F /* NativeMIDI.framework */,
+				66C27DC11A59E15E00DB9E2F /* NativeMIDITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		66C27DAC1A59E15E00DB9E2F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				66C27DF91A59F34500DB9E2F /* CoreMIDI.framework */,
+				66C27DF71A59F32400DB9E2F /* CoreAudio.framework */,
+				66C27DAD1A59E15E00DB9E2F /* Cocoa.framework */,
+				66C27DC21A59E15E00DB9E2F /* XCTest.framework */,
+				66C27DAF1A59E15E00DB9E2F /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		66C27DAF1A59E15E00DB9E2F /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				66C27DB01A59E15E00DB9E2F /* Foundation.framework */,
+				66C27DB11A59E15E00DB9E2F /* CoreData.framework */,
+				66C27DB21A59E15E00DB9E2F /* AppKit.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		66C27DB31A59E15E00DB9E2F /* NativeMIDI */ = {
+			isa = PBXGroup;
+			children = (
+				66C27DF31A59E65800DB9E2F /* RtMidi.cpp */,
+				66C27DF41A59E65800DB9E2F /* RtMidi.h */,
+				66C27DDA1A59E5FF00DB9E2F /* NativeMIDI.cpp */,
+				66C27DBA1A59E15E00DB9E2F /* NativeMIDI.h */,
+				66C27DB41A59E15E00DB9E2F /* Supporting Files */,
+			);
+			path = NativeMIDI;
+			sourceTree = "<group>";
+		};
+		66C27DB41A59E15E00DB9E2F /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				66C27DB51A59E15E00DB9E2F /* NativeMIDI-Info.plist */,
+				66C27DB61A59E15E00DB9E2F /* InfoPlist.strings */,
+				66C27DB91A59E15E00DB9E2F /* NativeMIDI-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		66C27DC81A59E15E00DB9E2F /* NativeMIDITests */ = {
+			isa = PBXGroup;
+			children = (
+				66C27DCE1A59E15E00DB9E2F /* NativeMIDITests.m */,
+				66C27DC91A59E15E00DB9E2F /* Supporting Files */,
+			);
+			path = NativeMIDITests;
+			sourceTree = "<group>";
+		};
+		66C27DC91A59E15E00DB9E2F /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				66C27DCA1A59E15E00DB9E2F /* NativeMIDITests-Info.plist */,
+				66C27DCB1A59E15E00DB9E2F /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		66C27DA71A59E15D00DB9E2F /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				66C27DDD1A59E62900DB9E2F /* FlashRuntimeExtensions.h in Headers */,
+				66C27DF61A59E65800DB9E2F /* RtMidi.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		66C27DA91A59E15D00DB9E2F /* NativeMIDI */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 66C27DD21A59E15E00DB9E2F /* Build configuration list for PBXNativeTarget "NativeMIDI" */;
+			buildPhases = (
+				66C27DA51A59E15D00DB9E2F /* Sources */,
+				66C27DA61A59E15D00DB9E2F /* Frameworks */,
+				66C27DA71A59E15D00DB9E2F /* Headers */,
+				66C27DA81A59E15D00DB9E2F /* Resources */,
+				66C27DD81A59E2E200DB9E2F /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = NativeMIDI;
+			productName = NativeMIDI;
+			productReference = 66C27DAA1A59E15E00DB9E2F /* NativeMIDI.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		66C27DC01A59E15E00DB9E2F /* NativeMIDITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 66C27DD51A59E15E00DB9E2F /* Build configuration list for PBXNativeTarget "NativeMIDITests" */;
+			buildPhases = (
+				66C27DBD1A59E15E00DB9E2F /* Sources */,
+				66C27DBE1A59E15E00DB9E2F /* Frameworks */,
+				66C27DBF1A59E15E00DB9E2F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				66C27DC61A59E15E00DB9E2F /* PBXTargetDependency */,
+			);
+			name = NativeMIDITests;
+			productName = NativeMIDITests;
+			productReference = 66C27DC11A59E15E00DB9E2F /* NativeMIDITests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		66C27DA11A59E15D00DB9E2F /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = BenKuper;
+				TargetAttributes = {
+					66C27DC01A59E15E00DB9E2F = {
+						TestTargetID = 66C27DA91A59E15D00DB9E2F;
+					};
+				};
+			};
+			buildConfigurationList = 66C27DA41A59E15D00DB9E2F /* Build configuration list for PBXProject "NativeMIDI" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 66C27DA01A59E15D00DB9E2F;
+			productRefGroup = 66C27DAB1A59E15E00DB9E2F /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				66C27DA91A59E15D00DB9E2F /* NativeMIDI */,
+				66C27DC01A59E15E00DB9E2F /* NativeMIDITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		66C27DA81A59E15D00DB9E2F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				66C27DB81A59E15E00DB9E2F /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		66C27DBF1A59E15E00DB9E2F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				66C27DCD1A59E15E00DB9E2F /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		66C27DD81A59E2E200DB9E2F /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "cd ../../..\n./build.command";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		66C27DA51A59E15D00DB9E2F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				66C27DF51A59E65800DB9E2F /* RtMidi.cpp in Sources */,
+				66C27DDB1A59E5FF00DB9E2F /* NativeMIDI.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		66C27DBD1A59E15E00DB9E2F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				66C27DCF1A59E15E00DB9E2F /* NativeMIDITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		66C27DC61A59E15E00DB9E2F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 66C27DA91A59E15D00DB9E2F /* NativeMIDI */;
+			targetProxy = 66C27DC51A59E15E00DB9E2F /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		66C27DB61A59E15E00DB9E2F /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				66C27DB71A59E15E00DB9E2F /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		66C27DCB1A59E15E00DB9E2F /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				66C27DCC1A59E15E00DB9E2F /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		66C27DD01A59E15E00DB9E2F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		66C27DD11A59E15E00DB9E2F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		66C27DD31A59E15E00DB9E2F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = NO;
+				COMBINE_HIDPI_IMAGES = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/benkuper/Documents/Dev/SDKs/AIRSDK_Compiler/runtimes/air/mac,
+					"/Users/benkuper/Documents/Dev/SDKs/AIRSDK_Compiler/runtimes/air-captive/mac",
+				);
+				FRAMEWORK_VERSION = A;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "NativeMIDI/NativeMIDI-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = __MACOSX_CORE__;
+				INFOPLIST_FILE = "NativeMIDI/NativeMIDI-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				VALID_ARCHS = i386;
+				WRAPPER_EXTENSION = framework;
+			};
+			name = Debug;
+		};
+		66C27DD41A59E15E00DB9E2F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = NO;
+				COMBINE_HIDPI_IMAGES = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/benkuper/Documents/Dev/SDKs/AIRSDK_Compiler/runtimes/air/mac,
+					"/Users/benkuper/Documents/Dev/SDKs/AIRSDK_Compiler/runtimes/air-captive/mac",
+				);
+				FRAMEWORK_VERSION = A;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "NativeMIDI/NativeMIDI-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = __MACOSX_CORE__;
+				INFOPLIST_FILE = "NativeMIDI/NativeMIDI-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				VALID_ARCHS = i386;
+				WRAPPER_EXTENSION = framework;
+			};
+			name = Release;
+		};
+		66C27DD61A59E15E00DB9E2F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/NativeMIDI.framework/Versions/A/NativeMIDI";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "NativeMIDI/NativeMIDI-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "NativeMIDITests/NativeMIDITests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		66C27DD71A59E15E00DB9E2F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/NativeMIDI.framework/Versions/A/NativeMIDI";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "NativeMIDI/NativeMIDI-Prefix.pch";
+				INFOPLIST_FILE = "NativeMIDITests/NativeMIDITests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		66C27DA41A59E15D00DB9E2F /* Build configuration list for PBXProject "NativeMIDI" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				66C27DD01A59E15E00DB9E2F /* Debug */,
+				66C27DD11A59E15E00DB9E2F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		66C27DD21A59E15E00DB9E2F /* Build configuration list for PBXNativeTarget "NativeMIDI" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				66C27DD31A59E15E00DB9E2F /* Debug */,
+				66C27DD41A59E15E00DB9E2F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		66C27DD51A59E15E00DB9E2F /* Build configuration list for PBXNativeTarget "NativeMIDITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				66C27DD61A59E15E00DB9E2F /* Debug */,
+				66C27DD71A59E15E00DB9E2F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 66C27DA11A59E15D00DB9E2F /* Project object */;
+}
