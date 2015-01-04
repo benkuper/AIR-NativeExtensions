@@ -1,11 +1,12 @@
 package benkuper.nativeExtensions
 {
-	import com.greensock.TweenLite;
 	import flash.desktop.NativeApplication;
 	import flash.events.Event;
 	import flash.events.EventDispatcher;
 	import flash.events.StatusEvent;
+	import flash.events.TimerEvent;
 	import flash.external.ExtensionContext;
+	import flash.utils.Timer;
 	
 	/**
 	 * ...
@@ -13,24 +14,39 @@ package benkuper.nativeExtensions
 	 */
 	public class NativeMIDI extends EventDispatcher
 	{
-		public var extContext:ExtensionContext;		
+		public static var extContext:ExtensionContext;		
 		
-		public var inputDevices:Vector.<MIDIDeviceIn>;
-		public var outputDevices:Vector.<MIDIDeviceOut>;
+		public static var inputDevices:Vector.<MIDIDeviceIn>;
+		public static var outputDevices:Vector.<MIDIDeviceOut>;
+		
+		public static var instance:NativeMIDI;
+		
+		private var updateListTimer:Timer;
 		
 		public function NativeMIDI():void
 		{
 			
 			extContext = ExtensionContext.createExtensionContext("benkuper.nativeExtensions.NativeMIDI", "midi");
-            extContext.addEventListener(StatusEvent.STATUS, statusHandler);
-
-            var b:Boolean = extContext.call("init") as Boolean;
+			extContext.addEventListener(StatusEvent.STATUS, statusHandler);
 			
-			updateDeviceList();
+			extContext.call("init") as Boolean;
 			
-
+			inputDevices = new Vector.<MIDIDeviceIn>();
+			outputDevices = new Vector.<MIDIDeviceOut>();
+			
+			
+			updateListTimer = new Timer(1000);
+			updateListTimer.addEventListener(TimerEvent.TIMER, updateListTimerTick);
+			updateListTimer.start();
+			
 			NativeApplication.nativeApplication.addEventListener(Event.EXITING, appExiting);
 			
+		}
+		
+		public static function init():void
+		{
+			if (instance != null) return;
+			instance = new NativeMIDI();
 		}
 		
 		private function statusHandler(e:StatusEvent):void 
@@ -38,123 +54,233 @@ package benkuper.nativeExtensions
 			//trace("Status from Native Extension", e.code, e.level);
 			switch(e.code)
 			{
-                case "print":
-                    trace("[NativeMIDI Extension::print] "+e.level);
-                    break;
-
+				case "print":
+					trace("[NativeMIDIExtension :: print] " + e.level);
+					break;
+					
 				case "data":
 					updateData();
 					break;
 			}
 		}
 		
+		private function updateListTimerTick(e:TimerEvent):void 
+		{
+			updateDeviceList();
+		}
+		
 		private function updateDeviceList():void 
 		{
-			inputDevices = extContext.call("listInputDevices") as Vector.<MIDIDeviceIn>;
-			outputDevices = extContext.call("listOutputDevices") as Vector.<MIDIDeviceOut>;
+			var newInputs:Vector.<MIDIDeviceIn> = extContext.call("listInputDevices") as Vector.<MIDIDeviceIn>;
+			
+			var found:Boolean;
+			
+			for each(var i:MIDIDeviceIn in inputDevices)
+			{
+				found = false;
+				for each(var ni:MIDIDeviceIn in newInputs)
+				{
+					if (i.name == ni.name) 
+					{
+						found = true;
+						break;				
+					}
+				}
+				if (!found) //device removed
+				{
+					removeDeviceIn(i);
+				}
+			}
+			
+			for each(var nj:MIDIDeviceIn in newInputs)
+			{
+				found = false;
+				for each(var j:MIDIDeviceIn in inputDevices)
+				{
+					if (j.name == nj.name) 
+					{
+						found = true;
+						break;
+					}
+					
+				}
+				
+				if (!found) //device added
+				{
+					addDeviceIn(nj);
+				}
+			}
+			
+			var newOutputs:Vector.<MIDIDeviceOut> = extContext.call("listOutputDevices") as Vector.<MIDIDeviceOut>;
+			
+			for each(var o:MIDIDeviceOut in outputDevices)
+			{
+				found = false;
+				for each(var no:MIDIDeviceOut in newOutputs)
+				{
+					if (o.name == no.name) 
+					{
+						found = true;
+						break;
+					}
+					
+				}
+				
+				if (!found) //device removed
+				{
+					removeDeviceOut(o);
+				}
+			}
+			
+			for each(var np:MIDIDeviceOut in newOutputs)
+			{
+				found = false;
+				for each(var p:MIDIDeviceOut in outputDevices)
+				{
+					if (p.name == np.name) 
+					{
+						found = true;
+						break;
+					}
+					
+				}
+				
+				if (!found) //device added
+				{
+					addDeviceOut(np);
+				}
+			}
 		}
+		
+		private function addDeviceIn(device:MIDIDeviceIn):void 
+		{
+			inputDevices.push(device);
+			var evt:MIDIEvent = new MIDIEvent(MIDIEvent.DEVICE_IN_ADDED);
+			evt.device = device;
+			dispatchEvent(evt);
+		
+		}
+		
+		private function removeDeviceIn(device:MIDIDeviceIn):void 
+		{
+			inputDevices.splice(inputDevices.indexOf(device), 1);
+			var evt:MIDIEvent = new MIDIEvent(MIDIEvent.DEVICE_IN_REMOVED);
+			evt.device = device;
+			dispatchEvent(evt);
+		}
+		
+		private function addDeviceOut(device:MIDIDeviceOut):void 
+		{
+			outputDevices.push(device);
+			var evt:MIDIEvent = new MIDIEvent(MIDIEvent.DEVICE_OUT_ADDED);
+			evt.device = device;
+			dispatchEvent(evt);
+		}
+		
+		private function removeDeviceOut(device:MIDIDeviceOut):void 
+		{
+			outputDevices.splice(outputDevices.indexOf(device), 1);
+			var evt:MIDIEvent = new MIDIEvent(MIDIEvent.DEVICE_OUT_REMOVED);
+			evt.device = device;
+			dispatchEvent(evt);
+		}
+		
 		
 		private function updateData():void 
 		{
 			var messages:Vector.<MIDIMessage> = extContext.call("updateData") as Vector.<MIDIMessage>;
-			
 			for each(var m:MIDIMessage in messages)
 			{
-				dispatchEvent(MIDIEvent.getEventForMessage(m));
+				var midiDevice:MIDIDeviceIn = getInDeviceForPointer(m.devicePointer);
+				if(midiDevice != null) midiDevice.updateData(m);
 			}
 		}		
 		
+		private function getInDeviceForPointer(devicePointer:int):MIDIDeviceIn 
+		{
+			for each(var m:MIDIDeviceIn in inputDevices)
+			{
+				if (m.nativePointer == devicePointer) return m;
+			}
+			
+			return null;
+		}
 		
-		public function openInputDevice(inputDevice:MIDIDeviceIn):Boolean
+		public static function openInputDevice(inputDevice:MIDIDeviceIn):int
 		{
 			return openInputDeviceByIndex(inputDevices.indexOf(inputDevice));
 		}
 		
-		public function openInputDeviceByIndex(index:int):Boolean
+		public static function openInputDeviceByIndex(index:int):int
 		{
-			if (index >= 0 && index < inputDevices.length) return extContext.call("openInputDevice", index) as Boolean;
+			if (index >= 0 && index < inputDevices.length) return extContext.call("openInputDevice", index) as int;
 			
-			return false;
+			return -1;
 		}
 		
-		public function openInputDeviceByName(name:String):Boolean
+		public static function openInputDeviceByName(name:String):int
 		{
 			for each(var i:MIDIDeviceIn in inputDevices)
 			{
+				trace(i.name,name);
 				if (i.name == name) return openInputDevice(i);
 			}
 			
-			return false;
+			return -1;
 		}
 		
-		public function openOutputDevice(outputDevice:MIDIDeviceOut):Boolean
+		public static function openOutputDevice(outputDevice:MIDIDeviceOut):int
 		{
 			return openOutputDeviceByIndex(outputDevices.indexOf(outputDevice));
 		}
 		
-		public function openOutputDeviceByIndex(index:int):Boolean
+		public static function openOutputDeviceByIndex(index:int):int
 		{
-			if (index >= 0 && index < outputDevices.length)  return extContext.call("openOutputDevice", index) as Boolean;
-			return false;
+			if (index >= 0 && index < outputDevices.length)  return extContext.call("openOutputDevice", index) as int;
+			return -1;
 		}
 		
-		public function openOutputDeviceByName(name:String):Boolean
+		public static function openOutputDeviceByName(name:String):int
 		{
 			for each(var i:MIDIDeviceOut in outputDevices)
 			{
 				if (i.name == name) return openOutputDevice(i);
 			}
 			
-			return false;
+			return -1;
 		}
 		
-		public function closeInputDevice(inputDevice:MIDIDeviceIn):void
+		public static function closeInputDevice(inputDevice:MIDIDeviceIn):Boolean
 		{
-			if (!inputDevice.opened) return;
-			var result:Boolean = extContext.call("closeInputDevice", inputDevice.name) as Boolean;
+			if (!inputDevice.opened) return false;
+			var result:Boolean = extContext.call("closeInputDevice", inputDevice.nativePointer) as Boolean;
+			return result;
 		}
 		
-		public function closeOutputDevice(outputDevice:MIDIDeviceOut):void
+		public static function closeOutputDevice(outputDevice:MIDIDeviceOut):Boolean
 		{
-			if (!outputDevice.opened) return;
-			var result:Boolean = extContext.call("closeOutputDevice", outputDevice.name) as Boolean;
+			if (!outputDevice.opened) return false;
+			var result:Boolean = extContext.call("closeOutputDevice", outputDevice.nativePointer) as Boolean;
+			return result;
 		}
 		
 		
 		//SENDING
 		
-		public function sendNoteOn(channel:int, pitch:int, velocity:int = 127):void
+		public static function sendMessage(outputDevice:MIDIDeviceOut, status:int, data1:int, data2:int):void 
 		{
-			sendMessage(channel + 143, pitch, velocity);
+			var result:Boolean = extContext.call("sendMessage", outputDevice.name, status, data1, data2) as Boolean;
 		}
-		
-		public function sendNoteOff(channel:int, pitch:int,velocity:int = 0):void
-		{
-			sendMessage(channel + 127, pitch, velocity);
-		}
-		
-		public function sendFullNote(channel:int, pitch:int, velocity:int, duration:Number):void
-		{
-			sendNoteOn(channel,pitch,velocity);
-			TweenLite.delayedCall(duration, sendNoteOff, [channel, pitch]);
-		}
-		
-		public function sendControllerChange(channel:int, number:int, value:int):void
-		{
-			sendMessage(channel + 175, number, value);
-		}
-		
-		public function sendMessage(status:int, data1:int, data2:int):void 
-		{
-			var result:Boolean = extContext.call("sendMessage", status, data1, data2) as Boolean;
-		}
-		
-		
 		
 		public function clean():void
 		{
 			trace("Cleaning...");
-			extContext.call("clean");
+			for each(var m:MIDIDeviceIn in inputDevices) m.close();
+			for each(var o:MIDIDeviceOut in outputDevices) o.close();
+			
+			updateListTimer.stop();
+			updateListTimer.removeEventListener(TimerEvent.TIMER, updateListTimerTick);
+			extContext.dispose();
 		}
 		
 		private function appExiting(e:Event):void 
