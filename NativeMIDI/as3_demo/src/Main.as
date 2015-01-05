@@ -17,6 +17,7 @@ package
 	{
 		private var deviceIn:MIDIDeviceIn;
 		private var deviceIn2:MIDIDeviceIn;
+		
 		private var deviceOut:MIDIDeviceOut;
 		
 		public function Main():void 
@@ -27,17 +28,15 @@ package
 			NativeMIDI.instance.addEventListener(MIDIEvent.DEVICE_OUT_ADDED, deviceOutAdded);
 			NativeMIDI.instance.addEventListener(MIDIEvent.DEVICE_OUT_REMOVED, deviceOutRemoved);
 			
-			//stage.addEventListener(KeyboardEvent.KEY_DOWN, keyDown);
-			//stage.addEventListener(KeyboardEvent.KEY_UP, keyDown);
-			//stage.addEventListener(MouseEvent.MOUSE_DOWN, mouseDown);
+			stage.addEventListener(KeyboardEvent.KEY_DOWN, keyDown);
+			stage.addEventListener(KeyboardEvent.KEY_UP, keyDown);
 		}
 		
 		
 		
 		private function deviceInAdded(e:MIDIEvent):void 
 		{
-			trace("device added !", e.device.name);
-			if (e.device.name.match("Keystation") != null)
+			if (e.device.name.match("loop") != null)
 			{
 				deviceIn = e.device as MIDIDeviceIn; 
 				var isOpen:Boolean = deviceIn.open();
@@ -66,7 +65,12 @@ package
 		
 		private function deviceOutAdded(e:MIDIEvent):void 
 		{
-			trace("device Out added",e.device.name);
+			if (e.device.name.match("loop") != null)
+			{
+				deviceOut = e.device as MIDIDeviceOut; 
+				var isOpen:Boolean = deviceOut.open();
+				trace("Device out" + deviceOut.name+" open ?" + deviceIn.opened);
+			}
 		}
 		
 		private function deviceOutRemoved(e:MIDIEvent):void 
@@ -77,7 +81,11 @@ package
 		
 		private function midiControllerChange(e:MIDIEvent):void 
 		{
-			trace("midi controller change",e.channel,e.value);
+			trace("midi controller change", e.channel, e.value);
+			graphics.clear();
+			graphics.beginFill(0);
+			graphics.drawRect(10, 10, e.value * 2, 50);
+			graphics.endFill();
 		}
 		
 		private function midiNoteOn(e:MIDIEvent):void 
@@ -90,11 +98,6 @@ package
 			trace("midi note off", e.pitch, e.velocity);
 		}
 		
-		private function mouseDown(e:MouseEvent):void 
-		{
-			if (deviceOut == null) return;
-			deviceOut.sendFullNote(1, 30, 127,.05);
-		}
 		
 		//keyboard
 		
@@ -112,26 +115,6 @@ package
 				if(e.type == KeyboardEvent.KEY_DOWN) deviceOut.sendControllerChange(1, e.keyCode, int(Math.random() * 126));
 			}
 		}
-		
-		
-		//MIDI Handlers
-		
-		//private function noteOn(e:MIDIEvent):void 
-		//{
-			//trace("[Main] Note On !",e.channel,e.pitch,e.velocity);
-		//}
-		//
-		//private function noteOff(e:MIDIEvent):void 
-		//{
-			//trace("[Main] Note Off !",e.channel,e.pitch,e.velocity);
-		//}
-		//
-		//private function controllerChange(e:MIDIEvent):void 
-		//{
-			//trace("[Main] controller change !",e.channel,e.number,e.value);
-		//}
-			
-		
 		
 	}
 	

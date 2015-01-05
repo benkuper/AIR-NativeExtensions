@@ -10,7 +10,7 @@
   </features>
   <libraries>
     <library path="library.swf">
-      <script name="benkuper/nativeExtensions/NativeMIDI" mod="1420394509466" signatureChecksum="3735708292" >
+      <script name="benkuper/nativeExtensions/NativeMIDI" mod="1420457358218" signatureChecksum="3735708292" >
         <def id="benkuper.nativeExtensions:NativeMIDI" /> 
         <dep id="benkuper.nativeExtensions:MIDIEvent" type="s" /> 
         <dep id="benkuper.nativeExtensions:MIDIDeviceOut" type="s" /> 
@@ -49,20 +49,20 @@
         <dep id="flash.events:Event" type="i" /> 
         <dep id="AS3" type="n" /> 
       </script>
-      <script name="_a0c2bdecdd64368d8e4fe6833cd61249c471d56ab2c4f1cef4d0cd378e2e326f_flash_display_Sprite" mod="1420396056332" signatureChecksum="4037639285" >
+      <script name="_a0c2bdecdd64368d8e4fe6833cd61249c471d56ab2c4f1cef4d0cd378e2e326f_flash_display_Sprite" mod="1420457550183" signatureChecksum="4037639285" >
         <def id="_a0c2bdecdd64368d8e4fe6833cd61249c471d56ab2c4f1cef4d0cd378e2e326f_flash_display_Sprite" /> 
         <dep id="flash.system:Security" type="e" /> 
         <dep id="flash.display:Sprite" type="i" /> 
         <dep id="AS3" type="n" /> 
       </script>
-      <script name="benkuper/nativeExtensions/MIDIDeviceOut" mod="1420392447553" signatureChecksum="1715379735" >
+      <script name="benkuper/nativeExtensions/MIDIDeviceOut" mod="1420457403215" signatureChecksum="1715379735" >
         <def id="benkuper.nativeExtensions:MIDIDeviceOut" /> 
         <dep id="flash.utils:setTimeout" type="e" /> 
         <dep id="benkuper.nativeExtensions:NativeMIDI" type="e" /> 
         <dep id="benkuper.nativeExtensions:MIDIDevice" type="i" /> 
         <dep id="AS3" type="n" /> 
       </script>
-      <script name="benkuper/nativeExtensions/MIDIDeviceIn" mod="1420395404989" signatureChecksum="1019434393" >
+      <script name="benkuper/nativeExtensions/MIDIDeviceIn" mod="1420412993260" signatureChecksum="1019434393" >
         <def id="benkuper.nativeExtensions:MIDIDeviceIn" /> 
         <dep id="benkuper.nativeExtensions:MIDIEvent" type="s" /> 
         <dep id="benkuper.nativeExtensions:MIDIMessage" type="s" /> 
@@ -77,7 +77,7 @@
         <dep id="AS3" type="n" /> 
       </script>
       <digests>
-        <digest type="SHA-256" signed="false" value="456938de5ac70367d29e7b1f3b3a70a0a09659a586be51f7f7d7355ce4df3fc3"   />
+        <digest type="SHA-256" signed="false" value="9fbf3ea1a7795497ec4af6a1a10d54d4d446274e8df20d6dc4eb4d9fd10eedc7"   />
       </digests>
     </library>
   </libraries>

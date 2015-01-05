@@ -9,6 +9,14 @@
                 <initializer>NativeMIDIExtInitializer</initializer>  
                 <finalizer>NativeMIDIExtFinalizer</finalizer>  
             </applicationDeployment>  
-        </platform>  
+        </platform>
+        
+        <platform name="MacOS-x86">
+            <applicationDeployment>
+                <nativeLibrary>NativeMIDI.framework</nativeLibrary>
+                <initializer>NativeMIDIExtInitializer</initializer>
+                <finalizer>NativeMIDIExtFinalizer</finalizer>
+            </applicationDeployment>
+        </platform>
     </platforms>  
 </extension>  
