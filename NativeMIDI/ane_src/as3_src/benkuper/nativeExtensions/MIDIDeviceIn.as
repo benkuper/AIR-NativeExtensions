@@ -20,7 +20,8 @@ package benkuper.nativeExtensions
 		{
 			super.open();
 			nativePointer = NativeMIDI.openInputDevice(this);
-			return nativePointer != -1;
+			opened = nativePointer != -1;
+			return opened;
 		}
 		
 		
@@ -36,6 +37,7 @@ package benkuper.nativeExtensions
 		{
 			super.close();
 			NativeMIDI.closeInputDevice(this);
+			opened = false;
 		}
 		
 		override public function toString():String

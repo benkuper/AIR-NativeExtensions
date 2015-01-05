@@ -18,13 +18,15 @@ package benkuper.nativeExtensions
 		{
 			super.open();
 			nativePointer = NativeMIDI.openOutputDevice(this);
-			return nativePointer != -1;
+			opened = nativePointer != -1;
+			return opened;
 		}
 		
 		override public function close():void
 		{
 			super.close();
 			NativeMIDI.closeOutputDevice(this);
+			opened = false;
 		}
 		
 		public function sendNoteOn(channel:int, pitch:int, velocity:int = 127):void

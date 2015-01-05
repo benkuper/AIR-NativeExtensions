@@ -253,6 +253,7 @@ package benkuper.nativeExtensions
 		public static function closeInputDevice(inputDevice:MIDIDeviceIn):Boolean
 		{
 			if (!inputDevice.opened) return false;
+			//trace("Close device :" + inputDevice);
 			var result:Boolean = extContext.call("closeInputDevice", inputDevice.nativePointer) as Boolean;
 			return result;
 		}
@@ -269,7 +270,7 @@ package benkuper.nativeExtensions
 		
 		public static function sendMessage(outputDevice:MIDIDeviceOut, status:int, data1:int, data2:int):void 
 		{
-			var result:Boolean = extContext.call("sendMessage", outputDevice.name, status, data1, data2) as Boolean;
+			var result:Boolean = extContext.call("sendMessage", outputDevice.nativePointer, status, data1, data2) as Boolean;
 		}
 		
 		public function clean():void
