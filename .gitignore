@@ -8,3 +8,7 @@ NativeMIDI/ane_src/ane_build/NativeMIDI.swc
 NativeMIDI/ane_src/ane_build/NativeMIDI.framework/NativeMIDI
 NativeMIDI/ane_src/ane_build/NativeMIDI.framework/Versions/A/NativeMIDI
 NativeMIDI/ane_src/ane_build/NativeMIDI.framework/Versions/Current/NativeMIDI
+/AIRBonjour/ane_src/native_src/Windows-x86/Release
+AIRBonjour/ane_src/native_src/Windows-x86/airBonjour-win.opensdf
+AIRBonjour/ane_src/native_src/Windows-x86/airBonjour-win.sdf
+NativeMIDI/ane_src/native_src/Windows-x86/NativeMIDI/NativeMIDI.sdf
