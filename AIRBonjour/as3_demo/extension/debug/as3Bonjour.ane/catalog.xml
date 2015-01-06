@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding ="utf-8"?>
+<swc xmlns="http://www.adobe.com/flash/swccatalog/9">
+  <versions>
+    <swc version="1.2" />
+    <flex version="4.6.0" build="23201" minimumSupportedVersion="3.0.0" />
+  </versions>
+  <features>
+    <feature-script-deps />
+    <feature-files />
+  </features>
+  <libraries>
+    <library path="library.swf">
+      <script name="org/opentekhnia/as3Bonjour/data/ResolvedHostInfo" mod="1420478285051" signatureChecksum="4120856137" >
+        <def id="org.opentekhnia.as3Bonjour.data:ResolvedHostInfo" /> 
+        <dep id="Object" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="_815d470486bb2e0095bb534c659308174d0e9344e0ef44bb9b9a724728b9ea20_flash_display_Sprite" mod="1420539180952" signatureChecksum="681801909" >
+        <def id="_815d470486bb2e0095bb534c659308174d0e9344e0ef44bb9b9a724728b9ea20_flash_display_Sprite" /> 
+        <dep id="flash.system:Security" type="e" /> 
+        <dep id="flash.display:Sprite" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="org/opentekhnia/as3Bonjour/data/Service" mod="1420538009928" signatureChecksum="36406363" >
+        <def id="org.opentekhnia.as3Bonjour.data:Service" /> 
+        <dep id="org.opentekhnia.as3Bonjour.data:NameValue" type="s" /> 
+        <dep id="Object" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="org/opentekhnia/as3Bonjour/data/NameValue" mod="1420478285049" signatureChecksum="761540954" >
+        <def id="org.opentekhnia.as3Bonjour.data:NameValue" /> 
+        <dep id="Object" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="benkuper/util/IPUtil" mod="1420536993110" signatureChecksum="2518836400" >
+        <def id="benkuper.util:IPUtil" /> 
+        <dep id="__AS3__.vec:Vector" type="s" /> 
+        <dep id="flash.net:NetworkInterface" type="s" /> 
+        <dep id="flash.net:InterfaceAddress" type="s" /> 
+        <dep id="trace" type="e" /> 
+        <dep id="flash.net:NetworkInfo" type="e" /> 
+        <dep id="Object" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="org/opentekhnia/as3Bonjour/events/BonjourEvent" mod="1420478285055" signatureChecksum="3125917314" >
+        <def id="org.opentekhnia.as3Bonjour.events:BonjourEvent" /> 
+        <dep id="flash.events:Event" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="org/opentekhnia/as3Bonjour/Bonjour" mod="1420537888546" signatureChecksum="472776550" >
+        <def id="org.opentekhnia.as3Bonjour:Bonjour" /> 
+        <dep id="org.opentekhnia.as3Bonjour.data:Service" type="s" /> 
+        <dep id="__AS3__.vec:Vector" type="s" /> 
+        <dep id="flash.events:StatusEvent" type="s" /> 
+        <dep id="flash.events:IEventDispatcher" type="s" /> 
+        <dep id="org.opentekhnia.as3Bonjour.data:ResolvedHostInfo" type="s" /> 
+        <dep id="flash.external:ExtensionContext" type="s" /> 
+        <dep id="flash.events:Event" type="s" /> 
+        <dep id="trace" type="e" /> 
+        <dep id="org.opentekhnia.as3Bonjour.data:Service" type="e" /> 
+        <dep id="flash.desktop:NativeApplication" type="e" /> 
+        <dep id="__AS3__.vec:Vector" type="e" /> 
+        <dep id="flash.events:StatusEvent" type="e" /> 
+        <dep id="org.opentekhnia.as3Bonjour.data:ResolvedHostInfo" type="e" /> 
+        <dep id="org.opentekhnia.as3Bonjour.events:BonjourEvent" type="e" /> 
+        <dep id="Error" type="e" /> 
+        <dep id="benkuper.util:IPUtil" type="e" /> 
+        <dep id="flash.external:ExtensionContext" type="e" /> 
+        <dep id="flash.events:Event" type="e" /> 
+        <dep id="flash.events:EventDispatcher" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <digests>
+        <digest type="SHA-256" signed="false" value="06acfa29f3516fe59bbc13d1ce46cd5fb406a82954febce588e800ab3ac3e86c"   />
+      </digests>
+    </library>
+  </libraries>
+  <files>
+  </files>
+</swc>
