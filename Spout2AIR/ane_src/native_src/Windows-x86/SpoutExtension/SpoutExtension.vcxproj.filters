@@ -38,28 +38,31 @@
     <ClCompile Include="SpoutExtension.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\..\..\Ressources\SDKs\Spout2SDK\spoutsdk\SpoutSDK\SpoutSender.cpp">
+    <ClCompile Include="..\..\..\..\..\..\..\..\..\Ressources\SDKs\Spout2SDK\SpoutSDK\Source\SpoutMemoryShare.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\..\..\Ressources\SDKs\Spout2SDK\spoutsdk\SpoutSDK\SpoutSenderNames.cpp">
+    <ClCompile Include="..\..\..\..\..\..\..\..\..\Ressources\SDKs\Spout2SDK\SpoutSDK\Source\SpoutReceiver.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\..\..\Ressources\SDKs\Spout2SDK\spoutsdk\SpoutSDK\SpoutDirectX.cpp">
+    <ClCompile Include="..\..\..\..\..\..\..\..\..\Ressources\SDKs\Spout2SDK\SpoutSDK\Source\SpoutSDK.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\..\..\Ressources\SDKs\Spout2SDK\spoutsdk\SpoutSDK\SpoutGLDXinterop.cpp">
+    <ClCompile Include="..\..\..\..\..\..\..\..\..\Ressources\SDKs\Spout2SDK\SpoutSDK\Source\SpoutSender.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\..\..\Ressources\SDKs\Spout2SDK\spoutsdk\SpoutSDK\SpoutGLextensions.cpp">
+    <ClCompile Include="..\..\..\..\..\..\..\..\..\Ressources\SDKs\Spout2SDK\SpoutSDK\Source\SpoutSenderNames.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\..\..\Ressources\SDKs\Spout2SDK\spoutsdk\SpoutSDK\SpoutMemoryShare.cpp">
+    <ClCompile Include="..\..\..\..\..\..\..\..\..\Ressources\SDKs\Spout2SDK\SpoutSDK\Source\SpoutSharedMemory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\..\..\Ressources\SDKs\Spout2SDK\spoutsdk\SpoutSDK\SpoutReceiver.cpp">
+    <ClCompile Include="..\..\..\..\..\..\..\..\..\Ressources\SDKs\Spout2SDK\SpoutSDK\Source\SpoutDirectX.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\..\..\Ressources\SDKs\Spout2SDK\spoutsdk\SpoutSDK\SpoutSDK.cpp">
+    <ClCompile Include="..\..\..\..\..\..\..\..\..\Ressources\SDKs\Spout2SDK\SpoutSDK\Source\SpoutGLDXinterop.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\..\..\..\..\Ressources\SDKs\Spout2SDK\SpoutSDK\Source\SpoutGLextensions.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

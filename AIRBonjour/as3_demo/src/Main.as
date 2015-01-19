@@ -27,6 +27,7 @@ package
 				
 			Bonjour.instance.addEventListener(BonjourEvent.DNSSD_ERROR, onBonjourError);
 				
+			Bonjour.registerService("AIR Demo OSC", "_osc._udp", 6000);
 			Bonjour.browse('_osc._udp','');
 			trace("browse");
 			//bonjour.browse('_apple-midi._udp', '');

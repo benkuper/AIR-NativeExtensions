@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?> 
+<application xmlns="http://ns.adobe.com/air/application/14.0">
+	
+	<id>VirtualMIDIDemo</id> 
+	<versionNumber>1.0</versionNumber> 
+	<filename>VirtualMIDIDemo</filename> 
+	
+	<name>VirtualMIDIDemo</name> 
+	<description></description> 
+	<copyright></copyright> 
+	
+	<initialWindow> 
+		<title>VirtualMIDIDemo</title> 
+		<content>VirtualMIDIDemo.swf</content> 
+		<systemChrome>standard</systemChrome> 
+		<transparent>false</transparent> 
+		<visible>true</visible> 
+		<minimizable>true</minimizable> 
+		<maximizable>true</maximizable> 
+		<resizable>true</resizable> 
+	</initialWindow> 
+	
+	<supportedProfiles>extendedDesktop</supportedProfiles>
+	
+	<extensions>
+		<extensionID>benkuper.nativeExtensions.VirtualMIDI</extensionID>
+		<extensionID>benkuper.nativeExtensions.NativeMIDI</extensionID>
+	</extensions>
+	<!-- 
+	More options:
+	http://livedocs.adobe.com/flex/3/html/File_formats_1.html#1043413
+	-->
+</application>

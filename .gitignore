@@ -12,3 +12,9 @@ NativeMIDI/ane_src/ane_build/NativeMIDI.framework/Versions/Current/NativeMIDI
 AIRBonjour/ane_src/native_src/Windows-x86/airBonjour-win.opensdf
 AIRBonjour/ane_src/native_src/Windows-x86/airBonjour-win.sdf
 NativeMIDI/ane_src/native_src/Windows-x86/NativeMIDI/NativeMIDI.sdf
+/AIRVirtualMIDI/ane_src/native_src/Windows-x86/AIRVirtualMIDI/ipch/airvirtualmidi-afaf6426/*.ipch
+/Spout2AIR/ane_src/native_src/Windows-x86/SpoutExtension/*.sdf
+/AIRVirtualMIDI/ane_src/native_src/Windows-x86/AIRVirtualMIDI/*.sdf
+/Spout2AIR/ane_src/native_src/Windows-x86/SpoutExtension/Debug/*.idb
+/AIRVirtualMIDI/ane_src/native_src/Windows-x86/AIRVirtualMIDI/Debug/*.idb
+/Spout2AIR/ane_src/native_src/Windows-x86/SpoutExtension/Debug/*.tlog

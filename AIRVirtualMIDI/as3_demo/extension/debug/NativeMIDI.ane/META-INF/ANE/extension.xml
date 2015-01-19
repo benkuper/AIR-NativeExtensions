@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<extension xmlns="http://ns.adobe.com/air/extension/3.8">  
+    <id>benkuper.nativeExtensions.NativeMIDI</id>  
+    <versionNumber>1</versionNumber>  
+    <platforms>  
+        <platform name="Windows-x86">  
+            <applicationDeployment>  
+                <nativeLibrary>NativeMIDI.dll</nativeLibrary>  
+                <initializer>NativeMIDIExtInitializer</initializer>  
+                <finalizer>NativeMIDIExtFinalizer</finalizer>  
+            </applicationDeployment>  
+        </platform>
+        
+        <platform name="MacOS-x86">
+            <applicationDeployment>
+                <nativeLibrary>NativeMIDI.framework</nativeLibrary>
+                <initializer>NativeMIDIExtInitializer</initializer>
+                <finalizer>NativeMIDIExtFinalizer</finalizer>
+            </applicationDeployment>
+        </platform>
+    </platforms>  
+</extension>  

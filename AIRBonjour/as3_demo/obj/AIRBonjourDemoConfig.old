@@ -16,7 +16,7 @@
     </define>
     <define append="true">
       <name>CONFIG::timeStamp</name>
-      <value>'06/01/2015'</value>
+      <value>'14/01/2015'</value>
     </define>
     <define append="true">
       <name>CONFIG::air</name>
@@ -35,6 +35,7 @@
       <path-element>D:\Documents\Perso\Projects\AIR\AIR-NativeExtensions\AIRBonjour\as3_demo\src</path-element>
       <path-element>D:\Documents\Ressources\AS3\BenKuper</path-element>
       <path-element>D:\Documents\Ressources\AS3\tuio-as3</path-element>
+      <path-element>D:\Documents\Ressources\AS3\greensock-v12-as3</path-element>
       <path-element>C:\Program Files (x86)\FlashDevelop\Library\AS3\classes</path-element>
     </source-path>
     <library-path append="true">
