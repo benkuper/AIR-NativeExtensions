@@ -9,6 +9,10 @@ Collections of Native Extensions for Adobe AIR
 This is a minimal setup with all files needed to start a new NativeExtension. It contains some scripts i've made to ease the compile and testing of ANE files.
 
 
+### AIRBonjour
+
+This is a mod from opentekhnia's as3Bonjour which allows both browsing for Bonjour / Zeroconf services and registering new services as well.
+
 ### NativeSerial
 
 This is a C++/C# extension that let users communicate with Serial COM Ports, like Arduino.
