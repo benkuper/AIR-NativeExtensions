@@ -1,0 +1,51 @@
+ImageRuntimeVersion: v4.0.30319
+Assembly NativeSerialExtension, Version=1.0.*, Culture=Invariant Language (Invariant Country): 
+	hash=SHA1, flags=PublicKey
+Assembly mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089: 
+	hash=None, flags=None
+Assembly System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089: 
+	hash=None, flags=None
+Assembly System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089: 
+	hash=None, flags=None
+Assembly System.Xml, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089: 
+	hash=None, flags=None
+Assembly System.Management, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a: 
+	hash=None, flags=None
+Class NativeSerialExtension.Port: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Fields:
+    System.String portName : Public
+    System.IO.Ports.SerialPort _serialPort : Public
+    Int32 bytesSinceLastRead : Public
+    Byte[] buffer : Public
+    Boolean isInit : Public
+    Boolean isOpened : Public
+  Methods:
+    openPort(String, Int32): PrivateScope, Public, HideBySig
+    closePort(): PrivateScope, Public, HideBySig
+    write(Byte[]): PrivateScope, Public, HideBySig
+    read(): PrivateScope, Public, HideBySig
+    clearBuffer(): PrivateScope, Public, HideBySig
+Class NativeSerialExtension.NativeSerial: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Fields:
+    System.Collections.Generic.List`1[NativeSerialExtension.Port] sPorts : Public, Static
+    Boolean isInit : Public, Static
+    System.Threading.Thread readThread : Public, Static
+    Boolean doRead : Public, Static
+    System.Threading.Thread listThread : Public, Static
+    Boolean doList : Public, Static
+    Void* freContext : Public, Static
+    Boolean btLibLoaded : Public, Static
+  Methods:
+    init(Void*): PrivateScope, Public, Static, HideBySig
+    openPort(String, Int32): PrivateScope, Public, Static, HideBySig
+    closePort(String): PrivateScope, Public, Static, HideBySig
+    isOpened(String): PrivateScope, Public, Static, HideBySig
+    write(String, Byte[]): PrivateScope, Public, Static, HideBySig
+    getPort(String): PrivateScope, Public, Static, HideBySig
+    getNumCOMPorts(): PrivateScope, Public, Static, HideBySig
+    getCOMPorts(): PrivateScope, Public, Static, HideBySig
+    clean(): PrivateScope, Public, Static, HideBySig
+    Read(): PrivateScope, Public, Static, HideBySig
+    ListPorts(): PrivateScope, Public, Static, HideBySig

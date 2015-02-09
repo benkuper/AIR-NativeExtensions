@@ -76,3 +76,5 @@ NativeMIDI/ane_src/native_src/MacOS/NativeMIDI/NativeMIDI.xcodeproj/project.xcwo
 /AIRVirtualMIDI/ane_src/native_src/Windows-x86/AIRVirtualMIDI/Debug/*.idb
 /Spout2AIR/ane_src/native_src/Windows-x86/SpoutExtension/Debug/*.tlog
 >>>>>>> .merge_file_kTI36K
+NativeSerial/ane_src/native_src/Windows-x86/NativeSerialExtension/NativeSerialExtension.sdf
+NativeMIDI/ane_src/native_src/Windows-x86/NativeMIDI/NativeMIDI.opensdf

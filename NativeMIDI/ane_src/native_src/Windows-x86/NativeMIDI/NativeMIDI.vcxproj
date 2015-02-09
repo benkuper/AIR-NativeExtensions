@@ -52,7 +52,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;NATIVEMIDI_EXPORTS;__WINDOWS_MM__;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>D:\Documents\Ressources\Libraries\pthread\include;D:\Documents\Ressources\Libraries\rtmidi-2.1.0;$(FLEX_SDK_PATH)/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\Documents\Ressources\Libraries\pthread\include;D:\Documents\Ressources\Libraries\rtmidi-2.1.0;$(FLEX_SDK_PATH)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -72,14 +72,14 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;NATIVEMIDI_EXPORTS;__WINDOWS_MM__;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>D:\Documents\Ressources\Libraries\pthread\include;D:\Documents\Ressources\Libraries\rtmidi-2.1.0;C:\Users\Ben Kuper\AppData\Local\FlashDevelop\Apps\flexairsdk\4.6.0+4.0.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\Documents\Ressources\Libraries\pthread\include;D:\Documents\Ressources\Libraries\rtmidi-2.1.0;$(FLEX_SDK_PATH)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>C:\Users\Ben Kuper\AppData\Local\FlashDevelop\Apps\flexairsdk\4.6.0+4.0.0\lib\win\FlashRuntimeExtensions.lib;D:\Documents\Ressources\Libraries\rtmidi-2.1.0\lib\rtmidid.lib;winmm.lib;D:\Documents\Ressources\Libraries\pthread\lib\x86\pthreadVC2.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(FLEX_SDK_PATH)\lib\win\FlashRuntimeExtensions.lib;D:\Documents\Ressources\Libraries\rtmidi-2.1.0\lib\rtmidid.lib;winmm.lib;D:\Documents\Ressources\Libraries\pthread\lib\x86\pthreadVC2.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
