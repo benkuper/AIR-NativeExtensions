@@ -55,13 +55,21 @@ package benkuper.nativeExtensions
 			}
 		}
 		
-		public function createSender(senderName:String, width:int, height:int):void
+		public function createSender(senderName:String, width:int, height:int):Boolean
 		{
-			
+			if (extContext == null) return false;
+			return extContext.call("createSender", senderName, width, height) as Boolean;
+		}
+		
+		public function updateSender(senderName:String,bd:BitmapData):void
+		{
+			if (extContext == null) return;
+			extContext.call("sendTexture",senderName, bd);
 		}
 		
 		public function createReceiver(senderName:String):SpoutReceiver
 		{
+			if (extContext == null) return null;
 			var result:SpoutReceiver = extContext.call("createReceiver", senderName) as SpoutReceiver;
 			trace("create Receiver Result :", result);
 			return result;
@@ -69,18 +77,20 @@ package benkuper.nativeExtensions
 		
 		public function receiveTexture(receiver:SpoutReceiver):Boolean
 		{
+			if (extContext == null) return false;
 			var result:Boolean = extContext.call("receiveTexture", receiver.textureName, receiver.bitmapData, receiver) as Boolean;
 			return result;
 		}
 		
 		public function showPanel():void
 		{
-			extContext.call("showPanel");
+			if(extContext != null) extContext.call("showPanel");
 		}
 		
 		private function appExiting(e:Event):void 
 		{
 			extContext.dispose();
+			extContext = null;
 		}
 	}
 	

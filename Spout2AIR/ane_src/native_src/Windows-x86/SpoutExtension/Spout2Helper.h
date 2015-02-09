@@ -1,4 +1,4 @@
-#include <Spout.h>
+#include "Spout.h"
 
 HWND hWnd;
 
