@@ -76,3 +76,14 @@ NativeMIDI/ane_src/native_src/MacOS/NativeMIDI/NativeMIDI.xcodeproj/project.xcwo
 /AIRVirtualMIDI/ane_src/native_src/Windows-x86/AIRVirtualMIDI/Debug/*.idb
 /Spout2AIR/ane_src/native_src/Windows-x86/SpoutExtension/Debug/*.tlog
 >>>>>>> .merge_file_kTI36K
+NativeSerial/ane_src/ane_build/library.swf
+NativeSerial/ane_src/ane_build/NativeSerial.swc
+NativeSerial/ane_src/ane_build/NativeSerial.framework/NativeSerial
+NativeSerial/ane_src/ane_build/NativeSerial.framework/Resources/Info.plist
+NativeSerial/ane_src/ane_build/NativeSerial.framework/Resources/en.lproj/InfoPlist.strings
+NativeSerial/ane_src/ane_build/NativeSerial.framework/Versions/A/NativeSerial
+NativeSerial/ane_src/ane_build/NativeSerial.framework/Versions/A/Resources/Info.plist
+NativeSerial/ane_src/ane_build/NativeSerial.framework/Versions/A/Resources/en.lproj/InfoPlist.strings
+NativeSerial/ane_src/ane_build/NativeSerial.framework/Versions/Current/NativeSerial
+NativeSerial/ane_src/ane_build/NativeSerial.framework/Versions/Current/Resources/Info.plist
+NativeSerial/ane_src/ane_build/NativeSerial.framework/Versions/Current/Resources/en.lproj/InfoPlist.strings

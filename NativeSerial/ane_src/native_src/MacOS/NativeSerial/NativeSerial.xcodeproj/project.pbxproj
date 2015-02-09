@@ -1,0 +1,523 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		66198B341A88A27000A0BF8C /* FlashRuntimeExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 66198B331A88A27000A0BF8C /* FlashRuntimeExtensions.h */; };
+		66198B361A88A28200A0BF8C /* rs232.h in Headers */ = {isa = PBXBuildFile; fileRef = 66198B351A88A28200A0BF8C /* rs232.h */; };
+		66198B381A88A29B00A0BF8C /* Adobe AIR.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66198B371A88A29B00A0BF8C /* Adobe AIR.framework */; };
+		66198B3A1A88A2B800A0BF8C /* rs232.c in Sources */ = {isa = PBXBuildFile; fileRef = 66198B391A88A2B800A0BF8C /* rs232.c */; };
+		66D6C09E19FDB7FA00C8A10B /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66D6C09D19FDB7FA00C8A10B /* Cocoa.framework */; };
+		66D6C0A819FDB7FA00C8A10B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 66D6C0A619FDB7FA00C8A10B /* InfoPlist.strings */; };
+		66D6C0AC19FDB7FA00C8A10B /* NativeSerial.m in Sources */ = {isa = PBXBuildFile; fileRef = 66D6C0AB19FDB7FA00C8A10B /* NativeSerial.m */; };
+		66D6C0B319FDB7FA00C8A10B /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66D6C0B219FDB7FA00C8A10B /* XCTest.framework */; };
+		66D6C0B419FDB7FA00C8A10B /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66D6C09D19FDB7FA00C8A10B /* Cocoa.framework */; };
+		66D6C0B719FDB7FA00C8A10B /* NativeSerial.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66D6C09A19FDB7FA00C8A10B /* NativeSerial.framework */; };
+		66D6C0BD19FDB7FA00C8A10B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 66D6C0BB19FDB7FA00C8A10B /* InfoPlist.strings */; };
+		66D6C0BF19FDB7FA00C8A10B /* NativeSerialTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 66D6C0BE19FDB7FA00C8A10B /* NativeSerialTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		66D6C0B519FDB7FA00C8A10B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 66D6C09119FDB7FA00C8A10B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 66D6C09919FDB7FA00C8A10B;
+			remoteInfo = NativeSerial;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		66198B331A88A27000A0BF8C /* FlashRuntimeExtensions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = FlashRuntimeExtensions.h; path = ../../../../../../SDKs/AIRSDK_Compiler/include/FlashRuntimeExtensions.h; sourceTree = "<group>"; };
+		66198B351A88A28200A0BF8C /* rs232.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = rs232.h; path = ../../../../../../Lib/RS232/rs232.h; sourceTree = "<group>"; };
+		66198B371A88A29B00A0BF8C /* Adobe AIR.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "Adobe AIR.framework"; path = "../../../../../../SDKs/AIRSDK_Compiler/runtimes/air/mac/Adobe AIR.framework"; sourceTree = "<group>"; };
+		66198B391A88A2B800A0BF8C /* rs232.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = rs232.c; path = ../../../../../../Lib/RS232/rs232.c; sourceTree = "<group>"; };
+		66D6C09A19FDB7FA00C8A10B /* NativeSerial.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = NativeSerial.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		66D6C09D19FDB7FA00C8A10B /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		66D6C0A019FDB7FA00C8A10B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		66D6C0A119FDB7FA00C8A10B /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		66D6C0A219FDB7FA00C8A10B /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		66D6C0A519FDB7FA00C8A10B /* NativeSerial-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "NativeSerial-Info.plist"; sourceTree = "<group>"; };
+		66D6C0A719FDB7FA00C8A10B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		66D6C0A919FDB7FA00C8A10B /* NativeSerial-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NativeSerial-Prefix.pch"; sourceTree = "<group>"; };
+		66D6C0AA19FDB7FA00C8A10B /* NativeSerial.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NativeSerial.h; sourceTree = "<group>"; };
+		66D6C0AB19FDB7FA00C8A10B /* NativeSerial.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NativeSerial.m; sourceTree = "<group>"; };
+		66D6C0B119FDB7FA00C8A10B /* NativeSerialTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NativeSerialTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		66D6C0B219FDB7FA00C8A10B /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		66D6C0BA19FDB7FA00C8A10B /* NativeSerialTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "NativeSerialTests-Info.plist"; sourceTree = "<group>"; };
+		66D6C0BC19FDB7FA00C8A10B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		66D6C0BE19FDB7FA00C8A10B /* NativeSerialTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NativeSerialTests.m; sourceTree = "<group>"; };
+		66D6C0C819FDB83F00C8A10B /* Adobe AIR.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "Adobe AIR.framework"; path = "../../../../../SDKs/AIRSDK_Compiler/runtimes/air/mac/Adobe AIR.framework"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		66D6C09619FDB7FA00C8A10B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				66198B381A88A29B00A0BF8C /* Adobe AIR.framework in Frameworks */,
+				66D6C09E19FDB7FA00C8A10B /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		66D6C0AE19FDB7FA00C8A10B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				66D6C0B719FDB7FA00C8A10B /* NativeSerial.framework in Frameworks */,
+				66D6C0B419FDB7FA00C8A10B /* Cocoa.framework in Frameworks */,
+				66D6C0B319FDB7FA00C8A10B /* XCTest.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		66D6C09019FDB7FA00C8A10B = {
+			isa = PBXGroup;
+			children = (
+				66198B391A88A2B800A0BF8C /* rs232.c */,
+				66198B351A88A28200A0BF8C /* rs232.h */,
+				66198B331A88A27000A0BF8C /* FlashRuntimeExtensions.h */,
+				66D6C0A319FDB7FA00C8A10B /* NativeSerial */,
+				66D6C0B819FDB7FA00C8A10B /* NativeSerialTests */,
+				66D6C09C19FDB7FA00C8A10B /* Frameworks */,
+				66D6C09B19FDB7FA00C8A10B /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		66D6C09B19FDB7FA00C8A10B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				66D6C09A19FDB7FA00C8A10B /* NativeSerial.framework */,
+				66D6C0B119FDB7FA00C8A10B /* NativeSerialTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		66D6C09C19FDB7FA00C8A10B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				66198B371A88A29B00A0BF8C /* Adobe AIR.framework */,
+				66D6C0C819FDB83F00C8A10B /* Adobe AIR.framework */,
+				66D6C09D19FDB7FA00C8A10B /* Cocoa.framework */,
+				66D6C0B219FDB7FA00C8A10B /* XCTest.framework */,
+				66D6C09F19FDB7FA00C8A10B /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		66D6C09F19FDB7FA00C8A10B /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				66D6C0A019FDB7FA00C8A10B /* Foundation.framework */,
+				66D6C0A119FDB7FA00C8A10B /* CoreData.framework */,
+				66D6C0A219FDB7FA00C8A10B /* AppKit.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		66D6C0A319FDB7FA00C8A10B /* NativeSerial */ = {
+			isa = PBXGroup;
+			children = (
+				66D6C0AA19FDB7FA00C8A10B /* NativeSerial.h */,
+				66D6C0AB19FDB7FA00C8A10B /* NativeSerial.m */,
+				66D6C0A419FDB7FA00C8A10B /* Supporting Files */,
+			);
+			path = NativeSerial;
+			sourceTree = "<group>";
+		};
+		66D6C0A419FDB7FA00C8A10B /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				66D6C0A519FDB7FA00C8A10B /* NativeSerial-Info.plist */,
+				66D6C0A619FDB7FA00C8A10B /* InfoPlist.strings */,
+				66D6C0A919FDB7FA00C8A10B /* NativeSerial-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		66D6C0B819FDB7FA00C8A10B /* NativeSerialTests */ = {
+			isa = PBXGroup;
+			children = (
+				66D6C0BE19FDB7FA00C8A10B /* NativeSerialTests.m */,
+				66D6C0B919FDB7FA00C8A10B /* Supporting Files */,
+			);
+			path = NativeSerialTests;
+			sourceTree = "<group>";
+		};
+		66D6C0B919FDB7FA00C8A10B /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				66D6C0BA19FDB7FA00C8A10B /* NativeSerialTests-Info.plist */,
+				66D6C0BB19FDB7FA00C8A10B /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		66D6C09719FDB7FA00C8A10B /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				66198B361A88A28200A0BF8C /* rs232.h in Headers */,
+				66198B341A88A27000A0BF8C /* FlashRuntimeExtensions.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		66D6C09919FDB7FA00C8A10B /* NativeSerial */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 66D6C0C219FDB7FA00C8A10B /* Build configuration list for PBXNativeTarget "NativeSerial" */;
+			buildPhases = (
+				66D6C09619FDB7FA00C8A10B /* Frameworks */,
+				66D6C09519FDB7FA00C8A10B /* Sources */,
+				66D6C09719FDB7FA00C8A10B /* Headers */,
+				66D6C09819FDB7FA00C8A10B /* Resources */,
+				66D6C0CC19FDBBF700C8A10B /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = NativeSerial;
+			productName = NativeSerial;
+			productReference = 66D6C09A19FDB7FA00C8A10B /* NativeSerial.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		66D6C0B019FDB7FA00C8A10B /* NativeSerialTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 66D6C0C519FDB7FA00C8A10B /* Build configuration list for PBXNativeTarget "NativeSerialTests" */;
+			buildPhases = (
+				66D6C0AD19FDB7FA00C8A10B /* Sources */,
+				66D6C0AE19FDB7FA00C8A10B /* Frameworks */,
+				66D6C0AF19FDB7FA00C8A10B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				66D6C0B619FDB7FA00C8A10B /* PBXTargetDependency */,
+			);
+			name = NativeSerialTests;
+			productName = NativeSerialTests;
+			productReference = 66D6C0B119FDB7FA00C8A10B /* NativeSerialTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		66D6C09119FDB7FA00C8A10B /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = BenKuper;
+				TargetAttributes = {
+					66D6C0B019FDB7FA00C8A10B = {
+						TestTargetID = 66D6C09919FDB7FA00C8A10B;
+					};
+				};
+			};
+			buildConfigurationList = 66D6C09419FDB7FA00C8A10B /* Build configuration list for PBXProject "NativeSerial" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 66D6C09019FDB7FA00C8A10B;
+			productRefGroup = 66D6C09B19FDB7FA00C8A10B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				66D6C09919FDB7FA00C8A10B /* NativeSerial */,
+				66D6C0B019FDB7FA00C8A10B /* NativeSerialTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		66D6C09819FDB7FA00C8A10B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				66D6C0A819FDB7FA00C8A10B /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		66D6C0AF19FDB7FA00C8A10B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				66D6C0BD19FDB7FA00C8A10B /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		66D6C0CC19FDBBF700C8A10B /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "cd ../../..\n./build.command";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		66D6C09519FDB7FA00C8A10B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				66198B3A1A88A2B800A0BF8C /* rs232.c in Sources */,
+				66D6C0AC19FDB7FA00C8A10B /* NativeSerial.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		66D6C0AD19FDB7FA00C8A10B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				66D6C0BF19FDB7FA00C8A10B /* NativeSerialTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		66D6C0B619FDB7FA00C8A10B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 66D6C09919FDB7FA00C8A10B /* NativeSerial */;
+			targetProxy = 66D6C0B519FDB7FA00C8A10B /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		66D6C0A619FDB7FA00C8A10B /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				66D6C0A719FDB7FA00C8A10B /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		66D6C0BB19FDB7FA00C8A10B /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				66D6C0BC19FDB7FA00C8A10B /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		66D6C0C019FDB7FA00C8A10B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		66D6C0C119FDB7FA00C8A10B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		66D6C0C319FDB7FA00C8A10B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CLANG_ENABLE_OBJC_ARC = NO;
+				COMBINE_HIDPI_IMAGES = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/benkuper/Documents/Dev/SDKs/AIRSDK_Compiler/runtimes/air/mac,
+				);
+				FRAMEWORK_VERSION = A;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "NativeSerial/NativeSerial-Prefix.pch";
+				GENERATE_PROFILING_CODE = NO;
+				INFOPLIST_FILE = "NativeSerial/NativeSerial-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx10.9;
+				VALID_ARCHS = "i386 x86_64";
+				WRAPPER_EXTENSION = framework;
+			};
+			name = Debug;
+		};
+		66D6C0C419FDB7FA00C8A10B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CLANG_ENABLE_OBJC_ARC = NO;
+				COMBINE_HIDPI_IMAGES = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/benkuper/Documents/Dev/SDKs/AIRSDK_Compiler/runtimes/air/mac,
+				);
+				FRAMEWORK_VERSION = A;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "NativeSerial/NativeSerial-Prefix.pch";
+				GENERATE_PROFILING_CODE = NO;
+				INFOPLIST_FILE = "NativeSerial/NativeSerial-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx10.9;
+				VALID_ARCHS = "i386 x86_64";
+				WRAPPER_EXTENSION = framework;
+			};
+			name = Release;
+		};
+		66D6C0C619FDB7FA00C8A10B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/NativeSerial.framework/Versions/A/NativeSerial";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "NativeSerial/NativeSerial-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "NativeSerialTests/NativeSerialTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		66D6C0C719FDB7FA00C8A10B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/NativeSerial.framework/Versions/A/NativeSerial";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "NativeSerial/NativeSerial-Prefix.pch";
+				INFOPLIST_FILE = "NativeSerialTests/NativeSerialTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		66D6C09419FDB7FA00C8A10B /* Build configuration list for PBXProject "NativeSerial" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				66D6C0C019FDB7FA00C8A10B /* Debug */,
+				66D6C0C119FDB7FA00C8A10B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		66D6C0C219FDB7FA00C8A10B /* Build configuration list for PBXNativeTarget "NativeSerial" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				66D6C0C319FDB7FA00C8A10B /* Debug */,
+				66D6C0C419FDB7FA00C8A10B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		66D6C0C519FDB7FA00C8A10B /* Build configuration list for PBXNativeTarget "NativeSerialTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				66D6C0C619FDB7FA00C8A10B /* Debug */,
+				66D6C0C719FDB7FA00C8A10B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 66D6C09119FDB7FA00C8A10B /* Project object */;
+}
