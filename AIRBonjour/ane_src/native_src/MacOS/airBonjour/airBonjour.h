@@ -7,13 +7,13 @@
 //
 
 #ifndef _WIN32
-	#define AS3BONJOUR_API __attribute__((visibility("default")))
+#define AS3BONJOUR_API __attribute__((visibility("default")))
 #else
-	#ifdef AS3BONJOUR_EXPORTS
-		#define AS3BONJOUR_API __declspec(dllexport)
-	#else
-		#define AS3BONJOUR_API __declspec(dllimport)
-	#endif
+#ifdef AS3BONJOUR_EXPORTS
+#define AS3BONJOUR_API __declspec(dllexport)
+#else
+#define AS3BONJOUR_API __declspec(dllimport)
+#endif
 #endif
 
 #include "FlashRuntimeExtensions.h"
@@ -22,12 +22,12 @@
 #include "Poco/DNSSD/DNSSDBrowser.h"
 
 extern "C" {
-	void AS3BONJOUR_API initNativeExtension(void** extDataToSet, FREContextInitializer* ctxInitializerToSet, 
-                                         FREContextFinalizer* ctxFinalizerToSet);
+	void AS3BONJOUR_API initNativeExtension(void** extDataToSet, FREContextInitializer* ctxInitializerToSet,
+                                            FREContextFinalizer* ctxFinalizerToSet);
     
 	void AS3BONJOUR_API doneNativeExtension(void* extData);
     
-	void contextInitializer(void* extData, const uint8_t* ctxType, FREContext ctx, 
+	void contextInitializer(void* extData, const uint8_t* ctxType, FREContext ctx,
                             uint32_t* numFunctions, const FRENamedFunction** functionsToSet);
     
 	void contextFinalizer(FREContext ctx);
@@ -73,6 +73,16 @@ extern "C" {
                                  FREObject argv[]);
     
     FREObject getRemovedService(FREContext ctx,
+                                void *functionData,
+                                uint32_t argc,
+                                FREObject argv[]);
+    
+	FREObject registerService(FREContext ctx,
+                              void *functionData,
+                              uint32_t argc,
+                              FREObject argv[]);
+    
+	FREObject unregisterService(FREContext ctx,
                                 void *functionData,
                                 uint32_t argc,
                                 FREObject argv[]);

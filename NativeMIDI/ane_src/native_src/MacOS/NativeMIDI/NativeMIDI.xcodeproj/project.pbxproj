@@ -422,6 +422,7 @@
 				GCC_PREFIX_HEADER = "NativeMIDI/NativeMIDI-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = __MACOSX_CORE__;
 				INFOPLIST_FILE = "NativeMIDI/NativeMIDI-Info.plist";
+				LIBRARY_SEARCH_PATHS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				VALID_ARCHS = i386;
 				WRAPPER_EXTENSION = framework;
@@ -446,6 +447,7 @@
 				GCC_PREFIX_HEADER = "NativeMIDI/NativeMIDI-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = __MACOSX_CORE__;
 				INFOPLIST_FILE = "NativeMIDI/NativeMIDI-Info.plist";
+				LIBRARY_SEARCH_PATHS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				VALID_ARCHS = i386;
 				WRAPPER_EXTENSION = framework;
@@ -511,6 +513,7 @@
 				66C27DD41A59E15E00DB9E2F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		66C27DD51A59E15E00DB9E2F /* Build configuration list for PBXNativeTarget "NativeMIDITests" */ = {
 			isa = XCConfigurationList;
@@ -519,6 +522,7 @@
 				66C27DD71A59E15E00DB9E2F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

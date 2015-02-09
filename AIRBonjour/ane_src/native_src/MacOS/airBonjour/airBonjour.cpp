@@ -6,6 +6,7 @@
 //  Copyright (c) 2012 OpenTekhnia. All rights reserved.
 //
 
+
 #include "airBonjour.h"
 #include "ResolvedHostInfo.h"
 
@@ -32,6 +33,8 @@
 #else
 #include "Poco/DNSSD/Bonjour/Bonjour.h"
 #endif
+
+using namespace std;
 
 // --------------------------------------------------------------------------------------
 // Macros zone
@@ -72,7 +75,7 @@ FREObject properties; \
 res = FRENewObject(FRESTRING("Array"), 0, NULL, &properties, NULL); \
 if (res != FRE_OK) Poco::Logger::get("airBonjour").error(std::string(errmsg) + " [creation] with code: " + toString<int>(res)); \
 res = FRESetArrayLength(name, length); \
-if (res != FRE_OK) Poco::Logger::get("airBonjour").error(std::string(errmsg) + " [set length] with code: " + toString<int>(res)); 
+if (res != FRE_OK) Poco::Logger::get("airBonjour").error(std::string(errmsg) + " [set length] with code: " + toString<int>(res));
 
 // --------------------------------------------------------------------------------------
 // Globals
@@ -115,12 +118,14 @@ FREObject isSupported(FREContext ctx,
                       uint32_t argc,
                       FREObject argv[]) {
     
-    FREObject retObj; 
+    FREObject retObj;
     
-    FRENewObjectFromBool(1, &retObj); 
-    return retObj; 
+    FRENewObjectFromBool(1, &retObj);
+    return retObj;
 }
 
+
+vector<Poco::DNSSD::ServiceHandle> handles;
 
 // initDNSSD()
 // initializes the DNSSD extension
@@ -129,7 +134,7 @@ FREObject initDNSSD(FREContext ctx,
                     void *functionData,
                     uint32_t argc,
                     FREObject argv[]) {
-
+    
     // initialize DNSSD
     Poco::DNSSD::initializeDNSSD();
     
@@ -140,7 +145,7 @@ FREObject initDNSSD(FREContext ctx,
     lastRemovedServices = new std::list<Poco::DNSSD::Service>();
     lastHostResolutions = new std::list<ResolvedHostInfo>();
     
-   
+    
     
     dnssdResponder = new Poco::DNSSD::DNSSDResponder();
     dnssdResponder->browser().hostResolveError += Poco::delegate(&onHostResolveError);
@@ -151,11 +156,12 @@ FREObject initDNSSD(FREContext ctx,
     dnssdResponder->browser().serviceRemoved   += Poco::delegate(&onServiceRemoved);
     dnssdResponder->browser().hostResolved     += Poco::delegate(&onHostResolved);
     dnssdResponder->start();
-
+    
     LDEBUG("DNSSD responder started");
     
     return NULL;
 }
+
 
 
 // stopDNSSD()
@@ -196,7 +202,7 @@ FREObject stopDNSSD(FREContext ctx,
 }
 
 // start browsing for service
-// 
+//
 //
 FREObject browse(FREContext ctx,
                  void *functionData,
@@ -217,7 +223,7 @@ FREObject browse(FREContext ctx,
     res = FREGetObjectAsUint32(argv[2], &networkInterfaces);
     CHECKRES(res, "Failure getting the 'networkInterfaces' for the service with code: ");
     
-    FREObject retObj; 
+    FREObject retObj;
     res = FRENewObjectFromBool(1, &retObj);
     CHECKRES(res, "Failure creating return value for browse with code: ");
     
@@ -235,7 +241,7 @@ FREObject browse(FREContext ctx,
 
 
 // stop browsing for service
-// 
+//
 //
 FREObject stop(FREContext ctx,
                void *functionData,
@@ -248,7 +254,7 @@ FREObject stop(FREContext ctx,
     FREResult res = FREGetObjectAsUTF8(argv[0], &length, (const uint8_t **) &name );
     CHECKRES(res, "Failure getting the 'name' for the browse handle with code: ");
     
-    FREObject retObj; 
+    FREObject retObj;
     res = FRENewObjectFromBool(1, &retObj);
     CHECKRES(res, "Failure creating return value for browse stop with code: ");
     
@@ -257,7 +263,7 @@ FREObject stop(FREContext ctx,
     } catch (...) {
         res = FRENewObjectFromBool(0, &retObj);
         CHECKRES(res, "Failure creating return value for browse stop with code: ");
-
+        
     }
     
     return retObj;
@@ -265,9 +271,9 @@ FREObject stop(FREContext ctx,
 
 
 FREObject registerService(FREContext ctx,
-               void *functionData,
-               uint32_t argc,
-               FREObject argv[]) {
+                          void *functionData,
+                          uint32_t argc,
+                          FREObject argv[]) {
     
     uint32_t length = 0;
     uint8_t *name = 0;
@@ -283,23 +289,24 @@ FREObject registerService(FREContext ctx,
 	FREResult res3 = FREGetObjectAsUint32(argv[2], &port );
     CHECKRES(res3, "Failure getting the 'name' for the browse handle with code: ");
     
-
-    FREObject retObj; 
+    
+    FREObject retObj;
     FREResult res = FRENewObjectFromInt32(1, &retObj);
     CHECKRES(res, "Failure creating return value for browse stop with code: ");
     
     try {
 		Poco::DNSSD::Service myService(0,std::string(FROMFRESTRING(name)),std::string(FROMFRESTRING(name)), std::string(FROMFRESTRING(type)),std::string(""), std::string(""),port);
-
+        
 		Poco::DNSSD::ServiceHandle myServiceHandle = dnssdResponder->registerService(myService);
-				dnssdResponder->browser().cancel(browseHandles[FROMFRESTRING(name)]);
-
-				void *pointer = &myServiceHandle;
-				res = FRENewObjectFromInt32((int)pointer,&retObj);
+        dnssdResponder->browser().cancel(browseHandles[FROMFRESTRING(name)]);
+        
+        handles.push_back(myServiceHandle);
+        int handleIndex  =handles.size()-1;
+        res = FRENewObjectFromInt32(handleIndex,&retObj);
     } catch (...) {
         res = FRENewObjectFromInt32(-1, &retObj);
         CHECKRES(res, "Failure creating return value for browse stop with code: ");
-
+        
     }
     
     return retObj;
@@ -307,22 +314,31 @@ FREObject registerService(FREContext ctx,
 
 
 FREObject unregisterService(FREContext ctx,
-               void *functionData,
-               uint32_t argc,
-               FREObject argv[]) {
+                            void *functionData,
+                            uint32_t argc,
+                            FREObject argv[]) {
     
-    int servicePointer = 0; 
-	FREGetObjectAsInt32(argv[0],&servicePointer);
-
+    int handleIndex = 0;
+	FREGetObjectAsInt32(argv[0],&handleIndex);
+    
+	printf("Service pointer = %i\n",handleIndex);
 	FREObject retObj;
-    FREResult res = FRENewObjectFromBool(true, &retObj);
+    FREResult res = FRENewObjectFromBool(false, &retObj);
     CHECKRES(res, "Failure creating return value for browse stop with code: ");
     
-	Poco::DNSSD::ServiceHandle * handle = (Poco::DNSSD::ServiceHandle *) servicePointer;
+	if(handleIndex < 0 || handleIndex >= handles.size())
+	{
+		printf("Handle index %i is not valid.\n",handleIndex);
+		return retObj;
+	}
+    
+	Poco::DNSSD::ServiceHandle handle = handles[handleIndex];
+    
     try {
-		dnssdResponder->unregisterService(*handle);
+		dnssdResponder->unregisterService(handle);
+		res = FRENewObjectFromInt32(true, &retObj);
     } catch (...) {
-        res = FRENewObjectFromInt32(false, &retObj);
+        
         CHECKRES(res, "Failure creating return value for browse stop with code: ");
     }
     
@@ -333,12 +349,13 @@ FREObject unregisterService(FREContext ctx,
 // contextInitializer()
 //
 // The context initializer is called when the runtime creates the extension context instance.
-void contextInitializer(void* extData, const uint8_t* ctxType, FREContext ctx, 
+void contextInitializer(void* extData, const uint8_t* ctxType, FREContext ctx,
                         uint32_t* numFunctions, const FRENamedFunction** functionsToSet) {
     
     as3Ctx = ctx;
     
-    *numFunctions = 9;
+    *numFunctions = 11;
+    
     FRENamedFunction* func = (FRENamedFunction*)malloc(sizeof(FRENamedFunction) * (*numFunctions));
     
     func[0].name = (const uint8_t*) "isSupported";
@@ -368,7 +385,7 @@ void contextInitializer(void* extData, const uint8_t* ctxType, FREContext ctx,
     func[6].name = (const uint8_t*) "getResolvedHost";
     func[6].functionData = NULL;
     func[6].function = &getResolvedHost;
-
+    
     func[7].name = (const uint8_t*) "initDNSSD";
     func[7].functionData = NULL;
     func[7].function = &initDNSSD;
@@ -376,7 +393,7 @@ void contextInitializer(void* extData, const uint8_t* ctxType, FREContext ctx,
     func[8].name = (const uint8_t*) "stopDNSSD";
     func[8].functionData = NULL;
     func[8].function = &stopDNSSD;
-
+    
 	func[9].name = (const uint8_t*) "registerService";
     func[9].functionData = NULL;
     func[9].function = &registerService;
@@ -385,7 +402,7 @@ void contextInitializer(void* extData, const uint8_t* ctxType, FREContext ctx,
     func[10].functionData = NULL;
     func[10].function = &unregisterService;
     
-    *functionsToSet = func;    
+    *functionsToSet = func;
     
     LDEBUG("Context set");
 }
@@ -411,16 +428,16 @@ void contextFinalizer(FREContext ctx) {
 // The extension initializer is called the first time the ActionScript side of the extension
 // calls ExtensionContext.createExtensionContext() for any context.
 
-void initNativeExtension(void** extDataToSet, FREContextInitializer* ctxInitializerToSet, 
+void initNativeExtension(void** extDataToSet, FREContextInitializer* ctxInitializerToSet,
                          FREContextFinalizer* ctxFinalizerToSet) {
     
     *ctxInitializerToSet = &contextInitializer;
     *ctxFinalizerToSet = &contextFinalizer;
     
     Poco::AutoPtr<Poco::ConsoleChannel> pCons(new Poco::ConsoleChannel);
-
+    
     // only when FileChannel used -------------------------
-    // 
+    //
 	// Poco::AutoPtr<Poco::FileChannel> pCons(new Poco::FileChannel);
     // Poco::Path current(Poco::Path::home());
     // Poco::Path logfile("airBonjour.log");
@@ -437,14 +454,14 @@ void initNativeExtension(void** extDataToSet, FREContextInitializer* ctxInitiali
     
     LDEBUG("Native extension init done.");
     
-} 
+}
 
 
 // done()
 //
 // The extension finalizer is called when the runtime unloads the extension. However, it is not always called.
 void doneNativeExtension(void* extData) {
-   
+    
     return;
 }
 
@@ -462,7 +479,7 @@ void onHostResolved(const void* sender, const Poco::DNSSD::DNSSDBrowser::Resolve
     
     lastHostResolutions->push_back(resolvedHost);
     
-    FREResult res = FREDispatchStatusEventAsync(as3Ctx, FRESTRING("hostResolved"), FRESTRING("hostEvent")); 
+    FREResult res = FREDispatchStatusEventAsync(as3Ctx, FRESTRING("hostResolved"), FRESTRING("hostEvent"));
     CHECKRES(res, "Event dispatch failure with code: ");
 }
 
@@ -486,7 +503,7 @@ FREObject getResolvedHost(FREContext ctx,
     ADD_PROPERTY_STR_TO_OBJ(as3resolvedHost, address, resolvedHost.address.toString(), "Failed when creating ResolvedHostInfo object's 'address'")
     ADD_PROPERTY_STR_TO_OBJ(as3resolvedHost, host, resolvedHost.host, "Failed when creating ResolvedHostInfo object's 'host'")
     ADD_PROPERTY_UINT_TO_OBJ(as3resolvedHost, ttl, resolvedHost.ttl, "Failed when creating ResolvedHostInfo object's 'ttl'")
-       
+    
     return as3resolvedHost;
 }
 
@@ -497,11 +514,11 @@ FREObject getResolvedHost(FREContext ctx,
 void onServiceFound(const void* sender, const Poco::DNSSD::DNSSDBrowser::ServiceEventArgs& args) {
     lastFoundServices->push_back(args.service);
     
-    FREResult res = FREDispatchStatusEventAsync(as3Ctx, FRESTRING("serviceFound"), FRESTRING("serviceEvent")); 
+    FREResult res = FREDispatchStatusEventAsync(as3Ctx, FRESTRING("serviceFound"), FRESTRING("serviceEvent"));
     CHECKRES(res, "Event dispatch failure with code: ");
     
 	LDEBUG("Found service: " + args.service.name());
-
+    
     reinterpret_cast<Poco::DNSSD::DNSSDBrowser*>(const_cast<void*>(sender))->resolve(args.service);
 }
 
@@ -530,7 +547,7 @@ FREObject getFoundService(FREContext ctx,
     ADD_PROPERTY_UINT_TO_OBJ(as3service, port, service.port(), "Failed when creating Service object's 'port'")
     
     CREATE_AS3_ARRAY(properties, service.properties().size(), "Failed when creating Service object's 'properties'")
-
+    
     Poco::Net::NameValueCollection::ConstIterator it;
     unsigned int index = 0;
     for (it = service.properties().begin(); it != service.properties().end(); ++it) {
@@ -555,7 +572,7 @@ FREObject getFoundService(FREContext ctx,
         CHECKRES(res, "Failed when setting Propeties array element with code: ");
     }
     
-    res = FRESetObjectProperty(as3service, FRESTRING("properties"), properties, NULL); 
+    res = FRESetObjectProperty(as3service, FRESTRING("properties"), properties, NULL);
     CHECKRES(res, "Failed when setting Service object's property 'propeties' with code: ");
     
     return as3service;
@@ -569,11 +586,11 @@ void onServiceResolved(const void* sender, const Poco::DNSSD::DNSSDBrowser::Serv
     
     lastResolvedServices->push_back(args.service);
     
-    FREResult res = FREDispatchStatusEventAsync(as3Ctx, FRESTRING("serviceResolved"), FRESTRING("serviceEvent")); 
+    FREResult res = FREDispatchStatusEventAsync(as3Ctx, FRESTRING("serviceResolved"), FRESTRING("serviceEvent"));
     CHECKRES(res, "Event dispatch failure with code: ");
     
 	LDEBUG("Resolved service: " + serviceResolvedName);
-
+    
     reinterpret_cast<Poco::DNSSD::DNSSDBrowser*>(const_cast<void*>(sender))->resolveHost(args.service.host());
 }
 
@@ -629,7 +646,7 @@ FREObject getResolvedService(FREContext ctx,
         index++;
     }
     
-    res = FRESetObjectProperty(as3service, FRESTRING("properties"), properties, NULL); 
+    res = FRESetObjectProperty(as3service, FRESTRING("properties"), properties, NULL);
     CHECKRES(res, "Failed when setting Service object's property 'propeties' with code: ");
     
     return as3service;
@@ -644,7 +661,7 @@ void onServiceRemoved(const void* sender, const Poco::DNSSD::DNSSDBrowser::Servi
     
     lastRemovedServices->push_back(args.service);
     
-    FREResult res = FREDispatchStatusEventAsync(as3Ctx, FRESTRING("serviceRemoved"), FRESTRING("serviceEvent")); 
+    FREResult res = FREDispatchStatusEventAsync(as3Ctx, FRESTRING("serviceRemoved"), FRESTRING("serviceEvent"));
     CHECKRES(res, "Event dispatch failure with code: ");
     
     LDEBUG("Removed service: " + serviceRemovedName);
@@ -655,9 +672,9 @@ void onServiceRemoved(const void* sender, const Poco::DNSSD::DNSSDBrowser::Servi
 //
 //
 FREObject getRemovedService(FREContext ctx,
-                             void *functionData,
-                             uint32_t argc,
-                             FREObject argv[]) {
+                            void *functionData,
+                            uint32_t argc,
+                            FREObject argv[]) {
     
     Poco::DNSSD::Service service = lastRemovedServices->front();
     lastRemovedServices->pop_front();
@@ -700,7 +717,7 @@ FREObject getRemovedService(FREContext ctx,
         CHECKRES(res, "Failed when setting Propeties array element with code: ");
     }
     
-    res = FRESetObjectProperty(as3service, FRESTRING("properties"), properties, NULL); 
+    res = FRESetObjectProperty(as3service, FRESTRING("properties"), properties, NULL);
     CHECKRES(res, "Failed when setting Service object's property 'propeties' with code: ");
     
     return as3service;
@@ -710,7 +727,7 @@ FREObject getRemovedService(FREContext ctx,
 //
 //
 void onHostResolveError(const void* sender, const Poco::DNSSD::DNSSDBrowser::ErrorEventArgs& args) {
-    FREResult res = FREDispatchStatusEventAsync(as3Ctx, FRESTRING("error"), FRESTRING("hostEvent")); 
+    FREResult res = FREDispatchStatusEventAsync(as3Ctx, FRESTRING("error"), FRESTRING("hostEvent"));
     CHECKRES(res, "Event dispatch failure with code: ");
     
     LERROR(args.error.message()+" (" + toString<int>(args.error.code()) + ")");
@@ -721,8 +738,8 @@ void onHostResolveError(const void* sender, const Poco::DNSSD::DNSSDBrowser::Err
 //
 //
 void onError(const void* sender, const Poco::DNSSD::DNSSDBrowser::ErrorEventArgs& args) {
-    FREResult res = FREDispatchStatusEventAsync(as3Ctx, FRESTRING("error"), FRESTRING("serviceEvent")); 
+    FREResult res = FREDispatchStatusEventAsync(as3Ctx, FRESTRING("error"), FRESTRING("serviceEvent"));
     CHECKRES(res, "Event dispatch failure with code: ");
-
+    
     LERROR(args.error.message()+" (" + toString<int>(args.error.code()) + ")");
 }
