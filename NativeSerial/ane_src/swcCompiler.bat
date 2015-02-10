@@ -1,3 +1,5 @@
+set PATH=%PATH%;%FLEX_SDK_PATH%\bin
+
 call acompc -source-path as3_src -include-classes benkuper.nativeExtensions.NativeSerial -swf-version=14 -output NativeSerial.swc
 
 unzip -o NativeSerial.swc -x catalog.xml

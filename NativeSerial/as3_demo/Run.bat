@@ -1,3 +1,8 @@
+cd ..\ane_src
+call swcCompiler.bat
+cd ..\as3_demo
+call copyANE.bat
+
 @echo off
 set PAUSE_ERRORS=1
 call bat\SetupSDK.bat

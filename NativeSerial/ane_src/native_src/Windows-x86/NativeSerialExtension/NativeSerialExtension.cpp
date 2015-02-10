@@ -126,9 +126,11 @@ namespace NativeSerialExtension {
 				{
 					int readResult = _serialPort->Read(buffer,bytesSinceLastRead,_serialPort->BytesToRead);
 					bytesSinceLastRead += readResult;
-					//Console::WriteLine(" -> "+bytesSinceLastRead+" read");
+					Console::WriteLine(" -> "+bytesSinceLastRead+" read");
 				}
-				catch (TimeoutException^) { }			
+				catch (TimeoutException^) { 
+				Console::WriteLine(" timeout !");
+				}			
 			}
 
 			void clearBuffer()
@@ -574,7 +576,7 @@ extern "C"
 	// Flash Native Extensions stuff
 	void NativeSerialContextInitializer(void* extData, const uint8_t* ctxType, FREContext ctx, uint32_t* numFunctionsToSet,  const FRENamedFunction** functionsToSet) { 
 
-		printf("** Native Serial Extension v0.1 by Ben Kuper **\n");
+		printf("** Native Serial Extension v0.2 by Ben Kuper **\n");
 
 
 

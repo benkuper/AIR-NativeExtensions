@@ -92,3 +92,5 @@ NativeSerial/ane_src/ane_build/NativeSerial.framework/Versions/Current/NativeSer
 NativeSerial/ane_src/ane_build/NativeSerial.framework/Versions/Current/Resources/Info.plist
 NativeSerial/ane_src/ane_build/NativeSerial.framework/Versions/Current/Resources/en.lproj/InfoPlist.strings
 >>>>>>> 8504b0b034e69b38e1b71c3de05e3db45a7674ed
+NativeSerial/ane_src/native_src/Windows-x86/NativeSerialExtension/Debug/
+NativeSerial/ane_src/native_src/Windows-x86/NativeSerialExtension/NativeSerialExtension.opensdf

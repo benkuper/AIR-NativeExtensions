@@ -36,7 +36,7 @@ package
 		private function portAdded(e:SerialEvent):void 
 		{
 			trace("Main :: port added :" + e.port.fullName);
-			port = NativeSerial.getPort("COM4");
+			port = NativeSerial.getPort("COM19");
 			
 			if (port != null) 
 			{
