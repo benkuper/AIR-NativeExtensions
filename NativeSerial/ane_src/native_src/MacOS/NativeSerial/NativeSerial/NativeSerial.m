@@ -271,7 +271,7 @@ void as3Print(const char * message)
         
         FREReleaseByteArray(argv[1]);
         
-        if (sendResult == -1)
+        if (sendResult != -1)
         {
             sResult = true;
         }
