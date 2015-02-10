@@ -13,7 +13,8 @@ ACOMPC=$FLEX_SDK/bin/acompc
 
 BUILDFOLDER=ane_build
 
-FRAMEWORKPATH=native_src/MacOS/NativeSerial/build/Products/Debug/$TARGET.framework
+FRAMEWORKPATH=native_src/MacOS/$TARGET.framework
+
 SWCTARGET=$BUILDFOLDER/$TARGET.swc
 
 echo $FLEX_SDK
