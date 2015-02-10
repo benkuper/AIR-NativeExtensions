@@ -10,13 +10,7 @@
   </features>
   <libraries>
     <library path="library.swf">
-      <script name="_bf696e517941fb7efd1b87126c88db411ff5381421f94f7064e4458e8fb7599e_flash_display_Sprite" mod="1423610534264" signatureChecksum="415398357" >
-        <def id="_bf696e517941fb7efd1b87126c88db411ff5381421f94f7064e4458e8fb7599e_flash_display_Sprite" /> 
-        <dep id="flash.system:Security" type="e" /> 
-        <dep id="flash.display:Sprite" type="i" /> 
-        <dep id="AS3" type="n" /> 
-      </script>
-      <script name="benkuper/nativeExtensions/SerialPort" mod="1423610530613" signatureChecksum="3530106213" >
+      <script name="benkuper/nativeExtensions/SerialPort" mod="1423610677086" signatureChecksum="3530106213" >
         <def id="benkuper.nativeExtensions:SerialPort" /> 
         <dep id="benkuper.nativeExtensions:SerialEvent" type="s" /> 
         <dep id="flash.utils:ByteArray" type="s" /> 
@@ -27,11 +21,17 @@
         <dep id="flash.events:EventDispatcher" type="i" /> 
         <dep id="AS3" type="n" /> 
       </script>
-      <script name="benkuper/nativeExtensions/SerialEvent" mod="1420498853123" signatureChecksum="3632183865" >
+      <script name="benkuper/nativeExtensions/SerialEvent" mod="1423610606690" signatureChecksum="1977402262" >
         <def id="benkuper.nativeExtensions:SerialEvent" /> 
         <dep id="benkuper.nativeExtensions:SerialPort" type="s" /> 
         <dep id="flash.utils:ByteArray" type="s" /> 
         <dep id="flash.events:Event" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="_8cb8dfad59ba34dc3cf04686781f1ea939d28de27c48a4ecfe115a6f7e7f7879_flash_display_Sprite" mod="1423610727851" signatureChecksum="3997138019" >
+        <def id="_8cb8dfad59ba34dc3cf04686781f1ea939d28de27c48a4ecfe115a6f7e7f7879_flash_display_Sprite" /> 
+        <dep id="flash.system:Security" type="e" /> 
+        <dep id="flash.display:Sprite" type="i" /> 
         <dep id="AS3" type="n" /> 
       </script>
       <script name="benkuper/nativeExtensions/NativeSerial" mod="1423610042471" signatureChecksum="2292603814" >
@@ -63,7 +63,7 @@
         <dep id="AS3" type="n" /> 
       </script>
       <digests>
-        <digest type="SHA-256" signed="false" value="a740b20c0e02b9cbc735fde4cbc59bf2839657c82b0f6f6b90fafe265a684218"   />
+        <digest type="SHA-256" signed="false" value="256083972eef17d68ae37fc69ceb79fcd10d568d93ea8cd018a827ea9d00f084"   />
       </digests>
     </library>
   </libraries>

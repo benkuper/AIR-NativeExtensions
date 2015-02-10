@@ -95,8 +95,14 @@ import flash.utils.ByteArray;
                             buffer2.position = 0;
                             evt = new SerialEvent((mode == MODE_BYTE255)?SerialEvent.DATA_255:SerialEvent.DATA_NEWLINE,this);
                             evt.data = buffer2;
+							if (mode == MODE_NEWLINE)
+							{
+								evt.stringData = buffer2.readUTFBytes(buffer2.bytesAvailable);
+								buffer2.position = 0;
+							}
                             dispatchEvent(evt);
                             buffer2.clear();
+							
                             break;
 						
                         default:

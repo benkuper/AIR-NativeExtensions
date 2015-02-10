@@ -20,7 +20,9 @@ package  benkuper.nativeExtensions
 		static public const DATA_NEWLINE:String = "dataNewline";
 		
 		public var data:ByteArray;
+		public var stringData:String;
 		public var port:SerialPort;
+		
 		public function SerialEvent(type:String, port:SerialPort = null, bubbles:Boolean=false, cancelable:Boolean=false) 
 		{ 
 			super(type, bubbles, cancelable);

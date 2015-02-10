@@ -33,7 +33,7 @@ package
 		
 		private function newLine(e:SerialEvent):void 
 		{
-			trace("New line : "+e.data.readUTFBytes(e.data.bytesAvailable));
+			trace("New line : "+e.stringData);
 		}
 		
 		private function keyDown(e:KeyboardEvent):void 
