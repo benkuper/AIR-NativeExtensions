@@ -266,8 +266,12 @@ void as3Print(const char * message)
         
         FREAcquireByteArray(argv[1], &dataToSend);
         
+        //char serr[256];
+        //sprintf(serr,"prep to write (%i) : %s",dataToSend.length,(unsigned char *)dataToSend.bytes);
+        //as3Print(serr);
+        
         int handleIndex = getHandleForPort((unsigned char *)port);
-        sendResult = SendBuf(handleIndex, (unsigned char *)&dataToSend.bytes, dataToSend.length);
+        sendResult = SendBuf(handleIndex, (unsigned char *)dataToSend.bytes, dataToSend.length);
         
         FREReleaseByteArray(argv[1]);
         
