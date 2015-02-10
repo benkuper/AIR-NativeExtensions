@@ -20,26 +20,20 @@ package
 		{
 			super();
 			NativeSerial.init();
-			NativeSerial.instance.addEventListener(SerialEvent.PORT_ADDED, portAdded);
+			trace(NativeSerial.ports);
+			p = NativeSerial.getPort("COM19");
+			var op:Boolean = p.open();
+			trace("port opened ?", op);
+			p.mode = SerialPort.MODE_NEWLINE;
+			p.addEventListener(SerialEvent.DATA_NEWLINE, newLine);
 			
 			stage.addEventListener(KeyboardEvent.KEY_DOWN, keyDown);
 		}
 		
-		private function portAdded(e:SerialEvent):void 
-		{
-			if (e.port.COMID == "COM21")
-			{
-				p = e.port;
-				var op:Boolean = p.open();
-				trace("port opened ?", op);
-				p.addEventListener(SerialEvent.DATA, newLine);
-			}
-			
-		}
 		
 		private function newLine(e:SerialEvent):void 
 		{
-			trace(e.data.readUTFBytes(e.data.bytesAvailable));
+			trace("New line : "+e.stringData);
 		}
 		
 		private function keyDown(e:KeyboardEvent):void 

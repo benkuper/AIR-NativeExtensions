@@ -81,6 +81,9 @@ import flash.utils.ByteArray;
 
             if (mode == MODE_BYTE255 || mode == MODE_NEWLINE)
             {
+				var endByte:int = (mode == MODE_BYTE255)?255:10; // '\n' = 10
+				
+				
                 readBuffer.position = 0;
                 for (var i:int = 0; i < bytesRead; i++)
                 {
@@ -88,14 +91,20 @@ import flash.utils.ByteArray;
                     if (b < 0) b += 256;
                     switch(b)
                     {
-                        case 255:
+                        case endByte:
                             buffer2.position = 0;
-                            evt = new SerialEvent(SerialEvent.DATA_255,this);
+                            evt = new SerialEvent((mode == MODE_BYTE255)?SerialEvent.DATA_255:SerialEvent.DATA_NEWLINE,this);
                             evt.data = buffer2;
+							if (mode == MODE_NEWLINE)
+							{
+								evt.stringData = buffer2.readUTFBytes(buffer2.bytesAvailable);
+								buffer2.position = 0;
+							}
                             dispatchEvent(evt);
                             buffer2.clear();
+							
                             break;
-
+						
                         default:
                             buffer2.writeByte(b);
                             break;
@@ -151,6 +160,11 @@ import flash.utils.ByteArray;
 		public function get isOpened():Boolean 
 		{
 			return NativeSerial.instance.isPortOpened(COMID);
+		}
+		
+		override public function toString():String
+		{
+			return "[SerialPort name=" + name+", COMID=" + COMID + "]";
 		}
 	}
 	

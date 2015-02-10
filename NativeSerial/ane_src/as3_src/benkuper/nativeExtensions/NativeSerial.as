@@ -69,11 +69,12 @@ import flash.utils.ByteArray;
             }else
             {
                 listPortsFunc = listPortsMac;
-
                 updatePortsLoopTimer = new Timer(1000);
                 updatePortsLoopTimer.addEventListener(TimerEvent.TIMER, updatePortsLoopTimerTick);
                 updatePortsLoopTimer.start();
             }
+			
+			updatePortsList();
 			
 			
 			NativeApplication.nativeApplication.addEventListener(Event.EXITING, appExiting);			
@@ -156,9 +157,10 @@ import flash.utils.ByteArray;
                 }
                 if (!nameIsFound) portsToAdd.push(n);
                 //trace("	> " + n + " is Found ? " + nameIsFound);
-            }
-
+			}
+			
             for each(var pn:String in portsToAdd) addPort(pn);
+			
         }
 
         protected function listPortsWin():Vector.<String>
