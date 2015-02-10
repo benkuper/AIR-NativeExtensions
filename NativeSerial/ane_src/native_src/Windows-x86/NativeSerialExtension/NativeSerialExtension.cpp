@@ -59,12 +59,12 @@ namespace NativeSerialExtension {
 				_serialPort->BaudRate = baudRate;
 				
 				
-				/*
-				_serialPort->Parity = SetPortParity(_serialPort.Parity);
-				_serialPort->DataBits = SetPortDataBits(_serialPort.DataBits);
-				_serialPort->StopBits = SetPortStopBits(_serialPort.StopBits);
-				_serialPort->Handshake = SetPortHandshake(_serialPort.Handshake);
-				*/
+				
+				_serialPort->Parity = System::IO::Ports::Parity::None;
+				_serialPort->DataBits = 8;
+				_serialPort->StopBits = System::IO::Ports::StopBits::Two;
+				_serialPort->DtrEnable = true;
+				_serialPort->RtsEnable = true;
 
 				// Set the read/write timeouts
 				_serialPort->ReadTimeout = 500;
@@ -100,7 +100,7 @@ namespace NativeSerialExtension {
 					_serialPort->Close();
 				}catch(Exception^ e)
 				{
-					Console::WriteLine("Error closing the port ("+portName+"), maybe device is already disconnected ?");
+					Console::WriteLine("Error closing the port ("+portName+"), maybe device is already disconnected ? %s"+e->Message);
 				}
 				
 			}
@@ -126,7 +126,7 @@ namespace NativeSerialExtension {
 				{
 					int readResult = _serialPort->Read(buffer,bytesSinceLastRead,_serialPort->BytesToRead);
 					bytesSinceLastRead += readResult;
-					Console::WriteLine(" -> "+bytesSinceLastRead+" read");
+					//if(bytesSinceLastRead > 0) Console::WriteLine(" -> "+bytesSinceLastRead+" read");
 				}
 				catch (TimeoutException^) { 
 				Console::WriteLine(" timeout !");
@@ -576,7 +576,7 @@ extern "C"
 	// Flash Native Extensions stuff
 	void NativeSerialContextInitializer(void* extData, const uint8_t* ctxType, FREContext ctx, uint32_t* numFunctionsToSet,  const FRENamedFunction** functionsToSet) { 
 
-		printf("** Native Serial Extension v0.2 by Ben Kuper **\n");
+		printf("** Native Serial Extension v0.21 by Ben Kuper **\n");
 
 
 

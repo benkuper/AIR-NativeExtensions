@@ -27,7 +27,7 @@ package
 		
 		private function portAdded(e:SerialEvent):void 
 		{
-			if (e.port.COMID == "COM19")
+			if (e.port.COMID == "COM21")
 			{
 				p = e.port;
 				var op:Boolean = p.open();
