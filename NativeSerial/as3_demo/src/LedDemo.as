@@ -21,12 +21,14 @@ package
 			super();
 			NativeSerial.init();
 			trace(NativeSerial.ports);
-			p = NativeSerial.getPort("COM19");
-			var op:Boolean = p.open();
-			trace("port opened ?", op);
-			p.mode = SerialPort.MODE_NEWLINE;
-			p.addEventListener(SerialEvent.DATA_NEWLINE, newLine);
-			
+			p = NativeSerial.getPort("COM6");
+			if (p != null)
+			{
+				var op:Boolean = p.open();
+				trace("port opened ?", op);
+				p.mode = SerialPort.MODE_NEWLINE;
+				p.addEventListener(SerialEvent.DATA_NEWLINE, newLine);
+			}
 			stage.addEventListener(KeyboardEvent.KEY_DOWN, keyDown);
 		}
 		
