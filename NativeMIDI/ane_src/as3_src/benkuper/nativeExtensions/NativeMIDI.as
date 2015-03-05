@@ -28,10 +28,10 @@ package benkuper.nativeExtensions
 			
 			extContext = ExtensionContext.createExtensionContext("benkuper.nativeExtensions.NativeMIDI", "midi");
 			extContext.addEventListener(StatusEvent.STATUS, statusHandler);
-			
-			extContext.call("init") as Boolean;
-			
-			inputDevices = new Vector.<MIDIDeviceIn>();
+
+            extContext.call("init") as Boolean;
+
+            inputDevices = new Vector.<MIDIDeviceIn>();
 			outputDevices = new Vector.<MIDIDeviceOut>();
 			
 			

@@ -274,7 +274,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "cd ../../..\n./build.command";
+			shellScript = "cp -r Build/Products/Debug/NativeSerial.framework ..\ncd ../../..\n./build.command";
 		};
 /* End PBXShellScriptBuildPhase section */
 
