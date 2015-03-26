@@ -94,3 +94,12 @@ NativeSerial/ane_src/ane_build/NativeSerial.framework/Versions/Current/Resources
 >>>>>>> 8504b0b034e69b38e1b71c3de05e3db45a7674ed
 NativeSerial/ane_src/native_src/Windows-x86/NativeSerialExtension/Debug/
 NativeSerial/ane_src/native_src/Windows-x86/NativeSerialExtension/NativeSerialExtension.opensdf
+AIRBonjour/ane_src/native_src/Windows-x86/airBonjour-win/Release/
+Spout2AIR/ane_src/native_src/Windows-x86/SpoutExtension/Debug/
+*.pdb
+*.log
+*.suo
+*.obj
+AIRVirtualMIDI/ane_src/native_src/Windows-x86/AIRVirtualMIDI/Debug/
+AIRVirtualMIDI/ane_src/native_src/Windows-x86/AIRVirtualMIDI/Release/
+*.pch
