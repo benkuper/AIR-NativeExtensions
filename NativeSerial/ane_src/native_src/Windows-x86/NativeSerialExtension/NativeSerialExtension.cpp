@@ -444,6 +444,7 @@ extern "C"
 
 		bool openResult = NativeSerial::openPort(portName,baud);
 
+		printf("NativeSerial port open result : %i",openResult);
 		FREObject result;
 		FRENewObjectFromBool(openResult,&result);
 		return result;

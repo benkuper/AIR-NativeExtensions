@@ -103,3 +103,4 @@ Spout2AIR/ane_src/native_src/Windows-x86/SpoutExtension/Debug/
 AIRVirtualMIDI/ane_src/native_src/Windows-x86/AIRVirtualMIDI/Debug/
 AIRVirtualMIDI/ane_src/native_src/Windows-x86/AIRVirtualMIDI/Release/
 *.pch
+Spout2AIR/ane_src/native_src/Windows-x86/SpoutExtension/SpoutExtension.opensdf
