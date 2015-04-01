@@ -267,7 +267,7 @@ extern "C"
 	// Flash Native Extensions stuff
 	void SpoutContextInitializer(void* extData, const uint8_t* ctxType, FREContext ctx, uint32_t* numFunctionsToSet,  const FRENamedFunction** functionsToSet) { 
 
-		printf("** Spout2 Extension v0.2 by Ben Kuper **\n");
+		printf("** Spout2 Extension v0.3 by Ben Kuper **\n");
 
 		static FRENamedFunction extensionFunctions[] =
 		{
