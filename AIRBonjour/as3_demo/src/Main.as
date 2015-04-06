@@ -2,8 +2,11 @@ package
 {
 	import benkuper.util.IPUtil;
 	import flash.display.Sprite;
-	import flash.net.NetworkInfo;
-	import org.opentekhnia.as3Bonjour.Bonjour;
+import flash.events.KeyboardEvent;
+import flash.net.NetworkInfo;
+import flash.ui.Keyboard;
+
+import org.opentekhnia.as3Bonjour.Bonjour;
 	import org.opentekhnia.as3Bonjour.data.ResolvedHostInfo;
 	import org.opentekhnia.as3Bonjour.data.Service;
 	import org.opentekhnia.as3Bonjour.events.BonjourEvent;
@@ -15,26 +18,26 @@ package
 	public class Main extends Sprite
 	{
 		public var bonjour:Bonjour;
-		
+		public var serviceHandle:int;
+
 		public function Main():void
 		{
 			
 			Bonjour.init();
 			Bonjour.instance.addEventListener(BonjourEvent.DNSSD_SERVICE_FOUND, onServiceFound);
-			Bonjour.instance..addEventListener(BonjourEvent.DNSSD_SERVICE_RESOLVED, onServiceResolved);
+			Bonjour.instance.addEventListener(BonjourEvent.DNSSD_SERVICE_RESOLVED, onServiceResolved);
 			Bonjour.instance.addEventListener(BonjourEvent.DNSSD_SERVICE_REMOVED, onServiceRemoved);
 			Bonjour.instance.addEventListener(BonjourEvent.DNSSD_HOST_RESOLVED, onHostResolved);
 				
 			Bonjour.instance.addEventListener(BonjourEvent.DNSSD_ERROR, onBonjourError);
 				
-			Bonjour.registerService("AIR Demo OSC", "_osc._udp", 6000);
-			Bonjour.browse('_osc._udp','');
-			trace("browse");
+
+			//Bonjour.browse('_osc._udp','');
+			//trace("browse");
 			//bonjour.browse('_apple-midi._udp', '');
 			
-			var s:Service = new Service();
-			//s.host = "";
-			
+
+            stage.addEventListener(KeyboardEvent.KEY_DOWN, keyDown);
 		}
 		
 		private function onBonjourError(e:BonjourEvent):void 
@@ -71,7 +74,20 @@ package
 			var service:Service = e.info as Service;
 			trace("Service resolved", service.name+"("+service.fullName+") => "+ service.host+":"+service.port);
 		}
-	
-	}
+
+        private function keyDown(event:KeyboardEvent):void {
+            switch(event.keyCode)
+            {
+
+                case Keyboard.R:
+                    serviceHandle = Bonjour.registerService("AIR Demo OSC", "_osc._udp", 6000);
+                    break;
+
+                case Keyboard.U:
+                    Bonjour.unregisterService(serviceHandle);
+                    break;
+            }
+        }
+    }
 
 }

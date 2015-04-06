@@ -2,7 +2,8 @@ package benkuper.nativeExtensions
 {
 	import flash.desktop.NativeApplication;
 	import flash.display.DisplayObject;
-	import flash.external.ExtensionContext;
+import flash.events.StatusEvent;
+import flash.external.ExtensionContext;
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
 	
@@ -23,6 +24,8 @@ package benkuper.nativeExtensions
 			trace("Mouse extContext check :", extContext);
 			var b:Boolean = extContext.call("init") as Boolean;
 			trace("init result :", b);
+
+            extContext.addEventListener(StatusEvent.STATUS, extContextStatus);
 			
 		}
 		
@@ -32,7 +35,12 @@ package benkuper.nativeExtensions
 			new ExtendedMouse();
 			isInit = true;
 		}
-		
+
+
+        private function extContextStatus(e:StatusEvent):void {
+            trace("Got status from extension : "+e.code+" > "+e.level);
+        }
+
 		private static function getStagePos():Point
 		{
 			var bounds:Rectangle = NativeApplication.nativeApplication.activeWindow.bounds;
@@ -72,6 +80,8 @@ package benkuper.nativeExtensions
 			if (!isInit) init();
 			extContext.call("setCursorPos", tx, ty);
 		}
-	}
+
+
+    }
 	
 } 

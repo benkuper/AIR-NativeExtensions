@@ -2,7 +2,8 @@
 <extension xmlns="http://ns.adobe.com/air/extension/4.0">  
     <id>benkuper.nativeExtensions.ExtendedMouse</id>  
     <versionNumber>1</versionNumber>  
-    <platforms>  
+    <platforms>
+        <!--
         <platform name="Windows-x86">  
             <applicationDeployment>  
                 <nativeLibrary>MouseExtension.dll</nativeLibrary>  
@@ -10,7 +11,7 @@
                 <finalizer>MouseExtFinalizer</finalizer>  
             </applicationDeployment>  
         </platform>  
-
+        -->
 	<platform name="MacOS-x86">  
             <applicationDeployment>  
                 <nativeLibrary>ExtendedMouse.framework</nativeLibrary>  

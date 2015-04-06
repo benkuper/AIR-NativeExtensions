@@ -1,0 +1,506 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		6621E1D91AB960DA00BDFDDD /* FlashRuntimeExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 6621E1D81AB960DA00BDFDDD /* FlashRuntimeExtensions.h */; };
+		668C42FF19F983D5008871D5 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 668C42FE19F983D5008871D5 /* Cocoa.framework */; };
+		668C430919F983D5008871D5 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 668C430719F983D5008871D5 /* InfoPlist.strings */; };
+		668C430D19F983D6008871D5 /* ExtendedMouse.c in Sources */ = {isa = PBXBuildFile; fileRef = 668C430C19F983D6008871D5 /* ExtendedMouse.c */; };
+		668C431419F983D6008871D5 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 668C431319F983D6008871D5 /* XCTest.framework */; };
+		668C431519F983D6008871D5 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 668C42FE19F983D5008871D5 /* Cocoa.framework */; };
+		668C431819F983D6008871D5 /* ExtendedMouse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 668C42FB19F983D5008871D5 /* ExtendedMouse.framework */; };
+		668C431E19F983D6008871D5 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 668C431C19F983D6008871D5 /* InfoPlist.strings */; };
+		668C432019F983D6008871D5 /* ExtendedMouseTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 668C431F19F983D6008871D5 /* ExtendedMouseTests.m */; };
+		668C432C19F98C1E008871D5 /* Adobe AIR.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 668C432B19F98C1E008871D5 /* Adobe AIR.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		668C431619F983D6008871D5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 668C42F219F983D5008871D5 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 668C42FA19F983D5008871D5;
+			remoteInfo = ExtendedMouse;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		6621E1D81AB960DA00BDFDDD /* FlashRuntimeExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FlashRuntimeExtensions.h; path = ../../../../../../SDKs/AIRSDK_Compiler/include/FlashRuntimeExtensions.h; sourceTree = "<group>"; };
+		668C42FB19F983D5008871D5 /* ExtendedMouse.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ExtendedMouse.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		668C42FE19F983D5008871D5 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		668C430119F983D5008871D5 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		668C430219F983D5008871D5 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		668C430319F983D5008871D5 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		668C430619F983D5008871D5 /* ExtendedMouse-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ExtendedMouse-Info.plist"; sourceTree = "<group>"; };
+		668C430819F983D5008871D5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		668C430A19F983D5008871D5 /* ExtendedMouse-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ExtendedMouse-Prefix.pch"; sourceTree = "<group>"; };
+		668C430B19F983D6008871D5 /* ExtendedMouse.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ExtendedMouse.h; sourceTree = "<group>"; };
+		668C430C19F983D6008871D5 /* ExtendedMouse.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = ExtendedMouse.c; sourceTree = "<group>"; };
+		668C431219F983D6008871D5 /* ExtendedMouseTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ExtendedMouseTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		668C431319F983D6008871D5 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		668C431B19F983D6008871D5 /* ExtendedMouseTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ExtendedMouseTests-Info.plist"; sourceTree = "<group>"; };
+		668C431D19F983D6008871D5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		668C431F19F983D6008871D5 /* ExtendedMouseTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ExtendedMouseTests.m; sourceTree = "<group>"; };
+		668C432B19F98C1E008871D5 /* Adobe AIR.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "Adobe AIR.framework"; path = "../../../../../SDKs/AIRSDK_Compiler/runtimes/air/mac/Adobe AIR.framework"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		668C42F719F983D5008871D5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				668C432C19F98C1E008871D5 /* Adobe AIR.framework in Frameworks */,
+				668C42FF19F983D5008871D5 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		668C430F19F983D6008871D5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				668C431519F983D6008871D5 /* Cocoa.framework in Frameworks */,
+				668C431419F983D6008871D5 /* XCTest.framework in Frameworks */,
+				668C431819F983D6008871D5 /* ExtendedMouse.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		668C42F119F983D5008871D5 = {
+			isa = PBXGroup;
+			children = (
+				6621E1D81AB960DA00BDFDDD /* FlashRuntimeExtensions.h */,
+				668C430419F983D5008871D5 /* ExtendedMouse */,
+				668C431919F983D6008871D5 /* ExtendedMouseTests */,
+				668C42FD19F983D5008871D5 /* Frameworks */,
+				668C42FC19F983D5008871D5 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		668C42FC19F983D5008871D5 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				668C42FB19F983D5008871D5 /* ExtendedMouse.framework */,
+				668C431219F983D6008871D5 /* ExtendedMouseTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		668C42FD19F983D5008871D5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				668C432B19F98C1E008871D5 /* Adobe AIR.framework */,
+				668C42FE19F983D5008871D5 /* Cocoa.framework */,
+				668C431319F983D6008871D5 /* XCTest.framework */,
+				668C430019F983D5008871D5 /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		668C430019F983D5008871D5 /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				668C430119F983D5008871D5 /* Foundation.framework */,
+				668C430219F983D5008871D5 /* CoreData.framework */,
+				668C430319F983D5008871D5 /* AppKit.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		668C430419F983D5008871D5 /* ExtendedMouse */ = {
+			isa = PBXGroup;
+			children = (
+				668C430B19F983D6008871D5 /* ExtendedMouse.h */,
+				668C430C19F983D6008871D5 /* ExtendedMouse.c */,
+				668C430519F983D5008871D5 /* Supporting Files */,
+			);
+			path = ExtendedMouse;
+			sourceTree = "<group>";
+		};
+		668C430519F983D5008871D5 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				668C430619F983D5008871D5 /* ExtendedMouse-Info.plist */,
+				668C430719F983D5008871D5 /* InfoPlist.strings */,
+				668C430A19F983D5008871D5 /* ExtendedMouse-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		668C431919F983D6008871D5 /* ExtendedMouseTests */ = {
+			isa = PBXGroup;
+			children = (
+				668C431F19F983D6008871D5 /* ExtendedMouseTests.m */,
+				668C431A19F983D6008871D5 /* Supporting Files */,
+			);
+			path = ExtendedMouseTests;
+			sourceTree = "<group>";
+		};
+		668C431A19F983D6008871D5 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				668C431B19F983D6008871D5 /* ExtendedMouseTests-Info.plist */,
+				668C431C19F983D6008871D5 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		668C42F819F983D5008871D5 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6621E1D91AB960DA00BDFDDD /* FlashRuntimeExtensions.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		668C42FA19F983D5008871D5 /* ExtendedMouse */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 668C432319F983D6008871D5 /* Build configuration list for PBXNativeTarget "ExtendedMouse" */;
+			buildPhases = (
+				668C42F619F983D5008871D5 /* Sources */,
+				668C42F719F983D5008871D5 /* Frameworks */,
+				668C42F819F983D5008871D5 /* Headers */,
+				668C42F919F983D5008871D5 /* Resources */,
+				668C432D19F98DFE008871D5 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ExtendedMouse;
+			productName = ExtendedMouse;
+			productReference = 668C42FB19F983D5008871D5 /* ExtendedMouse.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		668C431119F983D6008871D5 /* ExtendedMouseTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 668C432619F983D6008871D5 /* Build configuration list for PBXNativeTarget "ExtendedMouseTests" */;
+			buildPhases = (
+				668C430E19F983D6008871D5 /* Sources */,
+				668C430F19F983D6008871D5 /* Frameworks */,
+				668C431019F983D6008871D5 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				668C431719F983D6008871D5 /* PBXTargetDependency */,
+			);
+			name = ExtendedMouseTests;
+			productName = ExtendedMouseTests;
+			productReference = 668C431219F983D6008871D5 /* ExtendedMouseTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		668C42F219F983D5008871D5 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = BenKuper;
+				TargetAttributes = {
+					668C431119F983D6008871D5 = {
+						TestTargetID = 668C42FA19F983D5008871D5;
+					};
+				};
+			};
+			buildConfigurationList = 668C42F519F983D5008871D5 /* Build configuration list for PBXProject "ExtendedMouse" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 668C42F119F983D5008871D5;
+			productRefGroup = 668C42FC19F983D5008871D5 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				668C42FA19F983D5008871D5 /* ExtendedMouse */,
+				668C431119F983D6008871D5 /* ExtendedMouseTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		668C42F919F983D5008871D5 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				668C430919F983D5008871D5 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		668C431019F983D6008871D5 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				668C431E19F983D6008871D5 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		668C432D19F98DFE008871D5 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "cd ../../..\n./build.command";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		668C42F619F983D5008871D5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				668C430D19F983D6008871D5 /* ExtendedMouse.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		668C430E19F983D6008871D5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				668C432019F983D6008871D5 /* ExtendedMouseTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		668C431719F983D6008871D5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 668C42FA19F983D5008871D5 /* ExtendedMouse */;
+			targetProxy = 668C431619F983D6008871D5 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		668C430719F983D5008871D5 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				668C430819F983D5008871D5 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		668C431C19F983D6008871D5 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				668C431D19F983D6008871D5 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		668C432119F983D6008871D5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		668C432219F983D6008871D5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		668C432419F983D6008871D5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				COMBINE_HIDPI_IMAGES = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_SEARCH_PATHS = /Users/benkuper/Documents/Dev/SDKs/AIRSDK_Compiler/runtimes/air/mac;
+				FRAMEWORK_VERSION = A;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "ExtendedMouse/ExtendedMouse-Prefix.pch";
+				GCC_VERSION = "";
+				INFOPLIST_FILE = "ExtendedMouse/ExtendedMouse-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				WRAPPER_EXTENSION = framework;
+			};
+			name = Debug;
+		};
+		668C432519F983D6008871D5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				COMBINE_HIDPI_IMAGES = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_SEARCH_PATHS = /Users/benkuper/Documents/Dev/SDKs/AIRSDK_Compiler/runtimes/air/mac;
+				FRAMEWORK_VERSION = A;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "ExtendedMouse/ExtendedMouse-Prefix.pch";
+				GCC_VERSION = "";
+				INFOPLIST_FILE = "ExtendedMouse/ExtendedMouse-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				WRAPPER_EXTENSION = framework;
+			};
+			name = Release;
+		};
+		668C432719F983D6008871D5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/ExtendedMouse.framework/Versions/A/ExtendedMouse";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "ExtendedMouse/ExtendedMouse-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "ExtendedMouseTests/ExtendedMouseTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		668C432819F983D6008871D5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/ExtendedMouse.framework/Versions/A/ExtendedMouse";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "ExtendedMouse/ExtendedMouse-Prefix.pch";
+				INFOPLIST_FILE = "ExtendedMouseTests/ExtendedMouseTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		668C42F519F983D5008871D5 /* Build configuration list for PBXProject "ExtendedMouse" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				668C432119F983D6008871D5 /* Debug */,
+				668C432219F983D6008871D5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		668C432319F983D6008871D5 /* Build configuration list for PBXNativeTarget "ExtendedMouse" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				668C432419F983D6008871D5 /* Debug */,
+				668C432519F983D6008871D5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		668C432619F983D6008871D5 /* Build configuration list for PBXNativeTarget "ExtendedMouseTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				668C432719F983D6008871D5 /* Debug */,
+				668C432819F983D6008871D5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 668C42F219F983D5008871D5 /* Project object */;
+}

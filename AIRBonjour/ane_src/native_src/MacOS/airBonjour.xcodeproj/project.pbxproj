@@ -8,16 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		15BB211015234096008CEF0B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 15BB210E15234096008CEF0B /* InfoPlist.strings */; };
-		15BB211B15234102008CEF0B /* airBonjour.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 15BB211A15234102008CEF0B /* airBonjour.cpp */; };
+		15BB211B15234102008CEF0B /* airBonjour.mm in Sources */ = {isa = PBXBuildFile; fileRef = 15BB211A15234102008CEF0B /* airBonjour.mm */; };
 		668C5A281A5CA3A7009E0576 /* Adobe AIR.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 668C5A271A5CA3A7009E0576 /* Adobe AIR.framework */; };
-		668C66CF1A5FBAD900156CFA /* libPocoDNSSD.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 668C66CE1A5FBAD900156CFA /* libPocoDNSSD.1.dylib */; };
-		668C66D11A5FBAE600156CFA /* libPocoDNSSDBonjour.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 668C66D01A5FBAE600156CFA /* libPocoDNSSDBonjour.1.dylib */; };
-		668C66D31A5FBB2B00156CFA /* libPocoFoundation.17.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 668C66D21A5FBB2B00156CFA /* libPocoFoundation.17.dylib */; };
-		668C74BB1A5CAFAA009E0576 /* libPocoFoundation.30.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 668C74B71A5CAFAA009E0576 /* libPocoFoundation.30.dylib */; };
-		668C74BC1A5CAFAA009E0576 /* libPocoNet.30.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 668C74B81A5CAFAA009E0576 /* libPocoNet.30.dylib */; };
-		668C74BD1A5CAFAA009E0576 /* libPocoUtil.30.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 668C74B91A5CAFAA009E0576 /* libPocoUtil.30.dylib */; };
-		668C74BE1A5CAFAA009E0576 /* libPocoXML.30.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 668C74BA1A5CAFAA009E0576 /* libPocoXML.30.dylib */; };
-		668C74C21A5CB062009E0576 /* libCppUnit.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 668C74C11A5CB062009E0576 /* libCppUnit.1.dylib */; };
+		6690EDE01AD1F7DB0016763A /* Client.h in Headers */ = {isa = PBXBuildFile; fileRef = 6690EDD81AD1F7DB0016763A /* Client.h */; };
+		6690EDE21AD1F7DB0016763A /* Client.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6690EDDA1AD1F7DB0016763A /* Client.mm */; };
+		6690EDE31AD1F7DB0016763A /* Server.h in Headers */ = {isa = PBXBuildFile; fileRef = 6690EDDB1AD1F7DB0016763A /* Server.h */; };
+		6690EDE41AD1F7DB0016763A /* Server.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6690EDDC1AD1F7DB0016763A /* Server.mm */; };
+		6690EDE51AD1F7DB0016763A /* ofxBonjour.h in Headers */ = {isa = PBXBuildFile; fileRef = 6690EDDD1AD1F7DB0016763A /* ofxBonjour.h */; };
+		6690EDE61AD1F7DB0016763A /* Utils.h in Headers */ = {isa = PBXBuildFile; fileRef = 6690EDDE1AD1F7DB0016763A /* Utils.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,9 +24,8 @@
 		15BB210F15234096008CEF0B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		15BB211115234096008CEF0B /* airBonjour-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "airBonjour-Prefix.pch"; sourceTree = "<group>"; };
 		15BB211215234096008CEF0B /* airBonjour.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = airBonjour.h; sourceTree = "<group>"; };
-		15BB211A15234102008CEF0B /* airBonjour.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = airBonjour.cpp; sourceTree = "<group>"; };
+		15BB211A15234102008CEF0B /* airBonjour.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = airBonjour.mm; sourceTree = "<group>"; };
 		15BB21241523421C008CEF0B /* FlashRuntimeExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlashRuntimeExtensions.h; sourceTree = "<group>"; };
-		15FD25D81524BE5B0011043F /* ResolvedHostInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResolvedHostInfo.h; sourceTree = "<group>"; };
 		668C5A271A5CA3A7009E0576 /* Adobe AIR.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "Adobe AIR.framework"; path = "../../../../../SDKs/AIRSDK_Compiler/runtimes/air/mac/Adobe AIR.framework"; sourceTree = "<group>"; };
 		668C5A2B1A5CA511009E0576 /* libPocoDNSSDd.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libPocoDNSSDd.1.dylib; path = "../../../../../Lib/poco-ext/lib/libPocoDNSSDd.1.dylib"; sourceTree = "<group>"; };
 		668C5A2D1A5CA524009E0576 /* libPocoDNSSD.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libPocoDNSSD.1.dylib; path = "../../../../../Lib/poco-ext/lib/libPocoDNSSD.1.dylib"; sourceTree = "<group>"; };
@@ -46,6 +43,12 @@
 		668C74BA1A5CAFAA009E0576 /* libPocoXML.30.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libPocoXML.30.dylib; path = "../../../../../Lib/poco-1.6.0/lib/Darwin/i386/libPocoXML.30.dylib"; sourceTree = "<group>"; };
 		668C74BF1A5CB03F009E0576 /* libPocoFoundationd.30.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libPocoFoundationd.30.dylib; path = "../../../../../Lib/poco-1.6.0/lib/Darwin/i386/libPocoFoundationd.30.dylib"; sourceTree = "<group>"; };
 		668C74C11A5CB062009E0576 /* libCppUnit.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libCppUnit.1.dylib; path = "../../../../../Lib/poco-1.6.0/lib/Darwin/i386/libCppUnit.1.dylib"; sourceTree = "<group>"; };
+		6690EDD81AD1F7DB0016763A /* Client.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Client.h; path = "../../../../../../Lib/ofxBonjour-master/src/Client.h"; sourceTree = "<group>"; };
+		6690EDDA1AD1F7DB0016763A /* Client.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Client.mm; path = "../../../../../../Lib/ofxBonjour-master/src/Client.mm"; sourceTree = "<group>"; };
+		6690EDDB1AD1F7DB0016763A /* Server.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Server.h; path = "../../../../../../Lib/ofxBonjour-master/src/Server.h"; sourceTree = "<group>"; };
+		6690EDDC1AD1F7DB0016763A /* Server.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Server.mm; path = "../../../../../../Lib/ofxBonjour-master/src/Server.mm"; sourceTree = "<group>"; };
+		6690EDDD1AD1F7DB0016763A /* ofxBonjour.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ofxBonjour.h; path = "../../../../../../Lib/ofxBonjour-master/src/ofxBonjour.h"; sourceTree = "<group>"; };
+		6690EDDE1AD1F7DB0016763A /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Utils.h; path = "../../../../../../Lib/ofxBonjour-master/src/Utils.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,14 +56,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				668C66D31A5FBB2B00156CFA /* libPocoFoundation.17.dylib in Frameworks */,
-				668C66D11A5FBAE600156CFA /* libPocoDNSSDBonjour.1.dylib in Frameworks */,
-				668C66CF1A5FBAD900156CFA /* libPocoDNSSD.1.dylib in Frameworks */,
-				668C74C21A5CB062009E0576 /* libCppUnit.1.dylib in Frameworks */,
-				668C74BE1A5CAFAA009E0576 /* libPocoXML.30.dylib in Frameworks */,
-				668C74BB1A5CAFAA009E0576 /* libPocoFoundation.30.dylib in Frameworks */,
-				668C74BC1A5CAFAA009E0576 /* libPocoNet.30.dylib in Frameworks */,
-				668C74BD1A5CAFAA009E0576 /* libPocoUtil.30.dylib in Frameworks */,
 				668C5A281A5CA3A7009E0576 /* Adobe AIR.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -112,11 +107,11 @@
 		15BB210B15234096008CEF0B /* airBonjour */ = {
 			isa = PBXGroup;
 			children = (
+				6690EDD71AD1F7CE0016763A /* ofxBonjour */,
 				15BB21241523421C008CEF0B /* FlashRuntimeExtensions.h */,
 				15BB211215234096008CEF0B /* airBonjour.h */,
 				15BB210C15234096008CEF0B /* Supporting Files */,
-				15BB211A15234102008CEF0B /* airBonjour.cpp */,
-				15FD25D81524BE5B0011043F /* ResolvedHostInfo.h */,
+				15BB211A15234102008CEF0B /* airBonjour.mm */,
 			);
 			path = airBonjour;
 			sourceTree = "<group>";
@@ -131,6 +126,19 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		6690EDD71AD1F7CE0016763A /* ofxBonjour */ = {
+			isa = PBXGroup;
+			children = (
+				6690EDD81AD1F7DB0016763A /* Client.h */,
+				6690EDDA1AD1F7DB0016763A /* Client.mm */,
+				6690EDDB1AD1F7DB0016763A /* Server.h */,
+				6690EDDC1AD1F7DB0016763A /* Server.mm */,
+				6690EDDD1AD1F7DB0016763A /* ofxBonjour.h */,
+				6690EDDE1AD1F7DB0016763A /* Utils.h */,
+			);
+			name = ofxBonjour;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -138,6 +146,10 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6690EDE31AD1F7DB0016763A /* Server.h in Headers */,
+				6690EDE01AD1F7DB0016763A /* Client.h in Headers */,
+				6690EDE51AD1F7DB0016763A /* ofxBonjour.h in Headers */,
+				6690EDE61AD1F7DB0016763A /* Utils.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -212,7 +224,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "cd ../../..\n./ build.command";
+			shellScript = "cd ../..\nls\nsh build.command";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -221,7 +233,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				15BB211B15234102008CEF0B /* airBonjour.cpp in Sources */,
+				6690EDE21AD1F7DB0016763A /* Client.mm in Sources */,
+				15BB211B15234102008CEF0B /* airBonjour.mm in Sources */,
+				6690EDE41AD1F7DB0016763A /* Server.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

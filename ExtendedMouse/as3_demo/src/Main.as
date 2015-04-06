@@ -3,8 +3,9 @@ package
 	import benkuper.nativeExtensions.ExtendedMouse;
 	import benkuper.util.Shortcutter;
 	import flash.display.Sprite;
-	
-	/**
+import flash.events.MouseEvent;
+
+/**
 	 * ...
 	 * @author Ben Kuper
 	 */
@@ -12,7 +13,8 @@ package
 	{
 		
 		private var testSprite:Sprite;
-		
+	    private var mouseIsDown:Boolean;
+
 		public function Main():void 
 		{
 			Shortcutter.init(stage);
@@ -25,9 +27,10 @@ package
 			testSprite.graphics.endFill();
 			testSprite.x = 200;
 			testSprite.y = 300;
-		}
-		
-		
+
+
+        }
+
 		[Shortcut(key='c')]
 		public function clear():void
 		{
@@ -62,6 +65,8 @@ package
 			graphics.endFill();
 
 		}
-	}
+
+
+}
 	
 }

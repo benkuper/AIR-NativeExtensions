@@ -144,7 +144,7 @@ package org.opentekhnia.as3Bonjour
 				NativeApplication.nativeApplication.addEventListener(Event.EXITING, appExiting);
 				super(target);
 			} else {
-				throw new Error("Bonjour is already instatiated.");
+				throw new Error("Bonjour is already instantiated.");
 			}
 		}
 		
@@ -166,6 +166,12 @@ package org.opentekhnia.as3Bonjour
 		 */
 		public function onStatus(event: StatusEvent): void {
 			var service: Service;
+
+            if(event.code == "print")
+            {
+                trace("[BonjourExtension :: print] "+event.level);
+                return;
+            }
 			
 			if (event.level == BonjourEvent.NE_DNSSD_SERVICE_EVENT) {
 				switch (event.code) {
