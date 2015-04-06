@@ -59,7 +59,7 @@
       <AdditionalDependencies>d3d11.lib;opengl32.lib;winmm.lib;$(FLEX_SDK_PATH)\lib\win\FlashRuntimeExtensions.lib;D:\Documents\Ressources\Libraries\pthread\lib\x86\pthreadVC2.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>copy $(TargetPath) ..\$(TargetFileName)</Command>
+      <Command>copy $(TargetPath) $(SolutionDir)\..</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -70,15 +70,18 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;SPOUTEXTENSION_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Users\Ben Kuper\AppData\Local\FlashDevelop\Apps\flexairsdk\4.6.0+4.0.0\include;D:\Documents\Ressources\Libraries\pthread\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SPOUT_SDK_PATH);$(FLEX_SDK_PATH)\include;D:\Documents\Ressources\Libraries\pthread\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>d3d9.lib;d3d11.lib;opengl32.lib;winmm.lib;C:\Users\Ben Kuper\AppData\Local\FlashDevelop\Apps\flexairsdk\4.6.0+4.0.0\lib\win\FlashRuntimeExtensions.lib;D:\Documents\Ressources\Libraries\pthread\lib\x86\pthreadVC2.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>d3d11.lib;opengl32.lib;winmm.lib;$(FLEX_SDK_PATH)\lib\win\FlashRuntimeExtensions.lib;D:\Documents\Ressources\Libraries\pthread\lib\x86\pthreadVC2.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>copy $(TargetPath) $(SolutionDir)\..</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />

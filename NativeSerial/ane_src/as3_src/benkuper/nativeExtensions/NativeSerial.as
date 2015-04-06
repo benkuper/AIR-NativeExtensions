@@ -218,7 +218,6 @@ import flash.utils.ByteArray;
 			if (result) 
 			{
 				openedPorts.push(getPort(portName));
-				dispatchEvent(new SerialEvent(SerialEvent.PORT_OPENED))
 			}
 			
 			return result;
@@ -249,11 +248,11 @@ import flash.utils.ByteArray;
 		}
 		
 		
-		public function closePort(portName:String = "COM1"):void
+		public function closePort(portName:String = "COM1"):Boolean
 		{
-			extContext.call("closePort",portName);
+			var result:Boolean = extContext.call("closePort",portName);
 			openedPorts.splice(openedPorts.indexOf(getPort(portName)), 1);
-			dispatchEvent(new SerialEvent(SerialEvent.PORT_OPENED));
+			return result;
 		}
 		
 		//data
@@ -283,7 +282,7 @@ import flash.utils.ByteArray;
 				readBuffer.position = 0;
 				var bytesRead:int = extContext.call("update", p.COMID, readBuffer) as int;
 				readBuffer.position = 0;
-				p.updateBuffer(readBuffer,bytesRead);
+				p.updateBuffer(readBuffer, bytesRead);
  			}
 		}
 		
