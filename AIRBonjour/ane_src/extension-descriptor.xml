@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <extension xmlns="http://ns.adobe.com/air/extension/4.0">
-    <id>org.opentekhnia.as3Bonjour</id>  
+    <id>benkuper.nativeExtensions.airBonjour</id>
     <versionNumber>1</versionNumber>  
     <platforms>  
         <platform name="Windows-x86">  

@@ -24,7 +24,7 @@ mkdir -p $BUILDFOLDER
 
 cd /Users/benkuper/Documents/Dev/AIR-NativeExtensions/AIRBonjour/ane_src
 
-$ACOMPC -source-path as3_src -include-classes org.opentekhnia.as3Bonjour.Bonjour -swf-version=14 -output $SWCTARGET
+$ACOMPC -source-path as3_src -include-classes benkuper.nativeExtensions.airBonjour.Bonjour -swf-version=14 -output $SWCTARGET
 
 cp -r $FRAMEWORKPATH $BUILDFOLDER
 

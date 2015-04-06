@@ -1,15 +1,16 @@
 package
 {
-	import benkuper.util.IPUtil;
+import benkuper.nativeExtensions.airBonjour.Bonjour;
+import benkuper.nativeExtensions.airBonjour.data.*;
+import benkuper.nativeExtensions.airBonjour.events.*;
+
+import benkuper.util.IPUtil;
 	import flash.display.Sprite;
 import flash.events.KeyboardEvent;
 import flash.net.NetworkInfo;
 import flash.ui.Keyboard;
 
-import org.opentekhnia.as3Bonjour.Bonjour;
-	import org.opentekhnia.as3Bonjour.data.ResolvedHostInfo;
-	import org.opentekhnia.as3Bonjour.data.Service;
-	import org.opentekhnia.as3Bonjour.events.BonjourEvent;
+
 	
 	/**
 	 * ...
@@ -24,13 +25,14 @@ import org.opentekhnia.as3Bonjour.Bonjour;
 		{
 			
 			Bonjour.init();
+            /*
 			Bonjour.instance.addEventListener(BonjourEvent.DNSSD_SERVICE_FOUND, onServiceFound);
 			Bonjour.instance.addEventListener(BonjourEvent.DNSSD_SERVICE_RESOLVED, onServiceResolved);
 			Bonjour.instance.addEventListener(BonjourEvent.DNSSD_SERVICE_REMOVED, onServiceRemoved);
 			Bonjour.instance.addEventListener(BonjourEvent.DNSSD_HOST_RESOLVED, onHostResolved);
 				
 			Bonjour.instance.addEventListener(BonjourEvent.DNSSD_ERROR, onBonjourError);
-				
+				*/
 
 			//Bonjour.browse('_osc._udp','');
 			//trace("browse");
@@ -40,7 +42,7 @@ import org.opentekhnia.as3Bonjour.Bonjour;
             stage.addEventListener(KeyboardEvent.KEY_DOWN, keyDown);
 		}
 		
-		private function onBonjourError(e:BonjourEvent):void 
+		private function onBonjourError(e:BonjourEvent):void
 		{
 			trace("Bonjour error");
 		}

@@ -42,7 +42,7 @@
 
     <!-- Identifies the ActionScript extensions used by an application. -->
     <extensions>
-        <extensionID>org.opentekhnia.as3Bonjour</extensionID>
+        <extensionID>benkuper.nativeExtensions.airBonjour</extensionID>
     </extensions>
 
     <!-- Settings for the application's initial window. Required. -->
