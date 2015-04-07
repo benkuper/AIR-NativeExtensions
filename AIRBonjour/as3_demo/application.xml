@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?> 
-<application xmlns="http://ns.adobe.com/air/application/14.0">
+<application xmlns="http://ns.adobe.com/air/application/17.0">
 	
 	<id>AIRBonjourDemo</id> 
 	<versionNumber>1.0</versionNumber> 
@@ -23,7 +23,7 @@
 	<supportedProfiles>extendedDesktop</supportedProfiles>
 	
 	<extensions>
-		<extensionID>org.opentekhnia.as3Bonjour</extensionID>
+		<extensionID>benkuper.nativeExtensions.airBonjour</extensionID>
 	</extensions>
 	<!-- 
 	More options:

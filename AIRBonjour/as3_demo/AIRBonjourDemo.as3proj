@@ -8,8 +8,8 @@
     <movie fps="30" />
     <movie width="800" />
     <movie height="600" />
-    <movie version="10" />
-    <movie minorVersion="1" />
+    <movie version="16" />
+    <movie minorVersion="0" />
     <movie platform="AIR" />
     <movie background="#FFFFFF" />
   </output>
@@ -52,7 +52,7 @@
   </includeLibraries>
   <!-- SWC Libraries -->
   <libraryPaths>
-    <element path="lib\as3Bonjour.swc" />
+    <element path="lib\airBonjour.swc" />
   </libraryPaths>
   <!-- External Libraries -->
   <externalLibraryPaths>

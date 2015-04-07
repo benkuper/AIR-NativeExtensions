@@ -1,4 +1,4 @@
-set LIB_NAME=as3Bonjour
+set LIB_NAME=airBonjour
 set ANE_FILE=%LIB_NAME%.ane
 set ANE_PATH="..\ane_src\%LIB_NAME%.ane"
 
