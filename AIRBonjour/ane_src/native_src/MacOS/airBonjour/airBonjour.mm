@@ -20,6 +20,9 @@ using namespace ofxBonjour;
 vector<Server *> servers;
 
 FREContext as3Ctx;
+Client * client;
+
+vector<Service *> lastFoundServices;
 
 void as3Print(const char * message)
 {
@@ -47,6 +50,8 @@ FREObject initDNSSD(FREContext ctx,
     
     
     NSLog(@"Init DNS-SD");
+    
+    client = new Client(ctx);
     /*
     // initialize DNSSD
     Poco::DNSSD::initializeDNSSD();
@@ -116,6 +121,8 @@ FREObject stopDNSSD(FREContext ctx,
     
      */
     
+    delete client;
+    
     return NULL;
 }
 
@@ -145,6 +152,7 @@ FREObject browse(FREContext ctx,
     res = FRENewObjectFromBool(1, &retObj);
     //CHECKRES(res, "Failure creating return value for browse with code: ");
     
+    client->discover(string((const char *)regType));
     /*
     try {
         Poco::DNSSD::BrowseHandle browseHandle = dnssdResponder->browser().browse(std::string(FROM(const uint8_t*)(regType)), std::string(FROM(const uint8_t*)(domain)), 0, networkInterfaces);
@@ -213,10 +221,10 @@ FREObject registerService(FREContext ctx,
     //CHECKRES(res3, "Failure getting the 'name' for the browse handle with code: ");
     
     
-    as3Print("Register service with ofxBonjour");
-    NSLog(@"From NSLog Register service !\n");
+    //as3Print("Register service with ofxBonjour");
+    //NSLog(@"From NSLog Register service !\n");
     
-    Server * server = new Server();
+    Server * server = new Server(ctx);
     server->startService(string((const char *)type), string((const char *)name), port);
     //servers.push_back(server);
     
@@ -349,6 +357,7 @@ void contextInitializer(void* extData, const uint8_t* ctxType, FREContext ctx,
     *functionsToSet = func;
     
     
+    
    ////LDEBUG("Context set");
 }
 
@@ -458,20 +467,6 @@ FREObject getResolvedHost(FREContext ctx,
 }
 
 
-// onServiceFound
-//
-//
-void onServiceFound(const void* sender, const Poco::DNSSD::DNSSDBrowser::ServiceEventArgs& args) {
-   //lastFoundServices->push_back(args.service);
-    
-    FREResult res = FREDispatchStatusEventAsync(as3Ctx, (const uint8_t*)("serviceFound"), (const uint8_t*)("serviceEvent"));
-    //CHECKRES(res, "Event dispatch failure with code: ");
-    
-	////LDEBUG("Found service: " + args.service.name());
-    
-    reinterpret_cast<Poco::DNSSD::DNSSDBrowser*>(const_cast<void*>(sender))->resolve(args.service);
-}
-
 
 // get last found service
 //
@@ -485,8 +480,33 @@ FREObject getFoundService(FREContext ctx,
     //Poco::DNSSD::Service service = lastFoundServices->front();
     //lastFoundServices->pop_front();
     
+    vector<NSNetService *> services = client->getServices();
+    NSNetService *s = services[services.size()-1];
+    
     FREObject as3service;
-    FREResult res = FRENewObject((const uint8_t *)"org.opentekhnia.as3Bonjour.data.Service", 0, NULL, &as3service, NULL);
+    FREResult res = FRENewObject((const uint8_t *)"benkuper.nativeExtensions.airBonjour.data.Service", 0, NULL, &as3service, NULL);
+    
+    const char * domain = [[s domain] cStringUsingEncoding:NSUTF8StringEncoding];
+    const char * type = [[s type] cStringUsingEncoding:NSUTF8StringEncoding];
+    const char * host = [[s hostName] cStringUsingEncoding:NSUTF8StringEncoding];
+    const char * name = [[s name] cStringUsingEncoding:NSUTF8StringEncoding];
+    
+    FREObject freDomain;
+    FRENewObjectFromUTF8([[s domain] length], (const uint8_t *)domain, & freDomain);
+    FREObject freType;
+    FRENewObjectFromUTF8([[s type] length], (const uint8_t *)type, & freType);
+    FREObject freHost;
+    FRENewObjectFromUTF8([[s hostName] length], (const uint8_t *)host, & freHost);
+    FREObject freName;
+    FRENewObjectFromUTF8([[s name] length], (const uint8_t *)name, & freName);
+    
+    FRESetObjectProperty(as3service,(const uint8_t *)"domain",freDomain,NULL);
+    FRESetObjectProperty(as3service,(const uint8_t *)"type",freType,NULL);
+    FRESetObjectProperty(as3service,(const uint8_t *)"host",freHost,NULL);
+    FRESetObjectProperty(as3service,(const uint8_t *)"name",freName,NULL);
+    FRESetObjectProperty(as3service,(const uint8_t *)"fullName",freName,NULL);
+    
+    
     
     /*
     CHECKRES(res, "Failed when creating Service object with code: ");
@@ -532,21 +552,6 @@ FREObject getFoundService(FREContext ctx,
     return as3service;
 }
 
-// onServiceResolved
-//
-//
-void onServiceResolved(const void* sender, const Poco::DNSSD::DNSSDBrowser::ServiceEventArgs& args) {
-    std::string serviceResolvedName = args.service.name();
-    
-    //lastResolvedServices->push_back(args.service);
-    
-    FREResult res = FREDispatchStatusEventAsync(as3Ctx, (const uint8_t*)("serviceResolved"), (const uint8_t*)("serviceEvent"));
-    //CHECKRES(res, "Event dispatch failure with code: ");
-    
-	////LDEBUG("Resolved service: " + serviceResolvedName);
-    
-    reinterpret_cast<Poco::DNSSD::DNSSDBrowser*>(const_cast<void*>(sender))->resolveHost(args.service.host());
-}
 
 
 // get last resolved service
@@ -560,8 +565,44 @@ FREObject getResolvedService(FREContext ctx,
     //Poco::DNSSD::Service service = lastResolvedServices->front();
     //lastResolvedServices->pop_front();
     
+    vector<Service> services = client->getResolvedServices();
+    Service ofxS = services[services.size()-1];
+    
+    
     FREObject as3service;
-    FREResult res = FRENewObject((const uint8_t *)("org.opentekhnia.as3Bonjour.data.Service"), 0, NULL, &as3service, NULL);
+    FREResult res = FRENewObject((const uint8_t *)("benkuper.nativeExtensions.airBonjour.data.Service"), 0, NULL, &as3service, NULL);
+    
+    NSNetService *s = ofxS.ref;
+    const char * domain = [[s domain] cStringUsingEncoding:NSUTF8StringEncoding];
+    const char * type = [[s type] cStringUsingEncoding:NSUTF8StringEncoding];
+    const char * host = [[s hostName] cStringUsingEncoding:NSUTF8StringEncoding];
+    const char * name = [[s name] cStringUsingEncoding:NSUTF8StringEncoding];
+    const char * address = ofxS.ipAddress.c_str();
+    int port = ofxS.port;
+    
+    
+    FREObject freDomain;
+    FRENewObjectFromUTF8([[s domain] length], (const uint8_t *)domain, & freDomain);
+    FREObject freType;
+    FRENewObjectFromUTF8([[s type] length], (const uint8_t *)type, & freType);
+    FREObject freHost;
+    FRENewObjectFromUTF8([[s hostName] length], (const uint8_t *)host, & freHost);
+    FREObject freName;
+    FRENewObjectFromUTF8([[s name] length], (const uint8_t *)name, & freName);
+    FREObject freAddress;
+    FRENewObjectFromUTF8(ofxS.ipAddress.length(), (const uint8_t *)address, & freAddress);
+    FREObject frePort;
+    FRENewObjectFromInt32((int32_t)port, &frePort);
+    
+    
+    FRESetObjectProperty(as3service,(const uint8_t *)"domain",freDomain,NULL);
+    FRESetObjectProperty(as3service,(const uint8_t *)"type",freType,NULL);
+    FRESetObjectProperty(as3service,(const uint8_t *)"host",freHost,NULL);
+    FRESetObjectProperty(as3service,(const uint8_t *)"name",freName,NULL);
+    FRESetObjectProperty(as3service,(const uint8_t *)"fullName",freName,NULL);
+    FRESetObjectProperty(as3service,(const uint8_t *)"address",freAddress,NULL);
+    FRESetObjectProperty(as3service,(const uint8_t *)"port",frePort,NULL);
+    
     /*
     CHECKRES(res, "Failed when creating Service object with code: ");
     

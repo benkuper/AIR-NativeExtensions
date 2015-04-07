@@ -18,23 +18,24 @@ import flash.ui.Keyboard;
 	 */
 	public class Main extends Sprite
 	{
-		public var bonjour:Bonjour;
 		public var serviceHandle:int;
 
 		public function Main():void
 		{
 			
 			Bonjour.init();
-            /*
+            serviceHandle = Bonjour.registerService("AIR Demo OSC 1", "_osc._udp", 7000);
+
+
 			Bonjour.instance.addEventListener(BonjourEvent.DNSSD_SERVICE_FOUND, onServiceFound);
 			Bonjour.instance.addEventListener(BonjourEvent.DNSSD_SERVICE_RESOLVED, onServiceResolved);
 			Bonjour.instance.addEventListener(BonjourEvent.DNSSD_SERVICE_REMOVED, onServiceRemoved);
 			Bonjour.instance.addEventListener(BonjourEvent.DNSSD_HOST_RESOLVED, onHostResolved);
 				
 			Bonjour.instance.addEventListener(BonjourEvent.DNSSD_ERROR, onBonjourError);
-				*/
 
-			//Bonjour.browse('_osc._udp','');
+			Bonjour.browse('_osc._udp','');
+
 			//trace("browse");
 			//bonjour.browse('_apple-midi._udp', '');
 			
@@ -68,13 +69,14 @@ import flash.ui.Keyboard;
 		private function onServiceFound(e:BonjourEvent):void 
 		{
 			var service:Service = e.info as Service;
-			trace("Service found", service.name+"(" + service.fullName+") => " + service.host + ":" + service.port);
+			trace("Service found", service.name+"(" + service.fullName+")");
 		}
 		
 		protected function onServiceResolved(e:BonjourEvent):void
 		{
 			var service:Service = e.info as Service;
-			trace("Service resolved", service.name+"("+service.fullName+") => "+ service.host+":"+service.port);
+			trace("Service resolved", service.name+"("+service.fullName+") => "+ service.host+", "+service.address+":"+service.port);
+            trace(Bonjour.currentServices.length,"services total");
 		}
 
         private function keyDown(event:KeyboardEvent):void {
@@ -82,7 +84,7 @@ import flash.ui.Keyboard;
             {
 
                 case Keyboard.R:
-                    serviceHandle = Bonjour.registerService("AIR Demo OSC", "_osc._udp", 6000);
+                    serviceHandle = Bonjour.registerService("AIR Demo OSC 2", "_osc._udp", 2);
                     break;
 
                 case Keyboard.U:

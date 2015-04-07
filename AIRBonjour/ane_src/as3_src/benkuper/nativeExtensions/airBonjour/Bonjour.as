@@ -231,6 +231,7 @@ package benkuper.nativeExtensions.airBonjour
 		
 		private function removeService(service:Service):void 
 		{
+            if(service == null) return;
 			var s:Service = getServiceByName(service.name);
 			if (s == null) return;
 			currentServices.splice(currentServices.indexOf(s), 1);
