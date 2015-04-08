@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<extension xmlns="http://ns.adobe.com/air/extension/3.8">  
-    <id>org.opentekhnia.as3Bonjour</id>  
+<extension xmlns="http://ns.adobe.com/air/extension/4.0">
+    <id>benkuper.nativeExtensions.airBonjour</id>
     <versionNumber>1</versionNumber>  
     <platforms>  
         <platform name="Windows-x86">  
@@ -10,14 +10,14 @@
                 <finalizer>doneNativeExtension</finalizer>  
             </applicationDeployment>  
         </platform>
-        <!--
+        
         <platform name="MacOS-x86">
             <applicationDeployment>
-                <nativeLibrary>NativeMIDI.framework</nativeLibrary>
-                <initializer>NativeMIDIExtInitializer</initializer>
-                <finalizer>NativeMIDIExtFinalizer</finalizer>
+                <nativeLibrary>airBonjour.framework</nativeLibrary>
+                <initializer>initNativeExtension</initializer>
+                <finalizer>doneNativeExtension</finalizer>
             </applicationDeployment>
         </platform>
-		-->
+    
     </platforms>  
 </extension>  
