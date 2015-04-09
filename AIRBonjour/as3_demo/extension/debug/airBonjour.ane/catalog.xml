@@ -1,79 +1,79 @@
-<?xml version="1.0" ?>
+<?xml version="1.0" encoding ="utf-8"?>
 <swc xmlns="http://www.adobe.com/flash/swccatalog/9">
-    <versions>
-        <swc version="1.2"/>
-        <compiler name="ActionScript Compiler" version="2.0.0" build="354139"/>
-    </versions>
-    <features>
-        <feature-script-deps/>
-    </features>
-    <libraries>
-        <library path="library.swf">
-            <script name="benkuper/nativeExtensions/airBonjour/Bonjour" mod="1428341416000">
-                <def id="benkuper.nativeExtensions.airBonjour:Bonjour"/>
-                <dep id="Boolean" type="s"/>
-                <dep id="Error" type="e"/>
-                <dep id="Function" type="s"/>
-                <dep id="Number" type="e"/>
-                <dep id="String" type="s"/>
-                <dep id="__AS3__.vec:Vector" type="s"/>
-                <dep id="benkuper.nativeExtensions.airBonjour.data:ResolvedHostInfo" type="e"/>
-                <dep id="benkuper.nativeExtensions.airBonjour.data:Service" type="s"/>
-                <dep id="benkuper.nativeExtensions.airBonjour.events:BonjourEvent" type="e"/>
-                <dep id="benkuper.util:IPUtil" type="e"/>
-                <dep id="flash.desktop:NativeApplication" type="e"/>
-                <dep id="flash.events:Event" type="s"/>
-                <dep id="flash.events:EventDispatcher" type="i"/>
-                <dep id="flash.events:StatusEvent" type="s"/>
-                <dep id="flash.external:ExtensionContext" type="s"/>
-                <dep id="int" type="s"/>
-                <dep id="trace" type="e"/>
-                <dep id="uint" type="s"/>
-            </script>
-            <script name="benkuper/nativeExtensions/airBonjour/data/NameValue" mod="1428340898000">
-                <def id="benkuper.nativeExtensions.airBonjour.data:NameValue"/>
-                <dep id="Object" type="i"/>
-                <dep id="String" type="s"/>
-            </script>
-            <script name="benkuper/nativeExtensions/airBonjour/data/ResolvedHostInfo" mod="1428341275000">
-                <def id="benkuper.nativeExtensions.airBonjour.data:ResolvedHostInfo"/>
-                <dep id="Object" type="i"/>
-                <dep id="String" type="s"/>
-                <dep id="uint" type="s"/>
-            </script>
-            <script name="benkuper/nativeExtensions/airBonjour/data/Service" mod="1428340888000">
-                <def id="benkuper.nativeExtensions.airBonjour.data:Service"/>
-                <dep id="Array" type="s"/>
-                <dep id="Object" type="i"/>
-                <dep id="String" type="s"/>
-                <dep id="benkuper.nativeExtensions.airBonjour.data:NameValue" type="e"/>
-                <dep id="int" type="s"/>
-                <dep id="uint" type="s"/>
-            </script>
-            <script name="benkuper/nativeExtensions/airBonjour/events/BonjourEvent" mod="1428341150000">
-                <def id="benkuper.nativeExtensions.airBonjour.events:BonjourEvent"/>
-                <dep id="Boolean" type="s"/>
-                <dep id="Object" type="s"/>
-                <dep id="String" type="s"/>
-                <dep id="flash.events:Event" type="i"/>
-            </script>
-            <script name="benkuper/util/IPUtil" mod="1423554971000">
-                <def id="benkuper.util:IPUtil"/>
-                <dep id="Array" type="e"/>
-                <dep id="Boolean" type="s"/>
-                <dep id="Number" type="s"/>
-                <dep id="Object" type="i"/>
-                <dep id="String" type="s"/>
-                <dep id="__AS3__.vec:Vector" type="e"/>
-                <dep id="flash.net:InterfaceAddress" type="e"/>
-                <dep id="flash.net:NetworkInfo" type="e"/>
-                <dep id="flash.net:NetworkInterface" type="e"/>
-                <dep id="int" type="e"/>
-                <dep id="trace" type="e"/>
-            </script>
-            <digests>
-                <digest type="SHA-256" signed="false" value="5ea436682998feba366417367b7a83f90da2d92e859156ed8adb8618cec11a96"/>
-            </digests>
-        </library>
-    </libraries>
+  <versions>
+    <swc version="1.2" />
+    <flex version="4.6.0" build="23201" minimumSupportedVersion="3.0.0" />
+  </versions>
+  <features>
+    <feature-script-deps />
+    <feature-files />
+  </features>
+  <libraries>
+    <library path="library.swf">
+      <script name="benkuper/nativeExtensions/airBonjour/events/BonjourEvent" mod="1428483966579" signatureChecksum="580627356" >
+        <def id="benkuper.nativeExtensions.airBonjour.events:BonjourEvent" /> 
+        <dep id="flash.events:Event" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="benkuper/nativeExtensions/airBonjour/Bonjour" mod="1428565386260" signatureChecksum="2283334464" >
+        <def id="benkuper.nativeExtensions.airBonjour:Bonjour" /> 
+        <dep id="benkuper.nativeExtensions.airBonjour.data:Service" type="s" /> 
+        <dep id="__AS3__.vec:Vector" type="s" /> 
+        <dep id="flash.events:StatusEvent" type="s" /> 
+        <dep id="benkuper.nativeExtensions.airBonjour.data:ResolvedHostInfo" type="s" /> 
+        <dep id="flash.external:ExtensionContext" type="s" /> 
+        <dep id="flash.events:Event" type="s" /> 
+        <dep id="benkuper.nativeExtensions.airBonjour.data:Service" type="e" /> 
+        <dep id="trace" type="e" /> 
+        <dep id="flash.desktop:NativeApplication" type="e" /> 
+        <dep id="__AS3__.vec:Vector" type="e" /> 
+        <dep id="flash.events:StatusEvent" type="e" /> 
+        <dep id="benkuper.nativeExtensions.airBonjour.data:ResolvedHostInfo" type="e" /> 
+        <dep id="Error" type="e" /> 
+        <dep id="benkuper.util:IPUtil" type="e" /> 
+        <dep id="benkuper.nativeExtensions.airBonjour.events:BonjourEvent" type="e" /> 
+        <dep id="flash.external:ExtensionContext" type="e" /> 
+        <dep id="flash.events:Event" type="e" /> 
+        <dep id="flash.events:EventDispatcher" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="benkuper/nativeExtensions/airBonjour/data/NameValue" mod="1428483966573" signatureChecksum="1984968132" >
+        <def id="benkuper.nativeExtensions.airBonjour.data:NameValue" /> 
+        <dep id="Object" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="benkuper/nativeExtensions/airBonjour/data/ResolvedHostInfo" mod="1428483966575" signatureChecksum="459098803" >
+        <def id="benkuper.nativeExtensions.airBonjour.data:ResolvedHostInfo" /> 
+        <dep id="Object" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="benkuper/nativeExtensions/airBonjour/data/Service" mod="1428483966577" signatureChecksum="3633350853" >
+        <def id="benkuper.nativeExtensions.airBonjour.data:Service" /> 
+        <dep id="benkuper.nativeExtensions.airBonjour.data:NameValue" type="s" /> 
+        <dep id="Object" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="_e7987a554f3c1bed111af35bde9d24dada6f12d8dbfff973488cd158683e24ef_flash_display_Sprite" mod="1428565407856" signatureChecksum="50363553" >
+        <def id="_e7987a554f3c1bed111af35bde9d24dada6f12d8dbfff973488cd158683e24ef_flash_display_Sprite" /> 
+        <dep id="flash.system:Security" type="e" /> 
+        <dep id="flash.display:Sprite" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <script name="benkuper/util/IPUtil" mod="1423562207201" signatureChecksum="3391121463" >
+        <def id="benkuper.util:IPUtil" /> 
+        <dep id="__AS3__.vec:Vector" type="s" /> 
+        <dep id="flash.net:NetworkInterface" type="s" /> 
+        <dep id="flash.net:InterfaceAddress" type="s" /> 
+        <dep id="trace" type="e" /> 
+        <dep id="flash.net:NetworkInfo" type="e" /> 
+        <dep id="Object" type="i" /> 
+        <dep id="AS3" type="n" /> 
+      </script>
+      <digests>
+        <digest type="SHA-256" signed="false" value="d3bedc7548f7a12aa88878fda1c8a35155da19d2b2e3ca2e311c2c76f5d626a1"   />
+      </digests>
+    </library>
+  </libraries>
+  <files>
+  </files>
 </swc>

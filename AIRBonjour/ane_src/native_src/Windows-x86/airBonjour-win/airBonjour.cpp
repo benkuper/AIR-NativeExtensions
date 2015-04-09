@@ -47,7 +47,7 @@ using namespace std;
 #define LDEBUG(msg) Poco::Logger::get("airBonjour").debug(msg)
 #define LERROR(msg) Poco::Logger::get("airBonjour").error(msg)
 
-#define CHECKRES(r, msg) if (r != FRE_OK) { Poco::Logger::get("airBonjour").error(msg + toString<int>(r)); }
+#define CHECKRES(r, msg) if (r != FRE_OK) { Poco::Logger::get("airBonjour").error(msg + toString<int>(r)); printf("[AirBonjour, error %s",(msg + toString<int>(r)).c_str()); }
 
 #define ADD_PROPERTY_STR_TO_OBJ(freobj, name, stdstr, errmsg) \
 FREObject name; \
@@ -496,7 +496,7 @@ FREObject getResolvedHost(FREContext ctx,
     lastHostResolutions->pop_front();
     
     FREObject as3resolvedHost;
-    FREResult res = FRENewObject(FRESTRING("org.opentekhnia.as3Bonjour.data.ResolvedHostInfo"), 0, NULL, &as3resolvedHost, NULL);
+    FREResult res = FRENewObject(FRESTRING("benkuper.nativeExtensions.airBonjour.data.ResolvedHostInfo"), 0, NULL, &as3resolvedHost, NULL);
     CHECKRES(res, "Failed when creating ResolvedHostInfo object with code: ");
     
     ADD_PROPERTY_INT_TO_OBJ(as3resolvedHost, networkInterface, resolvedHost.networkInterface, "Failed when creating ResolvedHostInfo object's 'networkInterface'")
@@ -535,9 +535,9 @@ FREObject getFoundService(FREContext ctx,
     lastFoundServices->pop_front();
     
     FREObject as3service;
-    FREResult res = FRENewObject(FRESTRING("org.opentekhnia.as3Bonjour.data.Service"), 0, NULL, &as3service, NULL);
+    FREResult res = FRENewObject(FRESTRING("benkuper.nativeExtensions.airBonjour.data.Service"), 0, NULL, &as3service, NULL);
     CHECKRES(res, "Failed when creating Service object with code: ");
-    
+
     ADD_PROPERTY_STR_TO_OBJ(as3service, domain, service.domain(), "Failed when creating Service object's 'domain'")
     ADD_PROPERTY_STR_TO_OBJ(as3service, fullName, service.fullName(), "Failed when creating Service object's 'fullName'")
     ADD_PROPERTY_STR_TO_OBJ(as3service, host, service.host(), "Failed when creating Service object's 'host'")
@@ -553,7 +553,7 @@ FREObject getFoundService(FREContext ctx,
     for (it = service.properties().begin(); it != service.properties().end(); ++it) {
         
         FREObject item;
-        res = FRENewObject(FRESTRING("org.opentekhnia.as3Bonjour.data.NameValue"), 0, NULL, &item, NULL);
+        res = FRENewObject(FRESTRING("benkuper.nativeExtensions.airBonjour.data.NameValue"), 0, NULL, &item, NULL);
         CHECKRES(res, "Failed when creating NameValue object with code: ");
         
         FREObject key;
@@ -607,7 +607,7 @@ FREObject getResolvedService(FREContext ctx,
     lastResolvedServices->pop_front();
     
     FREObject as3service;
-    FREResult res = FRENewObject(FRESTRING("org.opentekhnia.as3Bonjour.data.Service"), 0, NULL, &as3service, NULL);
+    FREResult res = FRENewObject(FRESTRING("benkuper.nativeExtensions.airBonjour.data.Service"), 0, NULL, &as3service, NULL);
     CHECKRES(res, "Failed when creating Service object with code: ");
     
     ADD_PROPERTY_STR_TO_OBJ(as3service, domain, service.domain(), "Failed when creating Service object's 'domain'")
@@ -625,7 +625,7 @@ FREObject getResolvedService(FREContext ctx,
     for (it = service.properties().begin(); it != service.properties().end(); ++it) {
         
         FREObject item;
-        res = FRENewObject(FRESTRING("org.opentekhnia.as3Bonjour.data.NameValue"), 0, NULL, &item, NULL);
+        res = FRENewObject(FRESTRING("benkuper.nativeExtensions.airBonjour.data.NameValue"), 0, NULL, &item, NULL);
         CHECKRES(res, "Failed when creating NameValue object with code: ");
         
         FREObject key;
@@ -680,7 +680,7 @@ FREObject getRemovedService(FREContext ctx,
     lastRemovedServices->pop_front();
     
     FREObject as3service;
-    FREResult res = FRENewObject(FRESTRING("org.opentekhnia.as3Bonjour.data.Service"), 0, NULL, &as3service, NULL);
+    FREResult res = FRENewObject(FRESTRING("benkuper.nativeExtensions.airBonjour.data.Service"), 0, NULL, &as3service, NULL);
     CHECKRES(res, "Failed when creating Service object with code: ");
     
     ADD_PROPERTY_STR_TO_OBJ(as3service, domain, service.domain(), "Failed when creating Service object's 'domain'")
@@ -698,7 +698,7 @@ FREObject getRemovedService(FREContext ctx,
     for (it = service.properties().begin(); it != service.properties().end(); ++it) {
         
         FREObject item;
-        res = FRENewObject(FRESTRING("org.opentekhnia.as3Bonjour.data.NameValue"), 0, NULL, &item, NULL);
+        res = FRENewObject(FRESTRING("benkuper.nativeExtensions.airBonjour.data.NameValue"), 0, NULL, &item, NULL);
         CHECKRES(res, "Failed when creating NameValue object with code: ");
         
         FREObject key;
