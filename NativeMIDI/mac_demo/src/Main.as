@@ -37,7 +37,7 @@ public class Main extends Sprite
     private function deviceInAdded(e:MIDIEvent):void
     {
         trace("device added !", e.device.name);
-        if (e.device.name.match("Keystation") != null)
+        if (e.device.name.match("Launch") != null)
         {
             deviceIn = e.device as MIDIDeviceIn;
             var isOpen:Boolean = deviceIn.open();
