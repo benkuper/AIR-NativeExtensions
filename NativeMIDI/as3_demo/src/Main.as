@@ -36,7 +36,7 @@ package
 		
 		private function deviceInAdded(e:MIDIEvent):void 
 		{
-			if (e.device.name.match("loop") != null)
+			if (e.device.name.match("Launch") != null)
 			{
 				deviceIn = e.device as MIDIDeviceIn; 
 				var isOpen:Boolean = deviceIn.open();
