@@ -28,6 +28,8 @@ package benkuper.nativeExtensions
 		static public const MODE_BYTE255:String = "modeByte255";
 		static public const MODE_NEWLINE:String = "modeNewline";
 		static public const MODE_RAW:String = "modeRaw";
+		static public const MODE_COBS:String = "modeCobs";
+		
 		public var mode:String = MODE_RAW;
 		
 		public function SerialPort(fullName:String)
@@ -85,9 +87,11 @@ package benkuper.nativeExtensions
 				dispatchEvent(evt);
 			}
 			
-			if (mode == MODE_BYTE255 || mode == MODE_NEWLINE)
+			if (mode == MODE_BYTE255 || mode == MODE_NEWLINE ||mode == MODE_COBS)
 			{
-				var endByte:int = (mode == MODE_BYTE255) ? 255 : 10; // '\n' = 10
+				var endByte:int = 255;
+				if (mode == MODE_NEWLINE) endByte = 10; // \n
+				else if (mode == MODE_COBS) endByte = 0;
 				
 				readBuffer.position = 0;
 				for (var i:int = 0; i < bytesRead; i++)
@@ -96,20 +100,35 @@ package benkuper.nativeExtensions
 					if (b < 0)
 						b += 256;
 					
+					
 					switch (b)
 					{
 						case endByte: 
+							
+							var targetBuffer:ByteArray = buffer2;
 							buffer2.position = 0;
-							evt = new SerialEvent((mode == MODE_BYTE255) ? SerialEvent.DATA_255 : SerialEvent.DATA_NEWLINE, this);
-							evt.data = buffer2;
+							
+							var evtType:String = SerialEvent.DATA_255;
+							if (mode == MODE_NEWLINE) evtType = SerialEvent.DATA_NEWLINE;
+							else if (mode == MODE_COBS) 
+							{
+								evtType = SerialEvent.DATA_COBS;
+								targetBuffer = decodeCOBS(buffer2);
+								if (targetBuffer == null) return;
+								buffer2.position = 0;
+							}
+							
+							evt = new SerialEvent(evtType, this);
+							evt.data = targetBuffer;
+							
 							if (mode == MODE_NEWLINE)
 							{
 								evt.stringData = buffer2.readUTFBytes(buffer2.bytesAvailable);
 								buffer2.position = 0;
 							}
+							
 							dispatchEvent(evt);
 							buffer2.clear();
-							
 							break;
 						
 						default: 
@@ -118,7 +137,75 @@ package benkuper.nativeExtensions
 					}
 				}
 			}
+		}
 		
+		public function encodeCOBS(data:ByteArray):ByteArray
+		{
+			data.position = 0;
+			var numBytes:int = data.bytesAvailable;
+			var encodedData:ByteArray = new ByteArray();
+			encodedData.writeByte(0);
+			encodedData.writeBytes(data);
+			var zeroCount:int = 1;
+			
+			for(var i:int=numBytes;i>0;i--)
+			{
+				encodedData.position = i;
+				var byte:int = encodedData.readByte();
+				encodedData.position--;
+				
+				if(byte == 0) 
+				{
+				  encodedData.writeByte(zeroCount);
+				  zeroCount = 1;
+				}else 
+				{
+				  zeroCount++;
+				}
+			}
+			
+			encodedData.position = 0;
+			encodedData.writeByte(zeroCount);
+			encodedData.position = 0;
+			return encodedData;
+		}
+		
+		public function decodeCOBS(data:ByteArray):ByteArray
+		{
+			if (!isOpened) return null;
+			
+			data.position = 0;
+			var numBytes:int = data.bytesAvailable -1;
+			
+			try
+			{
+				var nextZeroIndex:int = data.readByte();  
+			}catch (e:Error)
+			{
+				trace("Error decoding COBS :", e.message);
+				return null;
+			}
+			
+			if (nextZeroIndex < 0) nextZeroIndex += 256;
+			
+			//trace("decoding cobs..., code byte = "+nextZeroIndex);
+			//for (var i:int = 0; i < numBytes; i++) trace(data.readByte());
+			//data.position = 0;
+			
+		    while(nextZeroIndex < numBytes)
+		    { 
+				data.position = nextZeroIndex;
+				var nextAddIndex:int = data.readByte();
+				if (nextAddIndex < 0) nextAddIndex += 256;
+				data.position--;
+				data.writeByte(0);
+				nextZeroIndex += nextAddIndex;
+		    }
+		   
+		  var decodedData:ByteArray = new ByteArray();
+		  data.position = 1;
+		  data.readBytes(decodedData);
+		  return decodedData;
 		}
 		
 		public function write(... bytes):void
@@ -128,7 +215,15 @@ package benkuper.nativeExtensions
 		
 		public function writeBytes(bytes:ByteArray):void
 		{
-			NativeSerial.instance.writeBytes(COMID, bytes);
+			var targetBytes:ByteArray = bytes;
+			if (mode == MODE_COBS) 
+			{
+				targetBytes = encodeCOBS(bytes);
+				targetBytes.position += targetBytes.bytesAvailable;
+				targetBytes.writeByte(0);
+			}
+			
+			NativeSerial.instance.writeBytes(COMID, targetBytes);
 		}
 		
 		//cleaning

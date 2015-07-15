@@ -188,6 +188,8 @@ package benkuper.nativeExtensions
 		
 		private function updateData():void 
 		{
+			if (extContext == null) return;
+			
 			var messages:Vector.<MIDIMessage> = extContext.call("updateData") as Vector.<MIDIMessage>;
 			for each(var m:MIDIMessage in messages)
 			{
@@ -282,6 +284,7 @@ package benkuper.nativeExtensions
 			updateListTimer.stop();
 			updateListTimer.removeEventListener(TimerEvent.TIMER, updateListTimerTick);
 			extContext.dispose();
+			extContext = null;
 		}
 		
 		private function appExiting(e:Event):void 

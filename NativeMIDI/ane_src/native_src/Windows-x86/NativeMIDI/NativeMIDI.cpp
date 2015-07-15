@@ -5,7 +5,6 @@
 #include "NativeMIDI.h"
 #include <iostream>
 
-using namespace std;
 
 //rtmidi
 #include <cstdlib>
@@ -112,13 +111,13 @@ FREObject messageToFre(midiMessage m)
 	FREObject fm = NULL;
 	FREResult fre = FRENewObject((const uint8_t *)"benkuper.nativeExtensions.MIDIMessage",5,args,&fm,NULL);
 			
-	printf("Message to fre FREResult %i\n",fre);
+	//printf("Message to fre FREResult %i\n",fre);
 
 	return fm;
 }
 
 
-vector<midiMessage> messageQueue;
+std::vector<midiMessage> messageQueue;
 
 void *MIDIReadThread(FREContext ctx)
 {
@@ -368,18 +367,27 @@ extern "C"
 		int numMessages = messageQueue.size();
 		
 		//printf("Update data, num messages : %i",numMessages);
-
 		FREObject result = NULL;
-		FRENewObject((const uint8_t *)"Vector.<benkuper.nativeExtensions.MIDIMessage>",0,NULL,&result,NULL);
 
-		FRESetArrayLength(result,numMessages);
-
-		for(int i=0;i<numMessages;i++)
+		try
 		{
 			
-			FRESetArrayElementAt(result,i,messageToFre(messageQueue[i]));
-		}
+			FRENewObject((const uint8_t *)"Vector.<benkuper.nativeExtensions.MIDIMessage>",0,NULL,&result,NULL);
 
+			FRESetArrayLength(result,numMessages);
+
+			for(int i=0;i<numMessages;i++)
+			{
+			
+				FRESetArrayElementAt(result,i,messageToFre(messageQueue[i]));
+			}
+
+			
+		}catch(std::exception e)
+		{
+			printf("### Error updating data : %s\n",e.what());
+		}
+		
 		messageQueue.clear();
 
 		return result;
@@ -397,7 +405,7 @@ extern "C"
 			removeDeviceIn(in);
 			delete in;
 			//printf("Num open midi devices %i\n",openMidiIn.size());
-		}catch(exception e)
+		}catch(std::exception e)
 		{
 			printf("Error closing input device.\n");
 		}
@@ -418,7 +426,7 @@ extern "C"
 			if(out->isPortOpen()) out->closePort();
 			removeDeviceOut(out);
 			delete out;
-		}catch(exception e)
+		}catch(std::exception e)
 		{
 			printf("Error closing output device.\n");
 		}
@@ -454,7 +462,7 @@ extern "C"
 		try
 		{
 			if(out->isPortOpen()) out->sendMessage(&outMessage);
-		}catch(exception e)
+		}catch(std::exception e)
 		{
 			printf("Error sending message : %s\n",e.what());
 		}
@@ -490,7 +498,7 @@ extern "C"
 		try
 		{
 			pthread_cancel(readThread);
-		}catch(exception e)
+		}catch(std::exception e)
 		{
 			printf("Thread already exited !");
 		}
@@ -500,7 +508,7 @@ extern "C"
 	// Flash Native Extensions stuff
 	void NativeMIDIContextInitializer(void* extData, const uint8_t* ctxType, FREContext ctx, uint32_t* numFunctionsToSet,  const FRENamedFunction** functionsToSet) { 
 
-		printf("** Native MIDI Extension v1.0 by Ben Kuper **\n");
+		printf("** Native MIDI Extension v1.1 by Ben Kuper **\n");
 
 		static FRENamedFunction extensionFunctions[] =
 		{

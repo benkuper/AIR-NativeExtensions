@@ -6,8 +6,8 @@
     <movie input="" />
     <movie path="bin\SpoutAIR.swf" />
     <movie fps="60" />
-    <movie width="800" />
-    <movie height="600" />
+    <movie width="1280" />
+    <movie height="720" />
     <movie version="4" />
     <movie minorVersion="0" />
     <movie platform="AIR" />

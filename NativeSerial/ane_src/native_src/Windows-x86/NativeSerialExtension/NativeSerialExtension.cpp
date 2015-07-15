@@ -16,10 +16,6 @@ using namespace System::Collections::Generic;
 using namespace System::Management;
 using namespace msclr::interop;
 
-/*
-using namespace InTheHand::Net::Sockets;
-using namespace InTheHand::Net::Bluetooth;
-*/
 
 using namespace System::IO::Ports;
 using namespace System::Threading;
@@ -74,6 +70,7 @@ namespace NativeSerialExtension {
 				try
 				{
 					_serialPort->Open();
+					Console::WriteLine("Port opened !");
 				}catch(Exception^ e)
 				{
 					Console::WriteLine("Error Opening Port :"+e->Message);
@@ -114,7 +111,13 @@ namespace NativeSerialExtension {
 					return;
 				}
 
-				_serialPort->Write(buffer,0,buffer->Length);
+				try
+				{
+					_serialPort->Write(buffer,0,buffer->Length);
+				}catch(Exception^ e)
+				{
+					Console::WriteLine("Port write error : "+e->Message);
+				}
 			}
 
 			void read()
@@ -255,6 +258,9 @@ namespace NativeSerialExtension {
 
 			static int getNumCOMPorts()
 			{
+				return getCOMPorts()->Length;
+
+				/*
 				 try
 				{
 					ManagementObjectSearcher^ searcher = 
@@ -271,43 +277,101 @@ namespace NativeSerialExtension {
 				}
 
 				 return 0;
+				 */
 			}
 
 			static array<String ^>^ getCOMPorts()
 			{
-
-				
-
-				array<String ^>^ ports;
+				List<String ^>^ portsList;
+				List<String ^>^ bluetoothIDsList;
 
 				 try
 				{
 					ManagementObjectSearcher^ searcher = 
 						gcnew ManagementObjectSearcher("root\\CIMV2", 
-						"SELECT * FROM Win32_PnPEntity WHERE Name LIKE '%(COM[0-9]%)%'"); 
+						"SELECT * FROM Win32_PnPEntity WHERE Name LIKE '%(COM[0-9]%)%' AND Status = 'OK'"); 
 
 					ManagementObjectCollection^ results = searcher->Get();
 					
-					ports = gcnew array<String^>(results->Count);
-
+					portsList = gcnew List<String^>();//results->Count);
+					bluetoothIDsList = gcnew List<String ^>();//->Count);
 					//Console::WriteLine("List Port using WMI :");
 					int i=0;
+
 					for each(ManagementObject^ queryObj in results)
 					{
 						//Console::WriteLine("-----------------------------------");
 						//Console::WriteLine("Win32_PnPEntity instance");
 						//Console::WriteLine("-----------------------------------");
-						//Console::WriteLine("> Name: {0}", queryObj["Name"]);
-						ports[i] = queryObj["Name"]->ToString();
+						
+						/*Console::WriteLine("Device "+i);
+						Console::WriteLine("> Name: {0}", queryObj["Name"]);
+						Console::WriteLine("> Device ID: {0}", queryObj["DeviceID"]);
+						*/
+
+
+						bool isValidPort = true;
+
+						String^ bluetoothID = "";
+						String^ deviceID = queryObj["DeviceID"]->ToString();
+						
+						if(deviceID->Contains("BTHENUM"))
+						{ 
+							
+
+							array<String ^>^ btSplit1 = deviceID->Split('&');
+							//Console::WriteLine(btSplit1->Length);
+							bluetoothID = btSplit1[btSplit1->Length-1]->Split('_')[0];
+							isValidPort = bluetoothID != "000000000000";
+							//Console::WriteLine("Bluetooth port try parse btID  -> "+isValidPort);
+							
+						}
+						
+						if(isValidPort)
+						{
+							portsList->Add(queryObj["Name"]->ToString());
+							bluetoothIDsList->Add(bluetoothID);
+						}
+
 						i++;
 					}
+
+					//bluetooth relation
+					
+					
+					ManagementObjectSearcher^ searcher2 = 
+						gcnew ManagementObjectSearcher("root\\CIMV2", 
+						 "SELECT * FROM Win32_PnPEntity WHERE PNPDeviceID Like '%BTHENUM%' AND PNPDeviceID Like '%DEV%' AND Status = 'OK'"); 
+
+					ManagementObjectCollection^ results2 = searcher2->Get();
+					
+					for each(ManagementObject^ queryObj in results2)
+					{
+						String^ deviceID = queryObj["DeviceID"]->ToString();
+						array<String ^>^ btSplit1 = deviceID->Split('_');
+						String ^ bluetoothID = btSplit1[btSplit1->Length-1];
+						String^ btName = queryObj["Name"]->ToString();
+
+						Console::WriteLine(btName+"/"+deviceID);
+
+						for(int i=0;i<portsList->Count;i++)
+						{
+							if(bluetoothIDsList[i] == bluetoothID)
+							{
+								portsList[i] = btName+" [BT] "+portsList[i]->Substring(portsList[i]->IndexOf("(COM"));
+							}
+						}
+					}
+					
+
+
 				}catch (ManagementException^ e)
 				{
 					Console::WriteLine("An error occurred while querying for WMI data: " + e->Message);
 					//return gcnew array<String ^>(0);
 				}
 
-				return ports;
+				return portsList->ToArray();
 			}
 
 
@@ -343,19 +407,6 @@ namespace NativeSerialExtension {
 
 			static void ListPorts()
 			{
-
-				Console::WriteLine("Bluetooth handling");
-				/*
-				BluetoothClient^ client = gcnew BluetoothClient();
-				array<BluetoothDeviceInfo^>^ devices = client->DiscoverDevices();
-				
-
-				for each(BluetoothDeviceInfo^ di in devices)
-				{ 
-					Console::WriteLine(di->DeviceName+" // "+di->DeviceAddress+" // "+di->Connected);
-				}
-				*/
-
 				int prevNumCOMPorts = 0;
 
 				while(doList)
@@ -577,7 +628,7 @@ extern "C"
 	// Flash Native Extensions stuff
 	void NativeSerialContextInitializer(void* extData, const uint8_t* ctxType, FREContext ctx, uint32_t* numFunctionsToSet,  const FRENamedFunction** functionsToSet) { 
 
-		printf("** Native Serial Extension v0.21 by Ben Kuper **\n");
+		printf("** Native Serial Extension v0.3 by Ben Kuper (06-06-2015) **\n");
 
 
 

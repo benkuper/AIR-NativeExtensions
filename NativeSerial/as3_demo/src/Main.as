@@ -24,6 +24,9 @@ package
 			NativeSerial.instance.addEventListener(SerialEvent.PORT_ADDED, portAdded);
 			NativeSerial.instance.addEventListener(SerialEvent.PORT_REMOVED, portRemoved);
 			
+			connect();
+			
+			trace(NativeSerial.ports);
 			/*
 			Shortcutter.init(stage);
 			Shortcutter.add(this);
@@ -36,13 +39,20 @@ package
 		private function portAdded(e:SerialEvent):void 
 		{
 			trace("Main :: port added :" + e.port.fullName);
-			port = NativeSerial.getPort("COM19");
 			
-			if (port != null) 
-			{
-				port.open();
-				port.addEventListener(SerialEvent.DATA, serialData);
-			}
+			connect();
+			
+		}
+		
+		private function connect():void 
+		{
+			port = NativeSerial.getPort("COM10");
+			
+			//if (port != null) 
+			//{
+				//port.open();
+				//port.addEventListener(SerialEvent.DATA, serialData);
+			//}
 		}
 		
 		private function portRemoved(e:SerialEvent):void 

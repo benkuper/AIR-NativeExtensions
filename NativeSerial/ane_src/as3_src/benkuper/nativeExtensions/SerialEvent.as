@@ -18,6 +18,7 @@ package  benkuper.nativeExtensions
 		static public const DATA:String = "data";
 		static public const DATA_255:String = "data255";
 		static public const DATA_NEWLINE:String = "dataNewline";
+		static public const DATA_COBS:String = "dataCOBS";
 		
 		public var data:ByteArray;
 		public var stringData:String;

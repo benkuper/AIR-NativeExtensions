@@ -69,7 +69,7 @@ import flash.utils.ByteArray;
             }else
             {
                 listPortsFunc = listPortsMac;
-                updatePortsLoopTimer = new Timer(1000);
+                updatePortsLoopTimer = new Timer(2000);
                 updatePortsLoopTimer.addEventListener(TimerEvent.TIMER, updatePortsLoopTimerTick);
                 updatePortsLoopTimer.start();
             }

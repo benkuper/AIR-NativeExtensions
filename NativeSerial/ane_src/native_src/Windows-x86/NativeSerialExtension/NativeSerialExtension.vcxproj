@@ -79,9 +79,6 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <Reference Include="InTheHand.Net.Personal">
-      <HintPath>C:\Program Files (x86)\32feet.NET\NET\InTheHand.Net.Personal.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />

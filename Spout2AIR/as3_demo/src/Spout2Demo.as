@@ -7,12 +7,16 @@ package
 	import flash.events.Event;
 	import flash.filters.GlowFilter;
 	import flash.geom.Rectangle;
+	import org.tuio.connectors.UDPConnector;
+	import org.tuio.osc.IOSCListener;
+	import org.tuio.osc.OSCManager;
+	import org.tuio.osc.OSCMessage;
 	
 	/**
 	 * ...
 	 * @author Ben Kuper
 	 */
-	public class Spout2Demo extends Sprite 
+	public class Spout2Demo extends Sprite implements IOSCListener
 	{
 		//spout stuff
 		private var spout:Spout;
@@ -27,6 +31,7 @@ package
 		private var ribbonAmount:int = 5;
 		private var ribbonParticleAmount:int = 20;
 		private var randomness:Number = .2
+		private var oscM:OSCManager;
 		
 		
 		public function Spout2Demo() 
@@ -34,6 +39,8 @@ package
 			super();
 			
 			setupRibbon();
+			
+			bd = new BitmapData(stage.stageWidth, stage.stageHeight,false,0);
 			
 			spout = new Spout();
 			
@@ -46,6 +53,24 @@ package
 			//addChild(bm);
 			//bm.x = 100;
 			
+			
+			oscM = new OSCManager(new UDPConnector("127.0.0.1", 6000));
+			oscM.addMsgListener(this);
+			
+		}
+		
+		/* INTERFACE org.tuio.osc.IOSCListener */
+		
+		public function acceptOSCMessage(msg:OSCMessage):void 
+		{
+			switch(msg.address)
+			{
+				case "/myo/orientation":
+					//trace("update", msg.arguments[1], msg.arguments[2]);
+					ribbonManager.update(stage.stageWidth /2 + msg.arguments[1]*stage.stageWidth/2, stage.stageHeight/2 - msg.arguments[2] * stage.stageHeight/2);
+					
+					break;
+			}
 		}
 		
 		private function enterFrame(e:Event):void 
@@ -70,11 +95,11 @@ package
   			ribbonManager.setRadiusDivide(10);		// default = 10
   			ribbonManager.setGravity(.03);			// default = .03
   			ribbonManager.setFriction(1.1);			// default = 1.1
-  			ribbonManager.setMaxDistance(40);		// default = 40
+  			ribbonManager.setMaxDistance(150);		// default = 40
   			ribbonManager.setDrag(2);				// default = 2
 			ribbonManager.setDragFlare(.008);		// default = .008
 			
-			bd = new BitmapData(stage.stageWidth,stage.stageHeight);			
+						
 
 		}
 		

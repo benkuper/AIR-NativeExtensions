@@ -36,17 +36,17 @@ package
 		
 		private function deviceInAdded(e:MIDIEvent):void 
 		{
-			if (e.device.name.match("loop") != null)
-			{
-				deviceIn = e.device as MIDIDeviceIn; 
-				var isOpen:Boolean = deviceIn.open();
-				trace("Device " + deviceIn.name+" open ?" + isOpen);
-				deviceIn.addEventListener(MIDIEvent.NOTE_ON, midiNoteOn);
-				deviceIn.addEventListener(MIDIEvent.NOTE_OFF, midiNoteOff);
-				deviceIn.addEventListener(MIDIEvent.CONTROLLER_CHANGE, midiControllerChange);
-			}
-			
-			if (e.device.name.match("LPK") != null)
+			//if (e.device.name.match("loop") != null)
+			//{
+				//deviceIn = e.device as MIDIDeviceIn; 
+				//var isOpen:Boolean = deviceIn.open();
+				//trace("Device " + deviceIn.name+" open ?" + isOpen);
+				//deviceIn.addEventListener(MIDIEvent.NOTE_ON, midiNoteOn);
+				//deviceIn.addEventListener(MIDIEvent.NOTE_OFF, midiNoteOff);
+				//deviceIn.addEventListener(MIDIEvent.CONTROLLER_CHANGE, midiControllerChange);
+			//}
+			//
+			if (e.device.name.match("nano") != null)
 			{
 				deviceIn2 = e.device as MIDIDeviceIn; 
 				var isOpen2:Boolean = deviceIn2.open();
