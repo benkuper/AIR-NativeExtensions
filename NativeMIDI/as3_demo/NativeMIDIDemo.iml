@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="Flex" version="4">
+  <component name="FlexBuildConfigurationManager" active="NativeMIDIDemo">
+    <configurations>
+      <configuration name="NativeMIDIDemo" target-platform="Desktop" pure-as="true" main-class="Main" output-file="NativeMIDIDemo.swf" output-folder="$MODULE_DIR$/out/production/NativeMIDIDemo">
+        <dependencies>
+          <entries>
+            <entry library-id="c1767c8e-1c72-4c35-8325-92e8764a051c">
+              <dependency linkage="Merged" />
+            </entry>
+          </entries>
+          <sdk name="AIRSDK_Compiler (1)" />
+        </dependencies>
+        <compiler-options />
+        <packaging-air-desktop package-file-name="NativeMIDIDemo" />
+        <packaging-android />
+        <packaging-ios />
+      </configuration>
+    </configurations>
+    <compiler-options />
+  </component>
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
+    </content>
+    <orderEntry type="jdk" jdkName="AIRSDK_Compiler (1)" jdkType="Flex SDK Type (new)" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module-library" exported="">
+      <library type="flex">
+        <properties id="c1767c8e-1c72-4c35-8325-92e8764a051c" />
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/extension/release/NativeMIDI.ane!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+  </component>
+</module>
+
