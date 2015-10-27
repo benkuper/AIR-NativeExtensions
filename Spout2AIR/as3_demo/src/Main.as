@@ -53,7 +53,7 @@
 			//bm.x = 100;
 			//bm.y = 100;
 			////addChild(bm);
-			spout.shareTexture("As3Test",  bd);
+			spout.createSender("As3Test", bd.width,bd.height );
 			
 			
 			
@@ -71,7 +71,7 @@
 			
 			bd.fillRect(new Rectangle(0, 0, bd.width, bd.height), 0);
 			bd.draw(this);
-			spout.updateTexture("As3Test", bd);
+			spout.updateSender("As3Test", bd);
 			
 		}
 	}
