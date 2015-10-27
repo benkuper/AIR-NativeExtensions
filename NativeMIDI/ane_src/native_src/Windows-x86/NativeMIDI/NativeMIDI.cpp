@@ -79,7 +79,7 @@ int getDeviceOutIndex(RtMidiOut *device)
 	printf("MIDI device not found %i\n",device);
 	return -1;
 }
-
+ 
 
 void removeDeviceOut(RtMidiOut * device)
 {

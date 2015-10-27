@@ -124,6 +124,7 @@ namespace NativeSerialExtension {
 			{
 				if(!isInit) return;
 				//Console::WriteLine("Read on Port "+portName);
+				if(!_serialPort->IsOpen) return;
 
 				try
 				{
@@ -131,8 +132,8 @@ namespace NativeSerialExtension {
 					bytesSinceLastRead += readResult;
 					//if(bytesSinceLastRead > 0) Console::WriteLine(" -> "+bytesSinceLastRead+" read");
 				}
-				catch (TimeoutException^) { 
-				Console::WriteLine(" timeout !");
+				catch (Exception^) { 
+				Console::WriteLine("Error reading.");
 				}			
 			}
 
@@ -352,7 +353,7 @@ namespace NativeSerialExtension {
 						String ^ bluetoothID = btSplit1[btSplit1->Length-1];
 						String^ btName = queryObj["Name"]->ToString();
 
-						Console::WriteLine(btName+"/"+deviceID);
+						//Console::WriteLine(btName+"/"+deviceID);
 
 						for(int i=0;i<portsList->Count;i++)
 						{

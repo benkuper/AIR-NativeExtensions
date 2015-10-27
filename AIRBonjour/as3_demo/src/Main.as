@@ -3,6 +3,8 @@ package
 import benkuper.nativeExtensions.airBonjour.Bonjour;
 import benkuper.nativeExtensions.airBonjour.data.*;
 import benkuper.nativeExtensions.airBonjour.events.*;
+import flash.net.InterfaceAddress;
+import flash.net.NetworkInterface;
 
 import benkuper.util.IPUtil;
 	import flash.display.Sprite;
@@ -25,21 +27,29 @@ import flash.ui.Keyboard;
 			
 			Bonjour.init();
             serviceHandle = Bonjour.registerService("AIR Demo OSC 1", "_osc._udp", 7000);
-
-
+			
+			
 			Bonjour.instance.addEventListener(BonjourEvent.DNSSD_SERVICE_FOUND, onServiceFound);
 			Bonjour.instance.addEventListener(BonjourEvent.DNSSD_SERVICE_RESOLVED, onServiceResolved);
 			Bonjour.instance.addEventListener(BonjourEvent.DNSSD_SERVICE_REMOVED, onServiceRemoved);
 			Bonjour.instance.addEventListener(BonjourEvent.DNSSD_HOST_RESOLVED, onHostResolved);
-				
+			
 			Bonjour.instance.addEventListener(BonjourEvent.DNSSD_ERROR, onBonjourError);
-
-			Bonjour.browse('_osc._udp','');
-
+			
+			Bonjour.browse('_ledcontrol._udp','');
+			
 			//trace("browse");
 			//bonjour.browse('_apple-midi._udp', '');
 			
-
+			var p:Vector.<NetworkInterface> = NetworkInfo.networkInfo.findInterfaces();
+			for (var i:int = 0; i < p.length; i++)
+			{
+				trace(p[i].displayName);
+				for each(var a:InterfaceAddress in p[i].addresses)
+				{
+					trace(a.broadcast);
+				}
+			}
             stage.addEventListener(KeyboardEvent.KEY_DOWN, keyDown);
 		}
 		

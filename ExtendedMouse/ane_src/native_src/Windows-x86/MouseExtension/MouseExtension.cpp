@@ -47,6 +47,8 @@ extern "C"
     
 		*numFunctionsToSet = sizeof( extensionFunctions ) / sizeof( FRENamedFunction );
 		*functionsToSet = extensionFunctions;
+
+
 	}
 
 
