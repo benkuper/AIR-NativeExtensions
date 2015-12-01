@@ -7,11 +7,10 @@ import flash.net.InterfaceAddress;
 import flash.net.NetworkInterface;
 
 import benkuper.util.IPUtil;
-	import flash.display.Sprite;
+import flash.display.Sprite;
 import flash.events.KeyboardEvent;
 import flash.net.NetworkInfo;
 import flash.ui.Keyboard;
-
 
 	
 	/**
@@ -41,6 +40,7 @@ import flash.ui.Keyboard;
 			//trace("browse");
 			//bonjour.browse('_apple-midi._udp', '');
 			
+			/*
 			var p:Vector.<NetworkInterface> = NetworkInfo.networkInfo.findInterfaces();
 			for (var i:int = 0; i < p.length; i++)
 			{
@@ -50,6 +50,7 @@ import flash.ui.Keyboard;
 					trace(a.broadcast);
 				}
 			}
+			*/
             stage.addEventListener(KeyboardEvent.KEY_DOWN, keyDown);
 		}
 		
