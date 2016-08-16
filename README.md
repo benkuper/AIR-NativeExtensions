@@ -5,21 +5,23 @@ Collections of Native Extensions for Adobe AIR
 
 ## Important informations
 
-* Mac users
+### Mac users
 Those dlls are all compiled for Windows-x86 and MacOS-x86. As Adobe decided to only support MacOS x64 since Adobe AIR 20, you will have to use the AIR 19 SDK in order to use this extensions on MacOS (or rebuild them for x64). 
 
-* Windows users
+### Windows users
 Most of these extensions will need some dll to run correctly. I included in the repo a zip files with all the dlls needed to run the different extensions.
 Those dlls need to be place in 2 places :
- * when working with an IDE, they need to be place aside the adl.exe file that is in the /bin folder of the AIR SDK directory. 
+* when working with an IDE, they need to be place aside the adl.exe file that is in the /bin folder of the AIR SDK directory. 
   * In Flash IDE and FlashBuilder, it should be somewhere in the installation folder (program files/adobe/.../runtime).
   * In FlashDevelop, this is in the %AppData%/../Local/FlashDevelop/Apps directory (just copy and paste this path), you will see one or more sdk folders.
   * In IntelliJ, well you put the SDK yourself so you should know :)
 
- * when packaging an app, the dlls should be added to the root directory of the installer.
+* when packaging an app, the dlls should be added to the root directory of the installer.
   * In Flash IDE, FlashBuilder and IntelliJ, there is a setting window where you can add files to be packaged in the .exe
   * In FlashDevelop, just paste the dlls in the /bin folder of your project and you're good to go.
 
+
+## What's in there ?
 
 ### BaseExtension
 
