@@ -6,7 +6,7 @@ Collections of Native Extensions for Adobe AIR
 ## Important informations
 
 ### Mac users
-Those dlls are all compiled for Windows-x86 and MacOS-x86. As Adobe decided to only support MacOS x64 since Adobe AIR 20, you will have to use the AIR 19 SDK in order to use this extensions on MacOS (or rebuild them for x64). 
+Those extensions are all compiled for Windows-x86 and MacOS-x86. As Adobe decided to only support MacOS x64 since Adobe AIR 20, you will have to use the AIR 19 SDK in order to use this extensions on MacOS (or rebuild them for x64). 
 
 ### Windows users
 Most of these extensions will need some dll to run correctly. I included in the repo a zip files with all the dlls needed to run the different extensions.
