@@ -1,9 +1,13 @@
 AIR-NativeExtensions
 ====================
 
+
 Collections of Native Extensions for Adobe AIR
 
 ## Important informations
+
+### THIS REPOSITORY IS NOT MAINTAINED ANYMORE. ADOBE AIR HAS BEEN LET DOWN AND SHOULD NOT BE USED ANYMORE.
+
 
 ### Mac users
 Those extensions are all compiled for Windows-x86 and MacOS-x86. As Adobe decided to only support MacOS x64 since Adobe AIR 20, you will have to use the AIR 19 SDK in order to use this extensions on MacOS (or rebuild them for x64). 
